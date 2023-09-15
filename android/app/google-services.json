@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "246386010481",
+    "project_id": "immune-africa",
+    "storage_bucket": "immune-africa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246386010481:android:264ca235af2f8d1a0c6ed0",
+        "android_client_info": {
+          "package_name": "com.example.immune_africa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_Fk3RT1VzzBLkNexiltCA9Us1EDfQ_YE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
