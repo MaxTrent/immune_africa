@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:immune_africa/screens/screens.dart';
 
 class Onboarding extends StatelessWidget {
   Onboarding({super.key});
@@ -13,17 +14,10 @@ class Onboarding extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           controller: _controller,
           children: [
-            OnboardingPage(image: 'assets/baby1.png', scrollText: 'Safe', controller),
-            OnboardingPage(image: 'assets/baby2.png', scrollText: 'Strong', onPressed: ()=>_controller.animateToPage(
-              1,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.ease,
-            ),),
-            OnboardingPage(image: 'assets/baby3.png', scrollText: 'Healthy', onPressed: ()=>_controller.animateToPage(
-              1,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.ease,
-            ),),
+            OnboardingPage(image: 'assets/baby1.png', scrollText: 'Safe', pageController: _controller, pageNumber: 1,),
+            OnboardingPage(image: 'assets/baby2.png', scrollText: 'Strong', pageController: _controller, pageNumber: 2,),
+            OnboardingPage(image: 'assets/baby3.png', scrollText: 'Healthy', pageController: _controller, pageNumber: 2,),
+
           ],
 
         ),
@@ -33,11 +27,12 @@ class Onboarding extends StatelessWidget {
 }
 
 class OnboardingPage extends StatelessWidget {
-  OnboardingPage({super.key,required this.image, required this.onPressed, required this.scrollText});
+  OnboardingPage({super.key,required this.image, required this.pageController, required this.scrollText, required this.pageNumber});
   String scrollText;
   String image;
-  VoidCallback? onPressed;
-  PageController controller;
+  // VoidCallback? onPressed;
+  int pageNumber;
+  PageController pageController;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +56,11 @@ class OnboardingPage extends StatelessWidget {
               SizedBox(
                 width: 317,
                 height: 52,
-                child: ElevatedButton(onPressed: (){onPressed;},
+                child: ElevatedButton(onPressed: (){pageController.animateToPage(
+                  pageNumber,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.ease,
+                );},
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)
@@ -81,7 +80,7 @@ class OnboardingPage extends StatelessWidget {
               ),
               SizedBox(height: 10,),
               TextButton(
-                onPressed: (){},
+                onPressed: (){Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>RegisterLogin()));},
                 child: Text('Skip', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.normal),),
               )
 
