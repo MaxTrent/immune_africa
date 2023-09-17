@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:immune_africa/Widgets/widgets.dart';
+import 'package:immune_africa/screens/screens.dart';
 
 class RegisterOption extends StatelessWidget {
   const RegisterOption({super.key});
@@ -33,7 +34,7 @@ class RegisterOption extends StatelessWidget {
                   SizedBox(
                     height: 54,
                     width: 317,
-                    child: AppButton(btnBackgroundColor: Colors.white, btnText: 'As a parent', btnTextColor: Theme.of(context).primaryColor, onPressed: (){},),
+                    child: AppButton(btnBackgroundColor: Colors.white, btnText: 'As a parent', btnTextColor: Theme.of(context).primaryColor, onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SignUp()));},),
                   ),
                   const SizedBox(
                     height: 20,
