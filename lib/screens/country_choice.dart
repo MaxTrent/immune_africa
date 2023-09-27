@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:csc_picker/csc_picker.dart';
+import 'package:immune_africa/themes/appThemes.dart';
 
-class CountryChoice extends StatelessWidget {
-  const CountryChoice({super.key});
+class CountryChoice extends StatefulWidget {
+  CountryChoice({super.key});
+
+  @override
+  State<CountryChoice> createState() => _CountryChoiceState();
+}
+
+class _CountryChoiceState extends State<CountryChoice> {
+  String countryValue = '';
+  bool isCountrySelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,66 +37,85 @@ class CountryChoice extends StatelessWidget {
                   height: 50,
                 ),
                 Image.asset('assets/map.png'),
-              SizedBox(height: 20),
-              Expanded(
-                child: SizedBox(
-                  height: 52,
-                  width: 317,
-                  child: CSCPicker(
-                    showCities: false,
-                    showStates: false,
-                    onCountryChanged: (_){},
-                    countrySearchPlaceholder: "Country",
-                    countryDropdownLabel: "Thank Country",
-                    disabledDropdownDecoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
-                        color: Colors.grey.shade300,
-                        border:
-                        Border.all(color: Colors.grey.shade300, width: 1)),
-                    dropdownDecoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
-                        color: Colors.white,
-                        border:
-                        Border.all(color: Colors.grey.shade300, width: 4)),
-                  ),
-                ),
-              ),
-              //   TextFormField(
-              //     decoration: const InputDecoration(
-              //         labelText: 'Country',
-              //         suffixIcon: Icon(Icons.keyboard_arrow_down)),
-              //     onTap: () {
-              //       showCountryPicker(
-              //           context: context,
-              //           onSelect: (Country country) {
-              //             print('Select country: ${country.displayName}');
-              //           },
-              //           countryListTheme: CountryListThemeData(
-              //             // Optional. Sets the border radius for the bottomsheet.
-              //             borderRadius: const BorderRadius.only(
-              //               topLeft: Radius.circular(40.0),
-              //               topRight: Radius.circular(40.0),
-              //             ),
-              //             // Optional. Styles the search field.
-              //             inputDecoration: InputDecoration(
-              //               labelText: 'Search',
-              //               hintText: 'Start typing to search',
-              //               prefixIcon: const Icon(Icons.search),
-              //               border: OutlineInputBorder(
-              //                 borderSide: BorderSide(
-              //                   color: const Color(0xFF8C98A8).withOpacity(0.2),
-              //                 ),
-              //               ),
-              //             ),
-              //           ));
-              //     },
-              //     readOnly: true,
-              //   ),
+                const SizedBox(height: 70),
+                buildCountryPicker(context),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  SizedBox buildCountryPicker(BuildContext context) {
+    return SizedBox(
+                height: 52,
+                width: 317,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        enableFeedback: true,
+                        elevation: 6,
+                        // shadowColor: Colors.purple,
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        )),
+                    onPressed: () {
+                      showCountryPicker(
+                          context: context,
+                          onSelect: (Country country) {
+                            setState(() {
+                              isCountrySelected = true;
+                              countryValue = country.name;
+                            });
+                            print('Select country: ${country.displayName}');
+                          },
+                          countryListTheme: CountryListThemeData(
+                            textStyle: Theme.of(context)
+                                .textTheme
+                                .headline1!
+                                .copyWith(color: Colors.black, fontSize: 18),
+                            flagSize: 0,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(40.0),
+                              topRight: Radius.circular(40.0),
+                            ),
+                            // Optional. Styles the search field.
+                            inputDecoration: InputDecoration(
+                              labelText: 'Search Country',
+                              floatingLabelStyle: Theme.of(context).textTheme.headline1!.copyWith(color: primaryAppColor),
+                              hintText: 'Start typing to search',
+                              focusColor: primaryAppColor,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: primaryAppColor,
+                                  width: 3
+                                ),
+                              ),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: primaryAppColor,
+                                ),
+                              ),
+                            ),
+                          ));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          !isCountrySelected ? 'Country' : countryValue,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline1!
+                              .copyWith(color: Colors.black),
+                        ),
+                        const Icon(
+                          Icons.keyboard_arrow_down_sharp,
+                          color: primaryAppColor,
+                        )
+                      ],
+                    )),
+              );
   }
 }
