@@ -42,6 +42,8 @@ dependencies:
   flutter_svg: ^1.1.6
   google_fonts: ^4.0.4
   flutter_screenutil: ^5.7.0
+  country_picker: ^2.0.19
+  csc_picker: ^0.2.7
 
 dev_dependencies:
   flutter_test:
