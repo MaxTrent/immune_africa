@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:immune_africa/themes/appThemes.dart';
+import 'package:immune_africa/themes/app_themes.dart';
 import 'screens/screens.dart';
 
 void main() {
@@ -16,13 +16,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       debugShowCheckedModeBanner: false,
       theme: appTheme.light,
       themeMode: ThemeMode.system,
-      initialRoute: '/splashscreen',
+      initialRoute: '/phone',
       routes: {
         '/splashscreen': (context) => const SplashScreen(),
+        '/phone': (context) => const PhoneRegistration(),
       },
     );
   }

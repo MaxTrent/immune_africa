@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:immune_africa/Widgets/app_button.dart';
 import 'package:immune_africa/screens/country_choice.dart';
-import 'package:immune_africa/themes/appThemes.dart';
+import 'package:immune_africa/themes/app_themes.dart';
 
 class ChooseLanguage extends StatelessWidget {
   ChooseLanguage({super.key});

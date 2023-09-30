@@ -1,8 +1,10 @@
 export 'splash_screen.dart';
 export 'onboarding.dart';
-export 'registerLogin.dart';
-export 'registerOption.dart';
+export 'register_login.dart';
+export 'register_option.dart';
 export 'sign_up.dart';
 export 'email_verification.dart';
 export 'choose_language.dart';
 export 'choose_language.dart';
+export 'phone_registration.dart';
+export 'reg_success.dart';

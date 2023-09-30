@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:immune_africa/Widgets/widgets.dart';
 import 'package:immune_africa/screens/screens.dart';
-import 'package:immune_africa/themes/appThemes.dart';
+import 'package:immune_africa/themes/app_themes.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({super.key});

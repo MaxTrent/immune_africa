@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:csc_picker/csc_picker.dart';
-import 'package:immune_africa/themes/appThemes.dart';
+import 'package:immune_africa/themes/app_themes.dart';
 
 class CountryChoice extends StatefulWidget {
-  CountryChoice({super.key});
+  const CountryChoice({super.key});
 
   @override
   State<CountryChoice> createState() => _CountryChoiceState();
