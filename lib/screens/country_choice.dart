@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:csc_picker/csc_picker.dart';
+import 'package:immune_africa/Widgets/progress_indicator.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 
 class CountryChoice extends StatefulWidget {
@@ -25,8 +26,18 @@ class _CountryChoiceState extends State<CountryChoice> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const SizedBox(height: 50,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    AppProgressIndicator(isFilled: true),
+                    AppProgressIndicator(isFilled: true),
+                    AppProgressIndicator(isFilled: false),
+                  ],
+                ),
+                const SizedBox(height: 20,),
                 Text(
-                  'What country do you\ncurrently live in?',
+                  'Which country do you\ncurrently live in?',
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme
@@ -76,7 +87,7 @@ class _CountryChoiceState extends State<CountryChoice> {
                                 .headline1!
                                 .copyWith(color: Colors.black, fontSize: 18),
                             flagSize: 0,
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(40.0),
                               topRight: Radius.circular(40.0),
                             ),
@@ -86,13 +97,13 @@ class _CountryChoiceState extends State<CountryChoice> {
                               floatingLabelStyle: Theme.of(context).textTheme.headline1!.copyWith(color: primaryAppColor),
                               hintText: 'Start typing to search',
                               focusColor: primaryAppColor,
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: primaryAppColor,
                                   width: 3
                                 ),
                               ),
-                              border: OutlineInputBorder(
+                              border: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: primaryAppColor,
                                 ),

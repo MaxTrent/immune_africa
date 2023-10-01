@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: appTheme.light,
       themeMode: ThemeMode.system,
-      initialRoute: '/phone',
+      initialRoute: '/splashscreen',
       routes: {
         '/splashscreen': (context) => const SplashScreen(),
         '/phone': (context) => const PhoneRegistration(),
