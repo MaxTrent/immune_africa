@@ -8,3 +8,4 @@ export 'choose_language.dart';
 export 'choose_language.dart';
 export 'phone_registration.dart';
 export 'reg_success.dart';
+export 'sign_in.dart';

@@ -1,9 +1,28 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:immune_africa/Widgets/widgets.dart';
+import 'screens.dart';
 
-class RegisterSuccess extends StatelessWidget {
+class RegisterSuccess extends StatefulWidget {
   const RegisterSuccess({super.key});
+
+  @override
+  State<RegisterSuccess> createState() => _RegisterSuccessState();
+}
+
+class _RegisterSuccessState extends State<RegisterSuccess> {
+  @override
+  void initState() {
+    Timer(
+        const Duration(
+          seconds: 2,
+        ), () {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> SignIn()));
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

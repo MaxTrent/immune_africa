@@ -117,9 +117,13 @@ class SignUp extends StatelessWidget {
                           keyboardType: TextInputType.name,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: _passwordController,
-                          decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.visibility_off),
-                            enabledBorder: UnderlineInputBorder(
+                          obscureText: context.read<SignUpProvider>().visible ? false : true,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(onPressed: () {
+                              context.read<SignUpProvider>().changeVisibility();
+                            },
+                            icon: context.watch<SignUpProvider>().visible ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
+                            enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: accentColor,
                               ),
@@ -139,10 +143,14 @@ class SignUp extends StatelessWidget {
                         TextFormField(
                           keyboardType: TextInputType.name,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: context.read<SignUpProvider>().visible ? false : true,
                           controller: _confirmPasswordController,
-                          decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.visibility_off),
-                            enabledBorder: UnderlineInputBorder(
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(onPressed: () {
+                              context.read<SignUpProvider>().changeVisibility();
+                            },
+                                icon: context.watch<SignUpProvider>().visible ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
+                            enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: accentColor,
                               ),

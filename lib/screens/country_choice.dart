@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:csc_picker/csc_picker.dart';
 import 'package:immune_africa/Widgets/progress_indicator.dart';
+import 'screens.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 
 class CountryChoice extends StatefulWidget {
@@ -110,7 +111,10 @@ class _CountryChoiceState extends State<CountryChoice> {
                               ),
                             ),
                           ));
-                    },
+                      Future.delayed(Duration(seconds: 2), (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PhoneRegistration()));
+                      });
+                      },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
