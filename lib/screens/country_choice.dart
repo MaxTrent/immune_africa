@@ -24,34 +24,37 @@ class _CountryChoiceState extends State<CountryChoice> {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.only(top: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 50,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    AppProgressIndicator(isFilled: true),
-                    AppProgressIndicator(isFilled: true),
-                    AppProgressIndicator(isFilled: false),
-                  ],
-                ),
-                const SizedBox(height: 20,),
-                Text(
-                  'Which country do you\ncurrently live in?',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline2!
-                      .copyWith(color: Colors.black, fontSize: 24),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Image.asset('assets/map.png'),
-                const SizedBox(height: 70),
-                buildCountryPicker(context),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 50,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      AppProgressIndicator(isFilled: true),
+                      AppProgressIndicator(isFilled: true),
+                      AppProgressIndicator(isFilled: false),
+                    ],
+                  ),
+                  const SizedBox(height: 20,),
+                  Text(
+                    'Which country do you\ncurrently live in?',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline2!
+                        .copyWith(color: Colors.black, fontSize: 24),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Image.asset('assets/map.png'),
+                  const SizedBox(height: 70),
+                  buildCountryPicker(context),
+                  SizedBox(height: 40,)
+                ],
+              ),
             ),
           ),
         ),

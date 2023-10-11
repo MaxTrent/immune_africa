@@ -11,6 +11,8 @@ class Onboarding extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: PageView(
+          allowImplicitScrolling: false,
+          physics: const NeverScrollableScrollPhysics(),
           scrollDirection: Axis.horizontal,
           controller: _controller,
           children: [
@@ -39,53 +41,57 @@ class OnboardingPage extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-            height: 459,
+            height: MediaQuery.of(context).size.height/1.5,
             width: MediaQuery.of(context).size.width,
             child: Image.asset(image,
             fit: BoxFit.cover,)),
-        Container(
-          height: 200,
-          width: MediaQuery.of(context).size.width,
-          color: Theme.of(context).primaryColor,
-          child: Column(
-            children: [
-              const SizedBox(height: 20,),
-              Text('Keep Your Children',
-              style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w200),),
-              const SizedBox(height: 10,),
-              SizedBox(
-                width: 317,
-                height: 52,
-                child: ElevatedButton(onPressed: (){pageController.animateToPage(
-                  pageNumber,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.ease,
-                );},
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)
+        Expanded(
+          child: Container(
+            height: MediaQuery.of(context).size.height/3,
+            width: MediaQuery.of(context).size.width,
+            color: Theme.of(context).primaryColor,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 20,),
+                Text('Keep Your Children',
+                style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w200),),
+                const SizedBox(height: 10,),
+                SizedBox(
+                  width: 317,
+                  height: 52,
+                  child: ElevatedButton(onPressed: (){pageController.animateToPage(
+                    pageNumber,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.ease,
+                  );},
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)
+                        ),
+                        backgroundColor: Colors.white,
+                        textStyle: Theme.of(context).textTheme.headline2,
                       ),
-                      backgroundColor: Colors.white,
-                      textStyle: Theme.of(context).textTheme.headline2,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(scrollText,
-                        style: Theme.of(context).textTheme.headline2!.copyWith( color: Theme.of(context).primaryColor),),
-                        Icon(Icons.arrow_forward_ios, color: Theme.of(context).primaryColor,),
-                      ],
-                    ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(scrollText,
+                          style: Theme.of(context).textTheme.headline2!.copyWith( color: Theme.of(context).primaryColor),),
+                          Icon(Icons.arrow_forward_ios, color: Theme.of(context).primaryColor,),
+                        ],
+                      ),
+                  ),
                 ),
-              ),
-              SizedBox(height: 10,),
-              TextButton(
-                onPressed: (){Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>RegisterLogin()));},
-                child: Text('Skip', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.normal),),
-              )
+                SizedBox(height: 10,),
+                TextButton(
+                  onPressed: (){Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>RegisterLogin()));},
+                  child: Text('Skip', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.normal),),
+                )
 
-            ]
+              ]
 
+            ),
           ),
         )
       ],

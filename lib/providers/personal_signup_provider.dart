@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SignUpProvider extends ChangeNotifier{
+class PersonalSignUpProvider extends ChangeNotifier{
   bool _visible = false;
   bool get visible => _visible;
 

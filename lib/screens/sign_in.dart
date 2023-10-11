@@ -9,17 +9,14 @@ import '../themes/themes.dart';
 class SignIn extends StatelessWidget {
   SignIn({super.key});
 
-
-  final _firstNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<SignUpProvider>(
-      create: (_) => SignUpProvider(),
+    return ChangeNotifierProvider<SignInProvider>(
+      create: (_) => SignInProvider(),
       builder: (context, child) => Scaffold(
         resizeToAvoidBottomInset: false,
         body: SafeArea(
@@ -76,12 +73,16 @@ class SignIn extends StatelessWidget {
                     keyboardType: TextInputType.name,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _passwordController,
-                    obscureText: context.read<SignUpProvider>().visible ? false : true,
+                    obscureText:
+                        context.read<SignInProvider>().visible ? false : true,
                     decoration: InputDecoration(
-                      suffixIcon: IconButton(onPressed: () {
-                        context.read<SignUpProvider>().changeVisibility();
-                      },
-                          icon: context.watch<SignUpProvider>().visible ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            context.read<SignInProvider>().changeVisibility();
+                          },
+                          icon: context.watch<SignInProvider>().visible
+                              ? const Icon(Icons.visibility)
+                              : const Icon(Icons.visibility_off)),
                       enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: accentColor,
@@ -89,7 +90,6 @@ class SignIn extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   const SizedBox(
                     height: 50,
                   ),

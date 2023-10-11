@@ -1,1 +1,2 @@
-export 'sign_up_provider.dart';
+export 'personal_signup_provider.dart';
+export 'sign_in_provider.dart';
