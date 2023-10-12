@@ -134,7 +134,7 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
                     child: AppButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const RegisterSuccess()));
+                              builder: (context) => RegisterSuccess(callback: () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> SignIn()));  },)));
                         },
                         btnText: 'DONE',
                         btnBackgroundColor: primaryAppColor,

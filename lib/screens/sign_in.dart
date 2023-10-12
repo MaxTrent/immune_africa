@@ -98,7 +98,7 @@ class SignIn extends StatelessWidget {
                         height: 52,
                         width: 317,
                         child: AppButton(
-                            onPressed: () {},
+                            onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HospitalSignUp()));},
                             btnText: 'LOGIN',
                             btnBackgroundColor: accentColor,
                             btnTextColor: Colors.white)),

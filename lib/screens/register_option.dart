@@ -34,7 +34,7 @@ class RegisterOption extends StatelessWidget {
                   SizedBox(
                     height: 54,
                     width: 317,
-                    child: AppButton(btnBackgroundColor: Colors.white, btnText: 'As a parent', btnTextColor: Theme.of(context).primaryColor, onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SignUp()));},),
+                    child: AppButton(btnBackgroundColor: Colors.white, btnText: 'As a parent', btnTextColor: Theme.of(context).primaryColor, onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=> IndividualSignUp()));},),
                   ),
                   const SizedBox(
                     height: 20,

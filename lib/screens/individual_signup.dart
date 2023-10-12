@@ -5,8 +5,8 @@ import 'package:immune_africa/screens/screens.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 import 'package:provider/provider.dart';
 
-class PersonalSignUp extends StatelessWidget {
-  PersonalSignUp({super.key});
+class IndividualSignUp extends StatelessWidget {
+  IndividualSignUp({super.key});
 
   final _firstNameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -16,8 +16,8 @@ class PersonalSignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PersonalSignUpProvider>(
-        create: (_) => PersonalSignUpProvider(),
+    return ChangeNotifierProvider<IndividualSignUpProvider>(
+        create: (_) => IndividualSignUpProvider(),
         builder: ((context, child) => Scaffold(
               resizeToAvoidBottomInset: false,
               body: SafeArea(
@@ -117,12 +117,12 @@ class PersonalSignUp extends StatelessWidget {
                           keyboardType: TextInputType.name,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: _passwordController,
-                          obscureText: context.read<PersonalSignUpProvider>().visible ? false : true,
+                          obscureText: context.read<IndividualSignUpProvider>().visible ? false : true,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(onPressed: () {
-                              context.read<PersonalSignUpProvider>().changeVisibility();
+                              context.read<IndividualSignUpProvider>().changeVisibility();
                             },
-                            icon: context.watch<PersonalSignUpProvider>().visible ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
+                            icon: context.watch<IndividualSignUpProvider>().visible ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
                             enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: accentColor,
@@ -143,13 +143,13 @@ class PersonalSignUp extends StatelessWidget {
                         TextFormField(
                           keyboardType: TextInputType.name,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          obscureText: context.read<PersonalSignUpProvider>().visible ? false : true,
+                          obscureText: context.read<IndividualSignUpProvider>().visible ? false : true,
                           controller: _confirmPasswordController,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(onPressed: () {
-                              context.read<PersonalSignUpProvider>().changeVisibility();
+                              context.read<IndividualSignUpProvider>().changeVisibility();
                             },
-                                icon: context.watch<PersonalSignUpProvider>().visible ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
+                                icon: context.watch<IndividualSignUpProvider>().visible ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
                             enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: accentColor,
