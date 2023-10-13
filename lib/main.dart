@@ -19,10 +19,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: appTheme.light,
       themeMode: ThemeMode.system,
-      initialRoute: '/splashscreen',
+      initialRoute: '/home',
       routes: {
         '/splashscreen': (context) => const SplashScreen(),
         '/phone': (context) => const PhoneRegistration(),
+        '/home': (context) => const Home(),
       },
     );
   }

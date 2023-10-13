@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-  const primaryAppColor = Color(0xffC879FF);
+  const primaryAppColor = Color(0xffA564D3);
   const accentColor = Color(0xffFFC9FF);
   // static const appAccentColor = Color(value)
 

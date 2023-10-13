@@ -29,11 +29,30 @@ class Dashboard extends StatelessWidget {
                     TextButton(onPressed: (){}, child: Text('Read More', style: Theme.of(context).textTheme.headline1!.copyWith(color: primaryAppColor),)),
                   ],
                 ),
-                 ListView.builder(
-                     scrollDirection: Axis.horizontal,
-                     itemBuilder: (context, int){
-                   return Container();
-                 }),
+                 SizedBox(
+                   height: 190,
+                   child: ListView.builder(
+                       scrollDirection: Axis.horizontal,
+                       itemCount: 5,
+                       itemBuilder: (BuildContext context, int index){
+                     return Padding(
+                       padding: const EdgeInsets.all(10.0),
+                       child: Container(
+                         height: 184,
+                         width: 293,
+                         decoration: BoxDecoration(
+                           image: const DecorationImage(image: AssetImage('assets/cute-baby-born 1.png',),
+                             fit: BoxFit.cover,
+                           ),
+                           color: primaryAppColor,
+                           borderRadius: BorderRadius.circular(20)
+                         ),
+                         child: const Text('Ease the pain of vaccination'),
+                       ),
+                     );
+                   }),
+                 ),
+                 SizedBox(height: 80,),
                  Text('Nothing to show yet', style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 19, color: Colors.black),),
                 Container(
                   height: 98,
