@@ -12,3 +12,4 @@ export 'sign_in.dart';
 export 'hospital_signup.dart';
 export 'dashbord.dart';
 export 'home.dart';
+export 'add_record.dart';

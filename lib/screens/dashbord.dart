@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:immune_africa/screens/add_record.dart';
 import '../themes/themes.dart';
 
 class Dashboard extends StatelessWidget {
-  const Dashboard({super.key});
+  Dashboard({super.key});
+
+  bool isRecordAvailable = false;
 
   @override
   Widget build(BuildContext context) {
@@ -47,26 +50,32 @@ class Dashboard extends StatelessWidget {
                            color: primaryAppColor,
                            borderRadius: BorderRadius.circular(20)
                          ),
-                         child: const Text('Ease the pain of vaccination'),
+                         child: Padding(
+                             padding: const EdgeInsets.only(top: 110, left: 30),
+                             child: Text('Ease the pain of\nvaccination', style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),)),
                        ),
                      );
                    }),
                  ),
-                 SizedBox(height: 80,),
-                 Text('Nothing to show yet', style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 19, color: Colors.black),),
-                Container(
-                  height: 98,
-                  width: 98,
-                  decoration: BoxDecoration(
-                    color: primaryAppColor,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset('assets/syringe.svg', color: Colors.white,),
-                      Text('ADD', style: Theme.of(context).textTheme.headline1,)
-                    ],
+                 const SizedBox(height: 80,),
+                 isRecordAvailable ? Container() : Text('Nothing to show yet', style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 19, color: Colors.black),),
+                const SizedBox(height: 10,),
+                GestureDetector(
+                  onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const AddRecord()));},
+                  child: Container(
+                    height: 98,
+                    width: 98,
+                    decoration: BoxDecoration(
+                      color: primaryAppColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset('assets/syringe.svg', color: Colors.white,),
+                        Text('ADD', style: Theme.of(context).textTheme.headline1,)
+                      ],
+                    ),
                   ),
                 ),
               ],

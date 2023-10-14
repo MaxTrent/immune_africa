@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
-    const Dashboard(),
+    Dashboard(),
   ];
 
   @override
