@@ -83,9 +83,9 @@ class OnboardingPage extends StatelessWidget {
                       ),
                   ),
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 TextButton(
-                  onPressed: (){Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>RegisterLogin()));},
+                  onPressed: (){Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const RegisterLogin()));},
                   child: Text('Skip', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.normal),),
                 )
 

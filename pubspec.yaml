@@ -44,6 +44,7 @@ dependencies:
   flutter_screenutil: ^5.7.0
   country_picker: ^2.0.19
   csc_picker: ^0.2.7
+  dotted_border: ^2.1.0
 
 dev_dependencies:
   flutter_test:
