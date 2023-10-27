@@ -13,3 +13,5 @@ export 'hospital_signup.dart';
 export 'dashbord.dart';
 export 'home.dart';
 export 'add_record.dart';
+export 'record_details.dart';
+export 'vaccine_details.dart';

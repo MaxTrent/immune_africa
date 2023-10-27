@@ -45,6 +45,7 @@ dependencies:
   country_picker: ^2.0.19
   csc_picker: ^0.2.7
   dotted_border: ^2.1.0
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   flutter_test:

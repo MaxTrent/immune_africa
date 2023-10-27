@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:immune_africa/screens/add_record.dart';
+import 'package:immune_africa/screens/screens.dart';
 import '../themes/themes.dart';
 
 class Dashboard extends StatelessWidget {
@@ -21,7 +22,7 @@ class Dashboard extends StatelessWidget {
               children: [
                 const _buildAppBar(),
                  const _buildInfoTiles(),
-                 const SizedBox(height: 80,),
+                 const SizedBox(height: 30,),
                  isRecordAvailable ? Padding(
                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
                    child: Column(
@@ -53,52 +54,94 @@ class Dashboard extends StatelessWidget {
                          ],
                        ),
                        const SizedBox(height: 10,),
-                       Container(
-                         width: 337,
-                         height: 171,
-                         decoration: BoxDecoration(
-                           color: primaryAppColor,
-                             borderRadius: BorderRadius.circular(20)
-                         ),
-                         child: Padding(
-                           padding: const EdgeInsets.all(8.0),
-                           child: Column(
-                             children: [
-                               Row(
-                                 children: [
-                                   const CircleAvatar(
-                                     backgroundImage: AssetImage('assets/cute-baby-born 1.png'),
-                                     radius: 40,
-                                   ),
-                                   Row(
-                                     children: [
-                                       Column(
-                                         children: [
-                                           Text('Chloe Adams', style: Theme.of(context).textTheme.headline1,),
-                                           Text('1 week old', style: Theme.of(context).textTheme.headline1,),
-                                         ],
+                       SizedBox(
+                         height: 400,
+                         child: ListView.builder(
+                           scrollDirection: Axis.vertical,
+                           itemCount: 5,
+                           itemBuilder: (BuildContext context, int index){
+                             return Padding(
+                               padding: const EdgeInsets.all(10.0),
+                               child: GestureDetector(
+                                 onTap: (){
+                                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=> RecordDetails()));
+                                 },
+                                 child: Container(
+                                   width: 337,
+                                   height: 171,
+                                   decoration: BoxDecoration(
+                                       gradient: const LinearGradient(
+                                         colors: [Color(0xffE09FFF), primaryAppColor],
+                                         begin: Alignment.centerLeft,
+                                         end: Alignment.centerRight,
                                        ),
-
-
-                                     ],
+                                       // color: primaryAppColor,
+                                       borderRadius: BorderRadius.circular(20)
                                    ),
+                                   child: Padding(
+                                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                     child: Column(
+                                       crossAxisAlignment: CrossAxisAlignment.center,
+                                       mainAxisAlignment: MainAxisAlignment.center,
+                                       children: [
+                                         Row(
+                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                           crossAxisAlignment: CrossAxisAlignment.center,
+                                           children: [
 
-                                 ],
+                                             Row(
+                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                               crossAxisAlignment: CrossAxisAlignment.start,
+                                               children: [
+                                                 const CircleAvatar(
+                                                   backgroundImage: AssetImage('assets/cute-baby-born 1.png'),
+                                                   radius: 40,
+                                                 ),
+                                                 Column(
+                                                   children: [
+                                                     Text('Chloe Adams', style: Theme.of(context).textTheme.headline1,),
+                                                     Text('1 week old', style: Theme.of(context).textTheme.headline1,),
+                                                   ],
+                                                 ),
+
+                                               ],
+                                             ),
+                                             SvgPicture.asset('assets/calendar.svg'),
+                                           ],
+                                         ),
+                                         SizedBox(height: 10,),
+                                         Padding(
+                                           padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                           child: Row(
+                                             children: [
+                                               SvgPicture.asset('assets/checkmark.svg'),
+                                               SizedBox(width: 10,),
+                                               Text('Hepatitis B', style: Theme.of(context).textTheme.headline1,),
+                                             ],
+                                           ),
+                                         ),
+                                         SizedBox(height: 10,),
+                                         Padding(
+                                           padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                           child: Row(
+                                             children: [
+                                               SvgPicture.asset('assets/checkmark.svg'),
+                                               SizedBox(width: 10,),
+                                               Text('Oral polio vaccine', style: Theme.of(context).textTheme.headline1,),
+                                             ],
+                                           ),
+                                         )
+                                       ],
+                                     ),
+                                   ),
+                                 ),
                                ),
+                             );
+                           },
 
-                             ],
-                           ),
                          ),
                        ),
-                       const SizedBox(height: 30,),
-                       Container(
-                         width: 337,
-                         height: 171,
-                         decoration: BoxDecoration(
-                             color: primaryAppColor,
-                             borderRadius: BorderRadius.circular(20)
-                         ),
-                       ),
+
 
                      ],
                    ),
