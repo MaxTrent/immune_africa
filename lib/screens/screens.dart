@@ -15,3 +15,4 @@ export 'home.dart';
 export 'add_record.dart';
 export 'record_details.dart';
 export 'vaccine_details.dart';
+export 'add_vaccines.dart';

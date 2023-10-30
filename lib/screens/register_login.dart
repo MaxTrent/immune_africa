@@ -67,7 +67,7 @@ class RegisterLogin extends StatelessWidget {
                           btnBackgroundColor: Theme.of(context).primaryColor,
                           btnText: 'LOGIN',
                           btnTextColor: Colors.white,
-                          onPressed: (){},),
+                          onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SignIn()));},),
                       )
                     ],
                   ),
