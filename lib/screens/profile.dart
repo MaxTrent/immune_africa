@@ -9,24 +9,16 @@ class Profile extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Text(
-              'Chloe Adams',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline1!
-                  .copyWith(color: Colors.black),
-            ),
-            const SizedBox(
-              width: 50,
-            ),
             Center(
-                child: Text(
-                  '1 week old',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1!
-                      .copyWith(color: Colors.black),
-                )),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 20,),
+                  const CircleAvatar(backgroundImage: AssetImage('assets/baby2.png'), radius: 30,),
+                  Text('Jessica Doe', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
+                ],
+              ),
+            ),
+
           ],
         ),
       ),

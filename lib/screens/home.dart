@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[0],
+      body: _pages[1],
       bottomNavigationBar: BottomNavigationBar(
         elevation: 5,
         onTap: (index){
