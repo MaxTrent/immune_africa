@@ -46,6 +46,7 @@ dependencies:
   csc_picker: ^0.2.7
   dotted_border: ^2.1.0
   table_calendar: ^3.0.9
+  lorem_ipsum: ^0.0.3
 
 dev_dependencies:
   flutter_test:

@@ -196,7 +196,7 @@ class _buildAppBar extends StatelessWidget {
             IconButton(onPressed: (){}, icon: const Icon(Icons.notifications_none, size: 38, color: primaryAppColor,))
           ],
         ),
-        TextButton(onPressed: (){}, child: Text('Read More', style: Theme.of(context).textTheme.headline1!.copyWith(color: primaryAppColor),)),
+        TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NewsArticles()));}, child: Text('Read More', style: Theme.of(context).textTheme.headline1!.copyWith(color: primaryAppColor),)),
       ],
     );
   }

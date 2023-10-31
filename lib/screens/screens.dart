@@ -16,3 +16,5 @@ export 'add_record.dart';
 export 'record_details.dart';
 export 'vaccine_details.dart';
 export 'add_vaccines.dart';
+export 'news_articles.dart';
+export 'profile.dart';

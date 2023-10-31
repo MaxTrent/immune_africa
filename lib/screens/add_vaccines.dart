@@ -18,13 +18,20 @@ class AddVaccines extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   IconButton(icon: const Icon(Icons.arrow_back), onPressed: (){Navigator.of(context).pop();},),
-                  Text('Chloe Adams', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
-                  SvgPicture.asset('assets/profile2.svg'),
+                  Column(crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircleAvatar(backgroundImage: AssetImage('assets/baby2.png'), radius: 30,),
+                      Text('Chloe Adams', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
+                      Text('1 week old', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 16),),
+
+                    ],
+                  ),
+                  const SizedBox(width: 20,),
                 ],
               ),
-              Text('1 week old', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 16),),
               const SizedBox(height: 10,),
 
               SingleChildScrollView(

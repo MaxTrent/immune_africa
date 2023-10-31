@@ -13,39 +13,26 @@ class RecordDetails extends StatelessWidget {
         body: SafeArea(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
+                  IconButton(icon: const Icon(Icons.arrow_back), onPressed: (){Navigator.of(context).pop();},),
+                  Column(crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircleAvatar(backgroundImage: AssetImage('assets/baby2.png'), radius: 30,),
+                      Text('Chloe Adams', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
+                      Text('1 week old', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 16),),
+
+                    ],
                   ),
-                  Text(
-                    'Chloe Adams',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1!
-                        .copyWith(color: Colors.black),
-                  ),
-                  const SizedBox(
-                    width: 50,
-                  ),
+                  SizedBox(width: 20,),
                 ],
               ),
-              Center(
-                  child: Text(
-                '1 week old',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline1!
-                    .copyWith(color: Colors.black),
-              )),
               TableCalendar(
                 daysOfWeekVisible: false,
                 firstDay: DateTime.utc(2010, 10, 16),
