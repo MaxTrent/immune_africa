@@ -18,3 +18,6 @@ export 'vaccine_details.dart';
 export 'add_vaccines.dart';
 export 'news_articles.dart';
 export 'profile.dart';
+export 'settings.dart';
+export 'account_settings.dart';
+export 'notification_settings.dart';

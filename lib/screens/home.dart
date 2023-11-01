@@ -14,6 +14,7 @@ class _HomeState extends State<Home> {
   final List<Widget> _pages = [
     Dashboard(),
     Profile(),
+    Settings(),
   ];
 
   @override
@@ -24,7 +25,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[1],
+      body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         elevation: 5,
         onTap: (index){
