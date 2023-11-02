@@ -21,3 +21,4 @@ export 'profile.dart';
 export 'settings.dart';
 export 'account_settings.dart';
 export 'notification_settings.dart';
+export 'notifications.dart';

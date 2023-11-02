@@ -64,7 +64,7 @@ class Dashboard extends StatelessWidget {
                                padding: const EdgeInsets.all(10.0),
                                child: GestureDetector(
                                  onTap: (){
-                                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=> RecordDetails()));
+                                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const RecordDetails()));
                                  },
                                  child: Container(
                                    width: 337,
@@ -109,24 +109,24 @@ class Dashboard extends StatelessWidget {
                                              SvgPicture.asset('assets/calendar.svg'),
                                            ],
                                          ),
-                                         SizedBox(height: 10,),
+                                         const SizedBox(height: 10,),
                                          Padding(
-                                           padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                            child: Row(
                                              children: [
                                                SvgPicture.asset('assets/checkmark.svg'),
-                                               SizedBox(width: 10,),
+                                               const SizedBox(width: 10,),
                                                Text('Hepatitis B', style: Theme.of(context).textTheme.headline1,),
                                              ],
                                            ),
                                          ),
-                                         SizedBox(height: 10,),
+                                         const SizedBox(height: 10,),
                                          Padding(
-                                           padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                            child: Row(
                                              children: [
                                                SvgPicture.asset('assets/checkmark.svg'),
-                                               SizedBox(width: 10,),
+                                               const SizedBox(width: 10,),
                                                Text('Oral polio vaccine', style: Theme.of(context).textTheme.headline1,),
                                              ],
                                            ),
@@ -193,7 +193,7 @@ class _buildAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Welcome, Jessica!', style: Theme.of(context).textTheme.headline2!.copyWith(color: Colors.black),),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.notifications_none, size: 38, color: primaryAppColor,))
+            IconButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const NotificationScreen()));}, icon: const Icon(Icons.notifications_none, size: 38, color: primaryAppColor,))
           ],
         ),
         TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NewsArticles()));}, child: Text('Read More', style: Theme.of(context).textTheme.headline1!.copyWith(color: primaryAppColor),)),
