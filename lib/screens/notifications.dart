@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:immune_africa/themes/app_themes.dart';
+
+import '../Widgets/widgets.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -31,18 +34,37 @@ class NotificationScreen extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight:Radius.circular(30)),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40.0, left: 40, bottom: 20),
-                        child: Text('Today',
-                          style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600)
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 40.0, left: 40, bottom: 20),
+                          child: Text('Today',
+                            style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600)
+                          ),
                         ),
-                      ),
-                      Divider(color: primaryAppColor, thickness: 1,)
-                    ],
+                        NotificationTile(),
+                        SizedBox(height: 20,),
+                        NotificationTile(),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0, left: 40, bottom: 20),
+                          child: Text('This Week',
+                              style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600)
+                          ),
+                        ),
+                        SizedBox(height: 20,),
+                        NotificationTile(),
+                        SizedBox(height: 20,),
+                        NotificationTile(),
+                        SizedBox(height: 20,),
+                        NotificationTile(),
+                        SizedBox(height: 20,),
+                        NotificationTile(),
+
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -54,5 +76,34 @@ class NotificationScreen extends StatelessWidget {
     );
   }
 }
+
+class NotificationTile extends StatelessWidget {
+  const NotificationTile({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AppDivider(),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SvgPicture.asset('assets/notif.svg'),
+              Text('It’s 2 more days to Chloe’s\nHep B Vaccine!', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black,fontSize: 18),),
+              Text('Tuesday', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black,fontSize: 18),)
+            ],
+          ),
+        ),
+        AppDivider(),
+      ],
+    );
+  }
+}
+
+
 
 
