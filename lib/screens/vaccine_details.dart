@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:immune_africa/Widgets/widgets.dart';
 import 'package:immune_africa/screens/add_vaccines.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 
@@ -31,7 +32,7 @@ class _VaccineDetailsState extends State<VaccineDetails>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(left: 10.0, top: 20.0, right: 10.0),
+        padding: const EdgeInsets.only( top: 20.0),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -144,87 +145,115 @@ class _VaccineDetailsState extends State<VaccineDetails>
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: ListTile(
-                            shape: const RoundedRectangleBorder(
-                                side: BorderSide(color: primaryAppColor)),
-                            leading:
-                                SvgPicture.asset('assets/syringe_purple.svg'),
-                            title: const Text('Hepatitis  B'),
-                            trailing: const Icon(
-                              Icons.arrow_forward_ios,
-                              color: primaryAppColor,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    ListView.builder(
-                      itemCount: 10,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: ListTile(
-                            shape: const RoundedRectangleBorder(
-                                side: BorderSide(color: primaryAppColor)),
-                            leading:
-                                SvgPicture.asset('assets/syringe_green.svg'),
-                            title: const Text('Oral Polio Vaccine'),
-                            subtitle: const Text('Date Received: 14th July 2023'),
-                          ),
-                        );
-                      },
-                    ),
-                    ListView.builder(
-                      itemCount: 10,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: ListTile(
-                            shape: const RoundedRectangleBorder(
-                                side: BorderSide(color: primaryAppColor)),
-                            leading: SvgPicture.asset('assets/syringe_red.svg'),
-                            title: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Text(
-                                'PCV II',
-                                style: Theme.of(context)
+                          child: Column(
+                            children: [
+                              AppDivider(),
+                              ListTile(
+                                leading:
+                                    SvgPicture.asset('assets/syringe_purple.svg'),
+                                title: Text('Hepatitis  B', style: Theme.of(context)
                                     .textTheme
                                     .headline1!
                                     .copyWith(
-                                        fontSize: 18, color: Colors.black),
+                                    fontSize: 18, color: Colors.black),),
+                                trailing: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: primaryAppColor,
+                                ),
                               ),
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 5,
+                              AppDivider(),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5.0),
+                          child: Column(
+                            children: [
+                              AppDivider(),
+                              ListTile(
+                                // shape: const RoundedRectangleBorder(
+                                //     side: BorderSide(color: primaryAppColor)),
+                                leading:
+                                    SvgPicture.asset('assets/syringe_green.svg'),
+                                title: Text('Oral Polio Vaccine', style: Theme.of(context)
+                                    .textTheme
+                                    .headline1!
+                                    .copyWith(
+                                    fontSize: 18, color: Colors.black),),
+                                subtitle: Text('Date Received: 14th July 2023', style: Theme.of(context)
+                                    .textTheme
+                                    .headline1!
+                                    .copyWith(
+                                    fontSize: 18, color: Colors.black),),
+                              ),
+                              AppDivider(),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5.0),
+                          child: Column(
+                            children: [
+                              AppDivider(),
+                              ListTile(
+                                // shape: const RoundedRectangleBorder(
+                                //     side: BorderSide(color: primaryAppColor)),
+                                leading: SvgPicture.asset('assets/syringe_red.svg'),
+                                title: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10.0),
+                                  child: Text(
+                                    'PCV II',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline1!
+                                        .copyWith(
+                                            fontSize: 18, color: Colors.black),
+                                  ),
                                 ),
-                                Text(
-                                  'Due Date: 11th July 2023',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline1!
-                                      .copyWith(
-                                          fontSize: 18, color: Colors.black),
+                                subtitle: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      'Due Date: 11th July 2023',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline1!
+                                          .copyWith(
+                                              fontSize: 18, color: Colors.black),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: TextButton(
+                                          onPressed: () {},
+                                          child: Text(
+                                            'Send Reminder',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline1!
+                                                .copyWith(
+                                                    fontSize: 18,
+                                                    color: primaryAppColor),
+                                          )),
+                                    ),
+                                  ],
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.zero,
-                                  child: TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        'Send Reminder',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline1!
-                                            .copyWith(
-                                                fontSize: 18,
-                                                color: primaryAppColor),
-                                      )),
-                                ),
-                              ],
-                            ),
+                              ),
+                              AppDivider(),
+                            ],
                           ),
                         );
                       },

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 import 'screens/screens.dart';
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp(
     appTheme: AppTheme(),
   ));
@@ -19,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: appTheme.light,
       themeMode: ThemeMode.system,
-      initialRoute: '/home',
+      initialRoute: '/splashscreen',
       routes: {
         '/splashscreen': (context) => const SplashScreen(),
         '/phone': (context) => const PhoneRegistration(),
