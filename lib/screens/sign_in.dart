@@ -98,7 +98,10 @@ class SignIn extends StatelessWidget {
                         height: 52,
                         width: 317,
                         child: AppButton(
-                            onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard()));},
+                          onPressed: (){
+                            context.read<SignInProvider>().signIn(context, _emailController.text.toString(), _passwordController.text.toString());
+                          },
+                            // onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard()));},
                             btnText: 'LOGIN',
                             btnBackgroundColor: accentColor,
                             btnTextColor: Colors.white)),
