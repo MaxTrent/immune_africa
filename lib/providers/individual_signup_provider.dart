@@ -1,11 +1,150 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../screens/screens.dart';
 
 class IndividualSignUpProvider extends ChangeNotifier{
   bool _visible = false;
   bool get visible => _visible;
+  final _auth = FirebaseAuth.instance;
+  // final _firstNameController = TextEditingController();
+  // final _emailController = TextEditingController();
+  // final _passwordController = TextEditingController();
 
   Future<void> changeVisibility() async {
     _visible = !_visible;
     notifyListeners();
   }
+
+  Future<void> verifyEmail() async{
+    User? user = _auth.currentUser;
+
+    if (user!= null && !user.emailVerified) {
+      await user.sendEmailVerification();
+    }
+  }
+
+  Future<void> signUp(BuildContext context, String username, String firstName, String password) async {
+    // String pword = _passwordController.text.toString();
+    try {
+      final credential = await _auth.createUserWithEmailAndPassword(
+          email: username, password: password).then((value) =>
+          print('user with user id ${value.user!.uid} is logged in'));
+
+      bool addData = await sendToDB(firstName, username);
+      await verifyEmail();
+      if (kDebugMode) {
+        print('add data ${addData.toString()}');
+      }
+      if (addData == true) {
+        Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) =>
+                const EmailVerification()));
+      }
+      else {
+        error(context, 'Error signing up');
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        error(context, 'Password is weak');
+      }
+      else if (e.code == 'email-already-in-use') {
+        User? user = _auth.currentUser;
+        if (user!.uid.isNotEmpty) {
+          bool userExist = await doesUserAlreadyExist(user.uid);
+          if (userExist == true) {
+            error(context, 'This account exists');
+          }
+          else {
+            bool addData = await sendToDB(firstName, username);
+            if (kDebugMode) {
+              print('add data ${addData.toString()}');
+            }
+            if (addData == true) {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) =>
+                       Dashboard()));
+            } else {
+              error(context, 'Error signing user up');
+            }
+          }
+        } else {
+          error(context, 'This account exists');
+        }
+      } else if (e.code == 'invalid-email') {
+        error(context, 'Invalid Email');
+      } else {
+        error(context, e.message);
+        if (kDebugMode) {
+          print(e);
+        }
+      }
+    } catch (e) {
+
+      if (kDebugMode) {
+        print(e);
+      }
+
+    }
+  }
+
+  Future<bool> sendToDB(String firstname, String email) async {
+    User? user = _auth.currentUser;
+    if (user!.uid.isNotEmpty) {
+      try {
+        CollectionReference users = FirebaseFirestore.instance.collection(
+            'users');
+        await users.add({
+          "firstname": firstname,
+          // "lastname": lastname,
+          "email": email,
+          "userId": user.uid,
+          "amount": 0,
+          "amountReset": 0,
+          "lastResetTime": DateTime.now()
+        }
+        );
+        return true;
+      } catch (e) {
+        print(e.toString());
+        return false;
+      }
+    }
+    return false;
+  }
+
+  Future<bool> doesUserAlreadyExist(String uid) async {
+    final dynamic values = await FirebaseFirestore.instance
+        .collection("users")
+        .where('userId', isEqualTo: uid)
+        .limit(1)
+        .get();
+
+    if (values.size >= 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+  void error(BuildContext context, errorMessage) {
+
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.red[600],
+        elevation: 0,
+        content: Text(
+          errorMessage,
+          textAlign: TextAlign.center,
+        )));
+
+
+  }
+
+
 }

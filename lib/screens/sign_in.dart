@@ -48,6 +48,8 @@ class SignIn extends StatelessWidget {
                         .copyWith(color: Colors.black, fontSize: 18),
                   ),
                   TextFormField(
+                    showCursor: true,
+                    cursorColor: accentColor,
                     onChanged: (value1) {
                       if(value1.isNotEmpty){
                         context.read<SignInProvider>().changeButtonStatusTrue();
@@ -84,6 +86,9 @@ class SignIn extends StatelessWidget {
                         .copyWith(color: Colors.black, fontSize: 18),
                   ),
                   TextFormField(
+                    showCursor: true,
+                    cursorColor: accentColor,
+
                     onChanged: (value2) {
                       if(value2.isNotEmpty){
                         context.read<SignInProvider>().changeButtonStatusTrue();
@@ -98,13 +103,14 @@ class SignIn extends StatelessWidget {
                     obscureText:
                         context.watch<SignInProvider>().visible ? false : true,
                     decoration: InputDecoration(
+
                       suffixIcon: IconButton(
                           onPressed: () {
                             context.read<SignInProvider>().changeVisibility();
                           },
                           icon: context.watch<SignInProvider>().visible
-                              ? const Icon(Icons.visibility)
-                              : const Icon(Icons.visibility_off)),
+                              ? const Icon(Icons.visibility, color: Colors.black,)
+                              : const Icon(Icons.visibility_off, color: accentColor,)),
                       focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: accentColor,

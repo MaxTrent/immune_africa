@@ -165,12 +165,15 @@ class IndividualSignUp extends StatelessWidget {
                               height: 52,
                               width: 317,
                               child: AppButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const EmailVerification()));
-                                  },
+                                onPressed: (){
+                                  context.read<IndividualSignUpProvider>().signUp(context, _emailController.text.toString(), _firstNameController.text.toString(), _passwordController.text.toString());
+                                },
+                                  // onPressed: () {
+                                  //   Navigator.of(context).push(
+                                  //       MaterialPageRoute(
+                                  //           builder: (context) =>
+                                  //               const EmailVerification()));
+                                  // },
                                   btnText: 'NEXT',
                                   btnBackgroundColor: accentColor,
                                   btnTextColor: Colors.white)),

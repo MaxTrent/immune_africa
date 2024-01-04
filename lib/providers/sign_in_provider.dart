@@ -11,12 +11,10 @@ class SignInProvider extends ChangeNotifier{
   bool _visible = false;
   bool get visible =>  _visible;
   bool get isButtonEnabled => _isButtonEnabled;
-  final TextEditingController _textFieldController1 = TextEditingController();
-  final TextEditingController _textFieldController2 = TextEditingController();
   Status _status = Status.Uninitialized;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<void> signIn(BuildContext context, email, password) async {
+  Future<void> signIn(BuildContext context, String email, String password) async {
     try {
       _status = Status.Authenticating;
       notifyListeners();
