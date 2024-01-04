@@ -48,10 +48,24 @@ class SignIn extends StatelessWidget {
                         .copyWith(color: Colors.black, fontSize: 18),
                   ),
                   TextFormField(
+                    onChanged: (value1) {
+                      if(value1.isNotEmpty){
+                        context.read<SignInProvider>().changeButtonStatusTrue();
+                      }
+                      else{
+                      context.read<SignInProvider>().changeButtonStatusFalse();
+                      }
+
+                    },
                     keyboardType: TextInputType.name,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _emailController,
                     decoration: const InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: accentColor,
+                        ),
+                      ),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: accentColor,
@@ -70,11 +84,19 @@ class SignIn extends StatelessWidget {
                         .copyWith(color: Colors.black, fontSize: 18),
                   ),
                   TextFormField(
+                    onChanged: (value2) {
+                      if(value2.isNotEmpty){
+                        context.read<SignInProvider>().changeButtonStatusTrue();
+                      }
+                      else{
+                        context.read<SignInProvider>().changeButtonStatusFalse();
+                      }
+                    },
                     keyboardType: TextInputType.name,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _passwordController,
                     obscureText:
-                        context.read<SignInProvider>().visible ? false : true,
+                        context.watch<SignInProvider>().visible ? false : true,
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                           onPressed: () {
@@ -83,6 +105,11 @@ class SignIn extends StatelessWidget {
                           icon: context.watch<SignInProvider>().visible
                               ? const Icon(Icons.visibility)
                               : const Icon(Icons.visibility_off)),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: accentColor,
+                        ),
+                      ),
                       enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: accentColor,
@@ -103,7 +130,7 @@ class SignIn extends StatelessWidget {
                           },
                             // onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard()));},
                             btnText: 'LOGIN',
-                            btnBackgroundColor: accentColor,
+                            btnBackgroundColor: context.watch<SignInProvider>().isButtonEnabled ? primaryAppColor : accentColor,
                             btnTextColor: Colors.white)),
                   )
                 ],

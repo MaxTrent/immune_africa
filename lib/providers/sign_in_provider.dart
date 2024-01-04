@@ -7,8 +7,12 @@ import 'package:provider/provider.dart';
 enum Status{Uninitialized, Authenticated, Authenticating, Unauthenticated}
 
 class SignInProvider extends ChangeNotifier{
+  bool _isButtonEnabled = false;
   bool _visible = false;
   bool get visible =>  _visible;
+  bool get isButtonEnabled => _isButtonEnabled;
+  final TextEditingController _textFieldController1 = TextEditingController();
+  final TextEditingController _textFieldController2 = TextEditingController();
   Status _status = Status.Uninitialized;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -58,6 +62,7 @@ class SignInProvider extends ChangeNotifier{
     }
   }
 
+
   error(BuildContext context, errorMessage) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -74,6 +79,17 @@ class SignInProvider extends ChangeNotifier{
       );
 
     });
+  }
+
+
+Future<void> changeButtonStatusTrue() async{
+    _isButtonEnabled = true;
+    notifyListeners();
+}
+
+  Future<void> changeButtonStatusFalse() async{
+    _isButtonEnabled = false;
+    notifyListeners();
   }
 
   Future<void> changeVisibility() async{
