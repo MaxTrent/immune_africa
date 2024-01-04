@@ -21,7 +21,7 @@ class SignInProvider extends ChangeNotifier{
       final credential = await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then(
-              (value) => Navigator.pushReplacementNamed(context, '/homepage'));
+              (value) => Navigator.pushReplacementNamed(context, '/home'));
       User? user = _auth.currentUser;
       var id = user!.uid;
       if (kDebugMode) {
