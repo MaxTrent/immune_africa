@@ -2,13 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
 
 enum Status{Uninitialized, Authenticated, Authenticating, Unauthenticated}
 
 class SignInProvider extends ChangeNotifier{
   bool _isButtonEnabled = false;
   bool _visible = false;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
   bool get visible =>  _visible;
   bool get isButtonEnabled => _isButtonEnabled;
   Status _status = Status.Uninitialized;
@@ -16,6 +17,7 @@ class SignInProvider extends ChangeNotifier{
 
   Future<void> signIn(BuildContext context, String email, String password) async {
     try {
+      _isLoading = true;
       _status = Status.Authenticating;
       notifyListeners();
       final credential = await _auth
@@ -58,6 +60,8 @@ class SignInProvider extends ChangeNotifier{
         print(e);
       }
     }
+    _isLoading = false;
+    notifyListeners();
   }
 
 

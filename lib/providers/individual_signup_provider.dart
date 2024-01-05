@@ -6,15 +6,35 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../screens/screens.dart';
 
 class IndividualSignUpProvider extends ChangeNotifier{
-  bool _visible = false;
-  bool get visible => _visible;
+  bool _isPasswordVisible = false;
+  bool _isConfirmPasswordVisible = false;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+  bool get isPasswordVisible => _isPasswordVisible;
+  bool get isConfirmPasswordVisible => _isConfirmPasswordVisible;
+  bool _isButtonEnabled = false;
+  bool get isButtonEnabled => _isButtonEnabled;
   final _auth = FirebaseAuth.instance;
   // final _firstNameController = TextEditingController();
   // final _emailController = TextEditingController();
   // final _passwordController = TextEditingController();
 
-  Future<void> changeVisibility() async {
-    _visible = !_visible;
+  Future<void> changeButtonStatusTrue() async{
+    _isButtonEnabled = true;
+    notifyListeners();
+  }
+
+  Future<void> changeButtonStatusFalse() async{
+    _isButtonEnabled = false;
+    notifyListeners();
+  }
+  Future<void> changeVisibilityPassword() async {
+    _isPasswordVisible = !_isPasswordVisible;
+    notifyListeners();
+  }
+
+  Future<void> changeVisibilityConfirm() async {
+    _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
     notifyListeners();
   }
 
@@ -29,6 +49,7 @@ class IndividualSignUpProvider extends ChangeNotifier{
   Future<void> signUp(BuildContext context, String username, String firstName, String password) async {
     // String pword = _passwordController.text.toString();
     try {
+      _isLoading = true;
       final credential = await _auth.createUserWithEmailAndPassword(
           email: username, password: password).then((value) =>
           print('user with user id ${value.user!.uid} is logged in'));
@@ -84,12 +105,12 @@ class IndividualSignUpProvider extends ChangeNotifier{
         }
       }
     } catch (e) {
-
       if (kDebugMode) {
         print(e);
       }
-
     }
+    _isLoading = false;
+    notifyListeners();
   }
 
   Future<bool> sendToDB(String firstname, String email) async {
@@ -97,7 +118,7 @@ class IndividualSignUpProvider extends ChangeNotifier{
     if (user!.uid.isNotEmpty) {
       try {
         CollectionReference users = FirebaseFirestore.instance.collection(
-            'users');
+            'parents');
         await users.add({
           "firstname": firstname,
           // "lastname": lastname,

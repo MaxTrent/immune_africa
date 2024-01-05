@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:immune_africa/providers/providers.dart';
-import 'package:immune_africa/screens/screens.dart';
 import 'package:provider/provider.dart';
-
 import '../Widgets/widgets.dart';
 import '../themes/themes.dart';
 
@@ -86,6 +84,7 @@ class SignIn extends StatelessWidget {
                         .copyWith(color: Colors.black, fontSize: 18),
                   ),
                   TextFormField(
+                    enableInteractiveSelection: false,
                     showCursor: true,
                     cursorColor: accentColor,
 
@@ -127,11 +126,19 @@ class SignIn extends StatelessWidget {
                     height: 50,
                   ),
                   Center(
-                    child: SizedBox(
+                    child: context.watch<SignInProvider>().isLoading ? const SizedBox(
+                      height: 30,
+                      width: 35,
+                      child: CircularProgressIndicator(
+                        color: primaryAppColor,
+                        strokeWidth: 2,
+                      ),
+                    ): SizedBox(
                         height: 52,
                         width: 317,
                         child: AppButton(
                           onPressed: (){
+                            if (_formKey.currentState!.validate())
                             context.read<SignInProvider>().signIn(context, _emailController.text.toString(), _passwordController.text.toString());
                           },
                             // onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard()));},

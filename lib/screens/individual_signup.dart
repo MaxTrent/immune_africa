@@ -70,6 +70,15 @@ class IndividualSignUp extends StatelessWidget {
                               .copyWith(color: Colors.black, fontSize: 18),
                         ),
                         TextFormField(
+                          onChanged: (value) {
+                            if(value.isNotEmpty){
+                              context.read<IndividualSignUpProvider>().changeButtonStatusTrue();
+                            }
+                            else{
+                              context.read<IndividualSignUpProvider>().changeButtonStatusFalse();
+                            }
+                          },
+                          cursorColor: primaryAppColor,
                           keyboardType: TextInputType.name,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: _firstNameController,
@@ -77,6 +86,11 @@ class IndividualSignUp extends StatelessWidget {
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: accentColor,
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: primaryAppColor,
                               ),
                             ),
                           ),
@@ -92,6 +106,15 @@ class IndividualSignUp extends StatelessWidget {
                               .copyWith(color: Colors.black, fontSize: 18),
                         ),
                         TextFormField(
+                          onChanged: (value) {
+                            if(value.isNotEmpty){
+                              context.read<IndividualSignUpProvider>().changeButtonStatusTrue();
+                            }
+                            else{
+                              context.read<IndividualSignUpProvider>().changeButtonStatusFalse();
+                            }
+                          },
+                          cursorColor: primaryAppColor,
                           keyboardType: TextInputType.name,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: _emailController,
@@ -99,6 +122,11 @@ class IndividualSignUp extends StatelessWidget {
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: accentColor,
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: primaryAppColor,
                               ),
                             ),
                           ),
@@ -114,18 +142,33 @@ class IndividualSignUp extends StatelessWidget {
                               .copyWith(color: Colors.black, fontSize: 18),
                         ),
                         TextFormField(
+                          enableInteractiveSelection: false,
+                          onChanged: (value) {
+                            if(value.isNotEmpty){
+                              context.read<IndividualSignUpProvider>().changeButtonStatusTrue();
+                            }
+                            else{
+                              context.read<IndividualSignUpProvider>().changeButtonStatusFalse();
+                            }
+                          },
+                          cursorColor: primaryAppColor,
                           keyboardType: TextInputType.name,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: _passwordController,
-                          obscureText: context.read<IndividualSignUpProvider>().visible ? false : true,
+                          obscureText: context.read<IndividualSignUpProvider>().isPasswordVisible ? false : true,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(onPressed: () {
-                              context.read<IndividualSignUpProvider>().changeVisibility();
+                              context.read<IndividualSignUpProvider>().changeVisibilityPassword();
                             },
-                            icon: context.watch<IndividualSignUpProvider>().visible ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
+                                icon: context.watch<IndividualSignUpProvider>().isPasswordVisible ? const Icon(Icons.visibility, color: Colors.black,) : const Icon(Icons.visibility_off, color: accentColor,)),
                             enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: accentColor,
+                              ),
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: primaryAppColor,
                               ),
                             ),
                           ),
@@ -141,18 +184,32 @@ class IndividualSignUp extends StatelessWidget {
                               .copyWith(color: Colors.black, fontSize: 18),
                         ),
                         TextFormField(
+                          onChanged: (value) {
+                            if(value.isNotEmpty){
+                              context.read<IndividualSignUpProvider>().changeButtonStatusTrue();
+                            }
+                            else{
+                              context.read<IndividualSignUpProvider>().changeButtonStatusFalse();
+                            }
+                          },
+                          cursorColor: primaryAppColor,
                           keyboardType: TextInputType.name,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          obscureText: context.read<IndividualSignUpProvider>().visible ? false : true,
+                          obscureText: context.read<IndividualSignUpProvider>().isConfirmPasswordVisible ? false : true,
                           controller: _confirmPasswordController,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(onPressed: () {
-                              context.read<IndividualSignUpProvider>().changeVisibility();
+                              context.read<IndividualSignUpProvider>().changeVisibilityConfirm();
                             },
-                                icon: context.watch<IndividualSignUpProvider>().visible ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
+                                icon: context.watch<IndividualSignUpProvider>().isConfirmPasswordVisible ? const Icon(Icons.visibility, color: Colors.black,) : const Icon(Icons.visibility_off, color: accentColor,)),
                             enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: accentColor,
+                              ),
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: primaryAppColor,
                               ),
                             ),
                           ),
@@ -175,8 +232,8 @@ class IndividualSignUp extends StatelessWidget {
                                   //               const EmailVerification()));
                                   // },
                                   btnText: 'NEXT',
-                                  btnBackgroundColor: accentColor,
-                                  btnTextColor: Colors.white)),
+                                  btnBackgroundColor: context.watch<IndividualSignUpProvider>().isButtonEnabled ? primaryAppColor:accentColor,
+                                  btnTextColor:  Colors.white)),
                         )
                       ],
                     ),
