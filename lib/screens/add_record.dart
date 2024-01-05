@@ -268,6 +268,7 @@ class AddRecord extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 TextFormField(
+                                  cursorColor: primaryAppColor,
                                   keyboardType: TextInputType.name,
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
@@ -280,12 +281,18 @@ class AddRecord extends StatelessWidget {
                                         .copyWith(color: Colors.black),
                                     enabledBorder: const UnderlineInputBorder(
                                       borderSide: BorderSide(
+                                        color: accentColor,
+                                      ),
+                                    ),
+                                    focusedBorder: const UnderlineInputBorder(
+                                      borderSide: BorderSide(
                                         color: primaryAppColor,
                                       ),
                                     ),
                                   ),
                                 ),
                                 TextFormField(
+                                  cursorColor: primaryAppColor,
                                   keyboardType: TextInputType.name,
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
@@ -297,6 +304,11 @@ class AddRecord extends StatelessWidget {
                                         .headline1!
                                         .copyWith(color: Colors.black),
                                     enabledBorder: const UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: accentColor,
+                                      ),
+                                    ),
+                                    focusedBorder: const UnderlineInputBorder(
                                       borderSide: BorderSide(
                                         color: primaryAppColor,
                                       ),
@@ -378,7 +390,7 @@ class AddRecord extends StatelessWidget {
                             child: DottedBorder(
                               color: Colors.black,
                               radius: const Radius.circular(20),
-                              dashPattern: [5, 5],
+                              dashPattern: const [5, 5],
                               strokeWidth: 2,
                               child: Center(
                                 child: Container(
@@ -405,12 +417,15 @@ class AddRecord extends StatelessWidget {
                           width: 317,
                           height: 52,
                           child: AppButton(
-                              onPressed: () {
-                                _controller.nextPage(
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.ease,
-                                );
-                              },
+                            onPressed: (){
+                              context.read<AddRecordProvider>().addRecordToDB(firstName, lastName, dob, gender, relationship, country);
+                            },
+                              // onPressed: () {
+                              //   _controller.nextPage(
+                              //     duration: const Duration(milliseconds: 500),
+                              //     curve: Curves.ease,
+                              //   );
+                              // },
                               btnText: 'Done',
                               btnBackgroundColor: primaryAppColor,
                               btnTextColor: Colors.white))
