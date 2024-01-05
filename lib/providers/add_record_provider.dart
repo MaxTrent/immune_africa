@@ -13,4 +13,8 @@ class AddRecordProvider extends ChangeNotifier{
     _selectedGender = 2;
     notifyListeners();
   }
+
+  Future<void> sendRecordToDB() async{
+
+  }
 }
