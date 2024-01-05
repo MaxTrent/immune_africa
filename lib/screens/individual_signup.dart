@@ -160,7 +160,7 @@ class IndividualSignUp extends StatelessWidget {
                             suffixIcon: IconButton(onPressed: () {
                               context.read<IndividualSignUpProvider>().changeVisibilityPassword();
                             },
-                                icon: context.watch<IndividualSignUpProvider>().isPasswordVisible ? const Icon(Icons.visibility, color: Colors.black,) : const Icon(Icons.visibility_off, color: accentColor,)),
+                                icon: context.watch<IndividualSignUpProvider>().isPasswordVisible ? const Icon(Icons.visibility, color: primaryAppColor,) : const Icon(Icons.visibility_off, color: accentColor,)),
                             enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: accentColor,
@@ -201,7 +201,7 @@ class IndividualSignUp extends StatelessWidget {
                             suffixIcon: IconButton(onPressed: () {
                               context.read<IndividualSignUpProvider>().changeVisibilityConfirm();
                             },
-                                icon: context.watch<IndividualSignUpProvider>().isConfirmPasswordVisible ? const Icon(Icons.visibility, color: Colors.black,) : const Icon(Icons.visibility_off, color: accentColor,)),
+                                icon: context.watch<IndividualSignUpProvider>().isConfirmPasswordVisible ? const Icon(Icons.visibility, color: primaryAppColor,) : const Icon(Icons.visibility_off, color: accentColor,)),
                             enabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: accentColor,
@@ -218,12 +218,21 @@ class IndividualSignUp extends StatelessWidget {
                           height: 50,
                         ),
                         Center(
-                          child: SizedBox(
+                          child: context.watch<IndividualSignUpProvider>().isLoading ? const SizedBox(
+                            height: 30,
+                            width: 35,
+                            child: CircularProgressIndicator(
+                              color: primaryAppColor,
+                              strokeWidth: 2,
+                            ),
+                          ): SizedBox(
                               height: 52,
                               width: 317,
                               child: AppButton(
                                 onPressed: (){
-                                  context.read<IndividualSignUpProvider>().signUp(context, _emailController.text.toString(), _firstNameController.text.toString(), _passwordController.text.toString());
+                                  if (_formKey.currentState!.validate()) {
+                                    context.read<IndividualSignUpProvider>().signUp(context, _emailController.text.toString(), _firstNameController.text.toString(), _passwordController.text.toString());
+                                  }
                                 },
                                   // onPressed: () {
                                   //   Navigator.of(context).push(

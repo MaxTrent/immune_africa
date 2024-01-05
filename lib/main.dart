@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/splashscreen': (context) => const SplashScreen(),
         '/phone': (context) => const PhoneRegistration(),
         '/home': (context) => const Home(),
+        '/emailverification': (context) => const EmailVerification(),
       },
     );
   }

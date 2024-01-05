@@ -50,6 +50,7 @@ class IndividualSignUpProvider extends ChangeNotifier{
     // String pword = _passwordController.text.toString();
     try {
       _isLoading = true;
+      notifyListeners();
       final credential = await _auth.createUserWithEmailAndPassword(
           email: username, password: password).then((value) =>
           print('user with user id ${value.user!.uid} is logged in'));
@@ -60,10 +61,7 @@ class IndividualSignUpProvider extends ChangeNotifier{
         print('add data ${addData.toString()}');
       }
       if (addData == true) {
-        Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) =>
-                const EmailVerification()));
+        Navigator.pushNamed(context, 'emailverification');
       }
       else {
         error(context, 'Error signing up');
@@ -131,7 +129,6 @@ class IndividualSignUpProvider extends ChangeNotifier{
         );
         return true;
       } catch (e) {
-        print(e.toString());
         return false;
       }
     }

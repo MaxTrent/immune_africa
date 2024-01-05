@@ -138,8 +138,9 @@ class SignIn extends StatelessWidget {
                         width: 317,
                         child: AppButton(
                           onPressed: (){
-                            if (_formKey.currentState!.validate())
-                            context.read<SignInProvider>().signIn(context, _emailController.text.toString(), _passwordController.text.toString());
+                            if (_formKey.currentState!.validate()) {
+                              context.read<SignInProvider>().signIn(context, _emailController.text.toString(), _passwordController.text.toString());
+                            }
                           },
                             // onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard()));},
                             btnText: 'LOGIN',
