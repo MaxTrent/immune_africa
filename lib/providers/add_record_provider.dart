@@ -20,7 +20,7 @@ class AddRecordProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addRecordToDB(String firstName, String lastName, DateTime dob,
+  Future<void> addRecordToDB(String firstName, String lastName, String dob,
       String gender, String relationship, String country) async {
     bool childRecordExist = await doesChildRecordExist(firstName);
     final user = _auth.currentUser;
@@ -48,7 +48,7 @@ class AddRecordProvider extends ChangeNotifier {
     final user = _auth.currentUser;
 
     await FirebaseFirestore.instance
-        .collection("expenses")
+        .collection("children")
         .doc("budgets")
         .collection(user!.email.toString())
         .where('lowerCaseBudgetName', isEqualTo: name.toLowerCase())

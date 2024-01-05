@@ -13,8 +13,11 @@ class AddRecord extends StatelessWidget {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _dateController = TextEditingController();
+  final _relationshipController = TextEditingController();
+  final _countryController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
+  String gender = '';
 
   @override
   Widget build(BuildContext context) {
@@ -150,6 +153,7 @@ class AddRecord extends StatelessWidget {
                                               context
                                                   .read<AddRecordProvider>()
                                                   .selectMale();
+                                              gender = 'Male';
                                             },
                                             child: Icon(
                                               Icons.male,
@@ -191,6 +195,7 @@ class AddRecord extends StatelessWidget {
                                                 context
                                                     .read<AddRecordProvider>()
                                                     .selectFemale();
+                                                gender = 'Female';
                                               },
                                               child: Icon(
                                                 Icons.female,
@@ -272,7 +277,7 @@ class AddRecord extends StatelessWidget {
                                   keyboardType: TextInputType.name,
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
-                                  controller: TextEditingController(),
+                                  controller: _relationshipController,
                                   decoration: InputDecoration(
                                     label: const Text('Relationship to child'),
                                     labelStyle: Theme.of(context)
@@ -296,7 +301,7 @@ class AddRecord extends StatelessWidget {
                                   keyboardType: TextInputType.name,
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
-                                  controller: TextEditingController(),
+                                  controller: _countryController,
                                   decoration: InputDecoration(
                                     label: const Text('Country of Birth'),
                                     labelStyle: Theme.of(context)
@@ -418,7 +423,7 @@ class AddRecord extends StatelessWidget {
                           height: 52,
                           child: AppButton(
                             onPressed: (){
-                              context.read<AddRecordProvider>().addRecordToDB(firstName, lastName, dob, gender, relationship, country);
+                              context.read<AddRecordProvider>().addRecordToDB(_firstNameController.text, _lastNameController.text, _dateController.text, gender, _relationshipController.text, _countryController.text);
                             },
                               // onPressed: () {
                               //   _controller.nextPage(
