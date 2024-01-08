@@ -13,7 +13,7 @@ class AddRecordProvider extends ChangeNotifier {
   final _auth = FirebaseAuth.instance;
   int _selectedGender = 0;
   XFile? _image;
-  final picker = ImagePicker();
+  final _picker = ImagePicker();
 
   int get selectedGender => _selectedGender;
 
@@ -31,6 +31,7 @@ class AddRecordProvider extends ChangeNotifier {
       String gender, String relationship, String country) async {
     // bool childRecordExist = await doesChildRecordExist(firstName);
     final user = _auth.currentUser;
+    notifyListeners();
     if (user!.uid.isNotEmpty) {
       try {
         CollectionReference children =
@@ -53,7 +54,7 @@ class AddRecordProvider extends ChangeNotifier {
 
   Future<bool> doesChildRecordExist(String name) async {
     final user = _auth.currentUser;
-
+    notifyListeners();
     await FirebaseFirestore.instance
         .collection("children")
         .doc("budgets")
@@ -64,11 +65,15 @@ class AddRecordProvider extends ChangeNotifier {
         .then((docs) {
       if (docs.size >= 1) {
         _isExist = true;
+        notifyListeners();
       } else {
         _isExist = false;
+        notifyListeners();
       }
     }, onError: (e) {
-      print("Error completing: $e");
+      if (kDebugMode) {
+        print("Error completing: $e");
+      }
       // _dialogBuilder(context, 'FAILURE', e.toString());
     });
 
@@ -80,7 +85,7 @@ class AddRecordProvider extends ChangeNotifier {
 
 //Image Picker function to get image from gallery
   Future<void> getImageFromGallery() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery, requestFullMetadata: false);
       if (pickedFile != null) {
         _image = XFile(pickedFile.path);
         notifyListeners();
@@ -91,7 +96,7 @@ class AddRecordProvider extends ChangeNotifier {
 
 //Image Picker function to get image from camera
   Future<void> getImageFromCamera() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera, requestFullMetadata: false);
 
 
       if (pickedFile != null) {

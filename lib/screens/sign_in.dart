@@ -47,7 +47,7 @@ class SignIn extends StatelessWidget {
                   ),
                   TextFormField(
                     showCursor: true,
-                    cursorColor: accentColor,
+                    cursorColor: primaryAppColor,
                     onChanged: (value1) {
                       if(value1.isNotEmpty){
                         context.read<SignInProvider>().changeButtonStatusTrue();
@@ -63,7 +63,7 @@ class SignIn extends StatelessWidget {
                     decoration: const InputDecoration(
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
-                          color: accentColor,
+                          color: primaryAppColor,
                         ),
                       ),
                       enabledBorder: UnderlineInputBorder(
@@ -86,7 +86,7 @@ class SignIn extends StatelessWidget {
                   TextFormField(
                     enableInteractiveSelection: false,
                     showCursor: true,
-                    cursorColor: accentColor,
+                    cursorColor: primaryAppColor,
 
                     onChanged: (value2) {
                       if(value2.isNotEmpty){
@@ -112,7 +112,7 @@ class SignIn extends StatelessWidget {
                               : const Icon(Icons.visibility_off, color: accentColor,)),
                       focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
-                          color: accentColor,
+                          color: primaryAppColor,
                         ),
                       ),
                       enabledBorder: const UnderlineInputBorder(
