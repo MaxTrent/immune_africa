@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:immune_africa/Widgets/widgets.dart';
 import 'package:immune_africa/providers/providers.dart';
 import 'package:immune_africa/themes/themes.dart';
@@ -392,22 +393,27 @@ class AddRecord extends StatelessWidget {
                           elevation: 15,
                           child: Padding(
                             padding: const EdgeInsets.all(70),
-                            child: DottedBorder(
-                              color: Colors.black,
-                              radius: const Radius.circular(20),
-                              dashPattern: const [5, 5],
-                              strokeWidth: 2,
-                              child: Center(
-                                child: Container(
-                                  height: 120,
-                                  width: 50,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: const Icon(
-                                    Icons.add,
-                                    size: 50,
-                                    color: primaryAppColor,
+                            child: GestureDetector(
+                              onTap: (){
+                                ImagePicker().pickImage(source: ImageSource.camera);
+                              },
+                              child: DottedBorder(
+                                color: Colors.black,
+                                radius: const Radius.circular(20),
+                                dashPattern: const [5, 5],
+                                strokeWidth: 2,
+                                child: Center(
+                                  child: Container(
+                                    height: 120,
+                                    width: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: const Icon(
+                                      Icons.add,
+                                      size: 50,
+                                      color: primaryAppColor,
+                                    ),
                                   ),
                                 ),
                               ),

@@ -50,6 +50,7 @@ dependencies:
   firebase_analytics: ^10.7.0
   cloud_firestore: ^4.14.0
   intl: ^0.18.1
+  image_picker: ^1.0.2
 
 dev_dependencies:
   flutter_test:
