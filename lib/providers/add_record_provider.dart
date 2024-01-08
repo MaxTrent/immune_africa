@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:immune_africa/themes/app_themes.dart';
 
 class AddRecordProvider extends ChangeNotifier {
   bool _isExist = false;
@@ -95,7 +96,9 @@ class AddRecordProvider extends ChangeNotifier {
 
       if (pickedFile != null) {
         _image = XFile(pickedFile.path);
+        notifyListeners();
       }
+    notifyListeners();
   }
 
   Future<void> showOptions(BuildContext context) async {
@@ -104,21 +107,21 @@ class AddRecordProvider extends ChangeNotifier {
       builder: (context) => CupertinoActionSheet(
         actions: [
           CupertinoActionSheetAction(
-            child: Text('Gallery'),
+            child:  Text('Gallery',
+            style: Theme.of(context).textTheme.headline2!.copyWith(color: primaryAppColor),),
             onPressed: () {
-              // close the options modal
               Navigator.of(context).pop();
-              // get image from gallery
               getImageFromGallery();
+              notifyListeners();
             },
           ),
           CupertinoActionSheetAction(
-            child: Text('Camera'),
+            child: Text('Camera',
+            style:Theme.of(context).textTheme.headline2!.copyWith(color: primaryAppColor),),
             onPressed: () {
-              // close the options modal
               Navigator.of(context).pop();
-              // get image from camera
               getImageFromCamera();
+              notifyListeners();
             },
           ),
         ],

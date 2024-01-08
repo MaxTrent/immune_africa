@@ -395,7 +395,7 @@ class AddRecord extends StatelessWidget {
                             padding: const EdgeInsets.all(70),
                             child: GestureDetector(
                               onTap: (){
-                                ImagePicker().pickImage(source: ImageSource.camera);
+                                context.read<AddRecordProvider>().showOptions(context);
                               },
                               child: DottedBorder(
                                 color: Colors.black,
