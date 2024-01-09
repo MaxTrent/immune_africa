@@ -34,9 +34,7 @@ class AddRecordProvider extends ChangeNotifier {
     notifyListeners();
     if (user!.uid.isNotEmpty) {
       try {
-        CollectionReference children =
-            FirebaseFirestore.instance.collection('children');
-        await children.add({
+           await FirebaseFirestore.instance.collection("children").doc("childinfo").collection(user.email.toString()).add({
           "firstname": firstName,
           "lastname": lastName,
           "dob": dob,

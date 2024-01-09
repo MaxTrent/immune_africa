@@ -1,63 +1,20 @@
-import 'dart:js';
-
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:immune_africa/models/models.dart';
 
-FirebaseAuth auth = FirebaseAuth.instance;
+class DatabaseService{
+  final _db = FirebaseFirestore.instance;
+  User? user;
 
-Future<void> signIn(BuildContext context, email, password) async {
-  try {
-    final credential = await auth
-        .signInWithEmailAndPassword(email: email, password: password)
-        .then(
-            (value) => Navigator.pushReplacementNamed(context, '/homepage'));
-    User? user = auth.currentUser;
-    var id = user!.uid;
-    if (kDebugMode) {
-      print('User with $id is signed in');
-    }
-  } on FirebaseAuthException catch (e) {
-    if (e.code == 'user-not-found' ||
-        e.code == 'wrong-password' ||
-        e.code == 'invalid-email') {
-      error(context, 'Wrong email or password.');
-      if (kDebugMode) {
-        print('No user found');
-      }
-    } else if (e.code == 'too-many-requests') {
-      error(context,
-          'Account has been temporarily disabled due to too many failed attempts');
-    } else {
-      error(context, e.message);
-      if (kDebugMode) {
-        print(e);
-      }
-    }
-  } catch (e) {
-    error(context, e);
-    if (kDebugMode) {
-      print(e);
-    }
+  Future<List<Records>> retrieveRecords() async {
+    QuerySnapshot<Map<String, dynamic>> snapshot = await _db
+        .collection("children")
+        .doc("childinfo")
+        .collection(user!.email.toString())
+        .get();
+
+    return snapshot.docs.map((docSnapshot) => Records.fromDocumentSnapshot(docSnapshot)).toList();
   }
-}
 
-error(BuildContext context, errorMessage) {
-  SchedulerBinding.instance.addPostFrameCallback((_) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        width: MediaQuery.of(context).size.width,
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.red[600],
-        elevation: 0,
-        content: Text(
-          errorMessage,
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
-
-  });
 }

@@ -52,8 +52,8 @@ class AddRecord extends StatelessWidget {
                           height: 20,
                         ),
                         SizedBox(
-                          height: 271,
-                          width: 336,
+                          height: 300,
+                          width: 352,
                           child: Card(
                             shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
@@ -156,16 +156,42 @@ class AddRecord extends StatelessWidget {
                                                   .selectMale();
                                               gender = 'Male';
                                             },
-                                            child: Icon(
-                                              Icons.male,
-                                              size: 60,
-                                              color: context
-                                                          .watch<
-                                                              AddRecordProvider>()
-                                                          .selectedGender ==
-                                                      1
-                                                  ? Colors.blue
-                                                  : accentColor,
+                                            style: OutlinedButton.styleFrom(
+                                              side: BorderSide.none,
+                                              splashFactory:
+                                                  NoSplash.splashFactory,
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                Icon(
+                                                  Icons.male,
+                                                  size: 60,
+                                                  color: context
+                                                              .watch<
+                                                                  AddRecordProvider>()
+                                                              .selectedGender ==
+                                                          1
+                                                      ? primaryAppColor
+                                                      : const Color(
+                                                          0xff3E3E3E66),
+                                                ),
+                                                Text(
+                                                  'Male',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headline1!
+                                                      .copyWith(
+                                                        color: context
+                                                                    .watch<
+                                                                        AddRecordProvider>()
+                                                                    .selectedGender ==
+                                                                1
+                                                            ? primaryAppColor
+                                                            : const Color(
+                                                                0xff3E3E3E66),
+                                                      ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                           // GestureDetector(child: Icon(
@@ -198,16 +224,41 @@ class AddRecord extends StatelessWidget {
                                                     .selectFemale();
                                                 gender = 'Female';
                                               },
-                                              child: Icon(
-                                                Icons.female,
-                                                size: 60,
-                                                color: context
-                                                            .watch<
-                                                                AddRecordProvider>()
-                                                            .selectedGender ==
-                                                        2
-                                                    ? Colors.pink
-                                                    : accentColor,
+                                              style: OutlinedButton.styleFrom(
+                                                side: BorderSide.none,
+                                                splashFactory:
+                                                    NoSplash.splashFactory,
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Icon(
+                                                    Icons.female,
+                                                    size: 60,
+                                                    color: context
+                                                                .watch<
+                                                                    AddRecordProvider>()
+                                                                .selectedGender ==
+                                                            2
+                                                        ? primaryAppColor
+                                                        : const Color(
+                                                            0xff3E3E3E66),
+                                                  ),
+                                                  Text(
+                                                    'Female',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .headline1!
+                                                        .copyWith(
+                                                            color: context
+                                                                        .watch<
+                                                                            AddRecordProvider>()
+                                                                        .selectedGender ==
+                                                                    2
+                                                                ? primaryAppColor
+                                                                : const Color(
+                                                                    0xff3E3E3E66)),
+                                                  ),
+                                                ],
                                               )),
                                         ],
                                       ),
@@ -394,8 +445,10 @@ class AddRecord extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(70),
                             child: GestureDetector(
-                              onTap: (){
-                                context.read<AddRecordProvider>().showOptions(context);
+                              onTap: () {
+                                context
+                                    .read<AddRecordProvider>()
+                                    .showOptions(context);
                               },
                               child: DottedBorder(
                                 color: Colors.black,
@@ -428,9 +481,15 @@ class AddRecord extends StatelessWidget {
                           width: 317,
                           height: 52,
                           child: AppButton(
-                            onPressed: (){
-                              context.read<AddRecordProvider>().addRecordToDB(_firstNameController.text, _lastNameController.text, _dateController.text, gender, _relationshipController.text, _countryController.text);
-                            },
+                              onPressed: () {
+                                context.read<AddRecordProvider>().addRecordToDB(
+                                    _firstNameController.text,
+                                    _lastNameController.text,
+                                    _dateController.text,
+                                    gender,
+                                    _relationshipController.text,
+                                    _countryController.text);
+                              },
                               // onPressed: () {
                               //   _controller.nextPage(
                               //     duration: const Duration(milliseconds: 500),
