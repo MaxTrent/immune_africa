@@ -23,5 +23,5 @@ class Records {
         dob = doc.data()!["dob"].toDate();
 
 
-  // void compareTo(Records records) {}
+  void compareTo(Records records) {}
 }
