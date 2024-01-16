@@ -15,6 +15,7 @@ class Dashboard extends StatelessWidget {
   Future<List<Records>>? _records;
   List<Records>? _retrievedRecords;
   bool isRecordAvailable = false;
+  DatabaseService service = DatabaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +38,12 @@ class Dashboard extends StatelessWidget {
                       height: 30,
                     ),
                     FutureBuilder(
-                        future: context.watch<DashBoardProvider>().recordsList,
+                        future: /*context.watch<DashBoardProvider>().recordsList*/ service.retrieveRecords(),
                         builder: (BuildContext context,
                             AsyncSnapshot<List<Records>> snapshot) {
-                          if (!snapshot.hasData) {
+                          if (!snapshot.hasData ) {
                             context.read<DashBoardProvider>().retrieveRecordsDetails();
+
                             return Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
@@ -105,13 +107,15 @@ class Dashboard extends StatelessWidget {
                                     height: 400,
                                     child: ListView.builder(
                                       scrollDirection: Axis.vertical,
-                                      itemCount: context.watch<DashBoardProvider>().retrievedRecordsList!.length,
+                                      itemCount:5 /*context.watch<DashBoardProvider>().retrievedRecordsList!.length*/,
                                       itemBuilder:
                                           (BuildContext context, int index) {
+
                                         return Padding(
                                           padding: const EdgeInsets.all(10.0),
                                           child: GestureDetector(
                                             onTap: () {
+                                              print(context.watch<DashBoardProvider>().retrievedRecordsList![index].firstName);
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
@@ -169,7 +173,7 @@ class Dashboard extends StatelessWidget {
                                                             Column(
                                                               children: [
                                                                 Text(
-                                                                  // 'Chloe Adams'
+                                                                  // 'Chloe Adams',
                                                                   context.watch<DashBoardProvider>().retrievedRecordsList![index].firstName,
                                                                   style: Theme.of(
                                                                           context)
@@ -252,6 +256,7 @@ class Dashboard extends StatelessWidget {
                               ),
                             );
                           } else {
+
                             return Column(
                               children: [
                                 Text(
