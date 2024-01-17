@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Records {
   final String firstName;
   final String lastName;
-  final DateTime dob;
+  final String dob;
 
   Records({required this.firstName,
     required this.lastName,
@@ -11,17 +11,16 @@ class Records {
 
   Map<String, dynamic> toMap() {
     return {
-      "firstName": firstName,
-      "lastName": lastName,
+      "firstname": firstName,
+      "lastname": lastName,
       "dob": dob,
     };
   }
 
   Records.fromDocumentSnapshot(DocumentSnapshot<Map<String, dynamic>> doc)
-      : firstName = doc.data()!["firstName"],
-        lastName = doc.data()!["lastName"],
-        dob = doc.data()!["dob"].toDate();
+      : firstName = doc.data()!["firstname"],
+        lastName = doc.data()!["lastname"],
+        dob = doc.data()!["dob"];
 
 
-  void compareTo(Records records) {}
 }

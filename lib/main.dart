@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:immune_africa/providers/dashboard_provider.dart';
 import 'package:immune_africa/themes/app_themes.dart';
+import 'package:provider/provider.dart';
 import 'screens/screens.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,6 +11,7 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // await Provider.of<DashBoardProvider>(context, listen: false).retrieveRecords();
   runApp(MyApp(
     appTheme: AppTheme(),
   ));
