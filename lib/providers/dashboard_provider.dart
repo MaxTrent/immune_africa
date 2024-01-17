@@ -9,7 +9,6 @@ class DashBoardProvider extends ChangeNotifier {
   bool _loading = false;
   final _db = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
-  String? _error;
   User? user;
   Future<List<Records>>? _recordsList;
   List<Records>? _retrievedRecordsList;
@@ -22,9 +21,6 @@ class DashBoardProvider extends ChangeNotifier {
   Future<void> retrieveRecords() async {
     user = _auth.currentUser;
     try{
-      _loading = true;
-      // notifyListeners();
-
       QuerySnapshot<Map<String, dynamic>> snapshot = await _db
           .collection("children")
           .doc("childinfo")
@@ -38,14 +34,11 @@ class DashBoardProvider extends ChangeNotifier {
       }
     }
     catch(e){
-      _error = 'An error occurred';
       if (kDebugMode) {
         print('Error retrieving record: $e');
       }
     } finally {
       _loading = false;
-      print('nothing happened');
-      // notifyListeners();
     }
 
     // _recordsList = service.retrieveRecords();

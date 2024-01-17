@@ -419,7 +419,18 @@ class AddRecord extends StatelessWidget {
                                   .copyWith(color: Colors.black),
                             ),
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  context
+                                      .read<AddRecordProvider>()
+                                      .addRecordToDB(
+                                          _firstNameController.text,
+                                          _lastNameController.text,
+                                          _dateController.text,
+                                          gender,
+                                          _relationshipController.text,
+                                          _countryController.text);
+                                  Navigator.pop(context);
+                                },
                                 child: Text(
                                   'Skip',
                                   style: Theme.of(context)
@@ -489,6 +500,7 @@ class AddRecord extends StatelessWidget {
                                     gender,
                                     _relationshipController.text,
                                     _countryController.text);
+                                Navigator.pop(context);
                               },
                               // onPressed: () {
                               //   _controller.nextPage(
