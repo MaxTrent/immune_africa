@@ -201,10 +201,38 @@ class Dashboard extends StatelessWidget {
                                           0 /*context.watch<DashBoardProvider>().retrievedRecordsList!.length*/,
                                       itemBuilder:
                                           (BuildContext context, int index) {
+
+                                            // from = DateTime(from.year, from.month, from.day);
+                                            // to = DateTime(to.year, to.month, to.day);
+                                            // totalDays = to.difference(from).inDays
+                                            // of (totalDays < 7) {
+                                            //   daysDiff = totalDays
+                                            // } else {
+                                            // totalFullWeeks = (totalDay / 7).ceil()
+                                            // daysDiff = totalDay - totalFullWeeks*7
+                                            // }
+                                            int daysDif;
+                                            int totalWeeks=0;
+                                            String duration;
                                             String dob = context.watch<DashBoardProvider>().retrievedRecordsList![index].dob;
                                             DateFormat format = DateFormat("dd/MM/yyyy");
                                             DateTime date = format.parse(dob);
+                                            DateTime currentDate = DateTime.now();
+                                            int totalDays = currentDate.difference(date).inDays;
                                             String fullName =  '${context.watch<DashBoardProvider>().retrievedRecordsList![index].firstName} ${context.watch<DashBoardProvider>().retrievedRecordsList![index].lastName}';
+
+                                            if (totalDays < 7){
+                                              daysDif = totalDays;
+                                              duration = '$daysDif days';
+                                            } else {
+                                              totalWeeks = (totalDays/7).ceil();
+                                              if (totalWeeks == 1){
+                                                duration = '$totalWeeks week';
+                                              } else{
+                                                duration = '$totalWeeks weeks';
+                                              }
+                                              // daysDif = totalDays - totalWeeks*7;
+                                            }
                                         return Padding(
                                           padding: const EdgeInsets.all(10.0),
                                           child: GestureDetector(
@@ -238,7 +266,7 @@ class Dashboard extends StatelessWidget {
                                                         horizontal: 15.0),
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
+                                                      CrossAxisAlignment.start,
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
                                                   children: [
@@ -265,6 +293,7 @@ class Dashboard extends StatelessWidget {
                                                               radius: 40,
                                                             ),
                                                             Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
                                                               children: [
                                                                 Text(
                                                                   // 'Chloe Adams',
@@ -276,7 +305,7 @@ class Dashboard extends StatelessWidget {
                                                                 ),
                                                                 Text(
                                                                   // '1 week old',
-                                                                  '$date',
+                                                                  '$duration old',
                                                                   style: Theme.of(
                                                                           context)
                                                                       .textTheme
