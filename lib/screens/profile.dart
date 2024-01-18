@@ -1,12 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../themes/themes.dart';
 
 class Profile extends StatelessWidget {
-  const Profile({super.key});
+  Profile({super.key});
+
+  final _auth = FirebaseAuth.instance;
+  User? _user;
 
   @override
   Widget build(BuildContext context) {
+    _user = _auth.currentUser;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -20,7 +25,7 @@ class Profile extends StatelessWidget {
                     children: [
                       const SizedBox(height: 20,),
                       const CircleAvatar(backgroundImage: AssetImage('assets/baby2.png'), radius: 30,),
-                      Text('Jessica Doe', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
+                      Text('${_user!.displayName}', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
                     ],
                   ),
                 ),

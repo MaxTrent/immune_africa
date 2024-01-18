@@ -223,7 +223,7 @@ class IndividualSignUp extends StatelessWidget {
                             width: 35,
                             child: CircularProgressIndicator(
                               color: primaryAppColor,
-                              strokeWidth: 2,
+                              // strokeWidth: 2,
                             ),
                           ): SizedBox(
                               height: 52,

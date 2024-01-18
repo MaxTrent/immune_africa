@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:immune_africa/providers/dashboard_provider.dart';
 import 'package:immune_africa/themes/app_themes.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'screens.dart';
 
 class RecordDetails extends StatelessWidget {
-  const RecordDetails({super.key});
+  RecordDetails({Key? key, required this.name}):super(key:key);
+  String name;
 
   @override
   Widget build(BuildContext context) {
@@ -25,141 +28,141 @@ class RecordDetails extends StatelessWidget {
                   Column(crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CircleAvatar(backgroundImage: AssetImage('assets/baby2.png'), radius: 30,),
-                      Text('Chloe Adams', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
+                      Text(name, style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
                       Text('1 week old', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 16),),
 
-                    ],
-                  ),
-                  SizedBox(width: 20,),
-                ],
-              ),
-              TableCalendar(
-                daysOfWeekVisible: false,
-                firstDay: DateTime.utc(2010, 10, 16),
-                lastDay: DateTime.utc(2030, 3, 14),
-                focusedDay: DateTime.now(),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Due',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1!
-                        .copyWith(color: Colors.black, fontSize: 18),
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => VaccineDetails()));
-                        });
-                      },
-                      child: Text(
-                        'View all',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline1!
-                            .copyWith(color: Colors.grey, fontSize: 14),
-                      ))
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/syringe_red.svg',
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'PCV II',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1!
-                        .copyWith(color: Colors.black),
-                  ),
-                ],
-              ),
-              const Divider(
-                height: 10,
-                color: primaryAppColor,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Taken',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline1!
-                    .copyWith(color: Colors.black, fontSize: 18),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/syringe_green.svg',
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Hepatitis  B',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1!
-                        .copyWith(color: Colors.black),
-                  ),
-                ],
-              ),
-              const Divider(
-                height: 10,
-                color: primaryAppColor,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Upcoming',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline1!
-                    .copyWith(color: Colors.black, fontSize: 18),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/syringe_yellow.svg',
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Hepatitis  B II',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1!
-                        .copyWith(color: Colors.black),
-                  ),
-                ],
-              ),
-            ],
+                      ],
+                    ),
+                    SizedBox(width: 20,),
+                  ],
+                ),
+                TableCalendar(
+                  daysOfWeekVisible: false,
+                  firstDay: DateTime.utc(2010, 10, 16),
+                  lastDay: DateTime.utc(2030, 3, 14),
+                  focusedDay: DateTime.now(),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Due',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline1!
+                          .copyWith(color: Colors.black, fontSize: 18),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => VaccineDetails()));
+                          });
+                        },
+                        child: Text(
+                          'View all',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline1!
+                              .copyWith(color: Colors.grey, fontSize: 14),
+                        ))
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/syringe_red.svg',
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'PCV II',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline1!
+                          .copyWith(color: Colors.black),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  height: 10,
+                  color: primaryAppColor,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Taken',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1!
+                      .copyWith(color: Colors.black, fontSize: 18),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/syringe_green.svg',
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Hepatitis  B',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline1!
+                          .copyWith(color: Colors.black),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  height: 10,
+                  color: primaryAppColor,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Upcoming',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1!
+                      .copyWith(color: Colors.black, fontSize: 18),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/syringe_yellow.svg',
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Hepatitis  B II',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline1!
+                          .copyWith(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    ));
+      ));
   }
 }

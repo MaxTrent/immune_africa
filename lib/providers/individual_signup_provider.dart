@@ -51,9 +51,17 @@ class IndividualSignUpProvider extends ChangeNotifier{
     try {
       _isLoading = true;
       notifyListeners();
-      final credential = await _auth.createUserWithEmailAndPassword(
-          email: username, password: password).then((value) =>
-          print('user with user id ${value.user!.uid} is logged in'));
+      UserCredential credential = await _auth.createUserWithEmailAndPassword(
+          email: username, password: password);
+          // .then((value) =>
+          // print('user with user id ${value.user!.uid} is logged in'));
+
+      User? user = credential.user;
+      if (user != null){
+        user.updateDisplayName(firstName);
+        print('update successful. first name is $firstName');
+      }
+
 
       bool addData = await sendToDB(firstName, username);
       await verifyEmail();
@@ -61,7 +69,7 @@ class IndividualSignUpProvider extends ChangeNotifier{
         print('add data ${addData.toString()}');
       }
       if (addData == true) {
-        Navigator.pushNamed(context, 'emailverification');
+       Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const EmailVerification()));
       }
       else {
         error(context, 'Error signing up');
