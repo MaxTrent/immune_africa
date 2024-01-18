@@ -7,8 +7,9 @@ import 'package:table_calendar/table_calendar.dart';
 import 'screens.dart';
 
 class RecordDetails extends StatelessWidget {
-  RecordDetails({Key? key, required this.name}):super(key:key);
+  RecordDetails({Key? key, required this.name, required this.date}):super(key:key);
   String name;
+  String date;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +28,13 @@ class RecordDetails extends StatelessWidget {
                   IconButton(icon: const Icon(Icons.arrow_back), onPressed: (){Navigator.of(context).pop();},),
                   Column(crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CircleAvatar(backgroundImage: AssetImage('assets/baby2.png'), radius: 30,),
+                      const CircleAvatar(backgroundImage: AssetImage('assets/baby2.png'), radius: 30,),
                       Text(name, style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
-                      Text('1 week old', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 16),),
+                      Text(date, style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 16),),
 
                       ],
                     ),
-                    SizedBox(width: 20,),
+                    const SizedBox(width: 20,),
                   ],
                 ),
                 TableCalendar(
@@ -59,7 +60,7 @@ class RecordDetails extends StatelessWidget {
                         onPressed: () {
                           WidgetsBinding.instance.addPostFrameCallback((_) {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => VaccineDetails()));
+                                builder: (context) => const VaccineDetails()));
                           });
                         },
                         child: Text(
@@ -79,7 +80,7 @@ class RecordDetails extends StatelessWidget {
                     SvgPicture.asset(
                       'assets/syringe_red.svg',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
@@ -95,7 +96,7 @@ class RecordDetails extends StatelessWidget {
                   height: 10,
                   color: primaryAppColor,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -129,7 +130,7 @@ class RecordDetails extends StatelessWidget {
                   height: 10,
                   color: primaryAppColor,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
