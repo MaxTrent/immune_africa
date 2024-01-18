@@ -6,6 +6,7 @@ import 'package:immune_africa/data/services.dart';
 import 'package:immune_africa/providers/providers.dart';
 import 'package:immune_africa/screens/add_record.dart';
 import 'package:immune_africa/screens/screens.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../models/models.dart';
 import '../themes/themes.dart';
@@ -200,6 +201,9 @@ class Dashboard extends StatelessWidget {
                                           0 /*context.watch<DashBoardProvider>().retrievedRecordsList!.length*/,
                                       itemBuilder:
                                           (BuildContext context, int index) {
+                                            String dob = context.watch<DashBoardProvider>().retrievedRecordsList![index].dob;
+                                            DateFormat format = DateFormat("dd/MM/yyyy");
+                                            DateTime date = format.parse(dob);
                                             String fullName =  '${context.watch<DashBoardProvider>().retrievedRecordsList![index].firstName} ${context.watch<DashBoardProvider>().retrievedRecordsList![index].lastName}';
                                         return Padding(
                                           padding: const EdgeInsets.all(10.0),
@@ -271,7 +275,8 @@ class Dashboard extends StatelessWidget {
                                                                       .headline1,
                                                                 ),
                                                                 Text(
-                                                                  '1 week old',
+                                                                  // '1 week old',
+                                                                  '$date',
                                                                   style: Theme.of(
                                                                           context)
                                                                       .textTheme
