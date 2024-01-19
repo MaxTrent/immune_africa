@@ -236,10 +236,14 @@ class Dashboard extends StatelessWidget {
                                         String fullName =
                                             '${context.watch<DashBoardProvider>().retrievedRecordsList![index].firstName} ${context.watch<DashBoardProvider>().retrievedRecordsList![index].lastName}';
 
-                                        if (totalDays < 7) {
+                                        if (totalDays < 7 && totalDays >1) {
                                           daysDif = totalDays;
                                           duration = '$daysDif days';
-                                        } else {
+                                        }
+                                        else if(totalDays <= 1){
+                                          daysDif = totalDays;
+                                          duration = '$daysDif day';
+                                        }else {
                                           totalWeeks = (totalDays / 7).ceil();
                                           if (totalWeeks == 1) {
                                             duration = '$totalWeeks week';
