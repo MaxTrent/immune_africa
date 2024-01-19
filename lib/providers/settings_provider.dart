@@ -6,23 +6,33 @@ import 'package:immune_africa/screens/screens.dart';
 
 class SettingsProvider extends ChangeNotifier {
   final _auth = FirebaseAuth.instance;
+  bool _loading = false;
 
+  bool get loading => _loading;
 
   Future<void> signOut(BuildContext context) async {
     try {
       final User? user = _auth.currentUser;
+      _loading = true;
       notifyListeners();
       if (user != null) {
-    await _auth.signOut();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (ctx)=> SignIn()), (route) => false);
-    });
-  }
+        await Future.delayed(const Duration(seconds: 2), () async {
+          await _auth.signOut();
+          if (kDebugMode) {
+            print('Signed Out');
 
-    }catch(e){
+          }});
+
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.pushAndRemoveUntil(context,
+              MaterialPageRoute(builder: (ctx) => SignIn()), (route) => false);
+        });
+      }
+    } catch (e) {
       if (kDebugMode) {
         print('Failed to sign out $e');
       }
+      _loading = false;
       error(context, e);
     }
   }
@@ -41,7 +51,6 @@ class SettingsProvider extends ChangeNotifier {
           ),
         ),
       );
-
     });
   }
 }
