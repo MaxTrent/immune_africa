@@ -20,9 +20,7 @@ class SettingsProvider extends ChangeNotifier {
           await _auth.signOut();
           if (kDebugMode) {
             print('Signed Out');
-
           }});
-
         WidgetsBinding.instance.addPostFrameCallback((_) {
           Navigator.pushAndRemoveUntil(context,
               MaterialPageRoute(builder: (ctx) => SignIn()), (route) => false);

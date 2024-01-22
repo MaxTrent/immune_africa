@@ -98,4 +98,18 @@ Future<void> changeButtonStatusTrue() async{
     _visible = !_visible;
     notifyListeners();
   }
+
+  // Future<void> checkIfSignedIn(BuildContext context) async {
+  //   User? user = _auth.currentUser;
+  //
+  //   if (user == null && user!.uid.isEmpty) {
+  //     if (kDebugMode) {
+  //       print('Not Signed In');
+  //     }
+  //   } else {
+  //     SchedulerBinding.instance.addPostFrameCallback((_) {
+  //       Navigator.pushReplacementNamed(context, '/home');
+  //     });
+  //   }
+  // }
 }
