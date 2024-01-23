@@ -461,26 +461,38 @@ class AddRecord extends StatelessWidget {
                                     .read<AddRecordProvider>()
                                     .showOptions(context);
                               },
-                              child: DottedBorder(
-                                color: Colors.black,
-                                radius: const Radius.circular(20),
-                                dashPattern: const [5, 5],
-                                strokeWidth: 2,
-                                child: Center(
-                                  child: Container(
-                                    height: 120,
-                                    width: 50,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: const Icon(
-                                      Icons.add,
-                                      size: 50,
-                                      color: primaryAppColor,
-                                    ),
-                                  ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 60.0),
+                                child: LinearProgressIndicator(
+
+                                  // minHeight: 50,
+                                  value: context.watch<AddRecordProvider>().uploadProgress,
+                                  color: primaryAppColor,
+                                  backgroundColor: Colors.grey[200],
+                                  minHeight: 10,
+
                                 ),
                               ),
+                              // DottedBorder(
+                              //   color: Colors.black,
+                              //   radius: const Radius.circular(20),
+                              //   dashPattern: const [5, 5],
+                              //   strokeWidth: 2,
+                              //   child: Center(
+                              //     child: Container(
+                              //       height: 120,
+                              //       width: 50,
+                              //       decoration: BoxDecoration(
+                              //         borderRadius: BorderRadius.circular(5),
+                              //       ),
+                              //       child: const Icon(
+                              //         Icons.add,
+                              //         size: 50,
+                              //         color: primaryAppColor,
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
                             ),
                           ),
                         ),
@@ -493,13 +505,7 @@ class AddRecord extends StatelessWidget {
                           height: 52,
                           child: AppButton(
                               onPressed: () {
-                                context.read<AddRecordProvider>().addRecordToDB(
-                                    _firstNameController.text,
-                                    _lastNameController.text,
-                                    _dateController.text,
-                                    gender,
-                                    _relationshipController.text,
-                                    _countryController.text);
+
                                 Navigator.pop(context);
                               },
                               // onPressed: () {

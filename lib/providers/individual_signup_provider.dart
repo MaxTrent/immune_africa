@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,29 +7,36 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../screens/screens.dart';
 
-class IndividualSignUpProvider extends ChangeNotifier{
+class IndividualSignUpProvider extends ChangeNotifier {
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
   bool _isLoading = false;
+  bool _isEmailVerified = false;
+
   bool get isLoading => _isLoading;
+
   bool get isPasswordVisible => _isPasswordVisible;
+
   bool get isConfirmPasswordVisible => _isConfirmPasswordVisible;
   bool _isButtonEnabled = false;
+
   bool get isButtonEnabled => _isButtonEnabled;
   final _auth = FirebaseAuth.instance;
+
   // final _firstNameController = TextEditingController();
   // final _emailController = TextEditingController();
   // final _passwordController = TextEditingController();
 
-  Future<void> changeButtonStatusTrue() async{
+  Future<void> changeButtonStatusTrue() async {
     _isButtonEnabled = true;
     notifyListeners();
   }
 
-  Future<void> changeButtonStatusFalse() async{
+  Future<void> changeButtonStatusFalse() async {
     _isButtonEnabled = false;
     notifyListeners();
   }
+
   Future<void> changeVisibilityPassword() async {
     _isPasswordVisible = !_isPasswordVisible;
     notifyListeners();
@@ -38,63 +47,75 @@ class IndividualSignUpProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  Future<void> verifyEmail() async{
-    User? user = _auth.currentUser;
-
-    if (user!= null && !user.emailVerified) {
+  Future<void> verifyEmail(BuildContext context) async {
+    final user = _auth.currentUser;
+    // user!.reload();
+    if (!user!.emailVerified) {
       await user.sendEmailVerification();
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => Home()),
+      // );
     }
   }
 
-  Future<void> signUp(BuildContext context, String username, String firstName, String password) async {
+  Future<void> checkEmailVerification(BuildContext context) async{
+    final user = _auth.currentUser;
+    await user!.reload();
+    _isEmailVerified = user.emailVerified;
+    notifyListeners();
+
+    if(_isEmailVerified){
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Email Successfully Verified")));
+    }
+  }
+
+  Future<void> signUp(BuildContext context, String username, String firstName,
+      String password) async {
     // String pword = _passwordController.text.toString();
     try {
       _isLoading = true;
       notifyListeners();
       UserCredential credential = await _auth.createUserWithEmailAndPassword(
           email: username, password: password);
-          // .then((value) =>
-          // print('user with user id ${value.user!.uid} is logged in'));
+      // .then((value) =>
+      // print('user with user id ${value.user!.uid} is logged in'));
 
       User? user = credential.user;
-      if (user != null){
+      if (user != null) {
         user.updateDisplayName(firstName);
         print('update successful. first name is $firstName');
       }
 
-
       bool addData = await sendToDB(firstName, username);
-      await verifyEmail();
+      await verifyEmail(context);
       if (kDebugMode) {
         print('add data ${addData.toString()}');
       }
       if (addData == true) {
-       Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const EmailVerification()));
-      }
-      else {
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => EmailVerification()));
+      } else {
         error(context, 'Error signing up');
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         error(context, 'Password is weak');
-      }
-      else if (e.code == 'email-already-in-use') {
+      } else if (e.code == 'email-already-in-use') {
         User? user = _auth.currentUser;
         if (user!.uid.isNotEmpty) {
           bool userExist = await doesUserAlreadyExist(user.uid);
           if (userExist == true) {
             error(context, 'This account exists');
-          }
-          else {
+          } else {
             bool addData = await sendToDB(firstName, username);
             if (kDebugMode) {
               print('add data ${addData.toString()}');
             }
             if (addData == true) {
-              Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) =>
-                       Dashboard()));
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Dashboard()));
             } else {
               error(context, 'Error signing user up');
             }
@@ -123,8 +144,8 @@ class IndividualSignUpProvider extends ChangeNotifier{
     User? user = _auth.currentUser;
     if (user!.uid.isNotEmpty) {
       try {
-        CollectionReference users = FirebaseFirestore.instance.collection(
-            'parents');
+        CollectionReference users =
+            FirebaseFirestore.instance.collection('parents');
         await users.add({
           "firstname": firstname,
           // "lastname": lastname,
@@ -133,8 +154,7 @@ class IndividualSignUpProvider extends ChangeNotifier{
           "amount": 0,
           "amountReset": 0,
           "lastResetTime": DateTime.now()
-        }
-        );
+        });
         return true;
       } catch (e) {
         return false;
@@ -157,9 +177,7 @@ class IndividualSignUpProvider extends ChangeNotifier{
     }
   }
 
-
   void error(BuildContext context, errorMessage) {
-
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.red[600],
@@ -168,9 +186,5 @@ class IndividualSignUpProvider extends ChangeNotifier{
           errorMessage,
           textAlign: TextAlign.center,
         )));
-
-
   }
-
-
 }

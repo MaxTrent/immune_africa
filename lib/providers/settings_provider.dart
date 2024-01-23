@@ -22,8 +22,8 @@ class SettingsProvider extends ChangeNotifier {
             print('Signed Out');
           }});
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.pushAndRemoveUntil(context,
-              MaterialPageRoute(builder: (ctx) => SignIn()), (route) => false);
+          Navigator.popUntil(context,
+              ModalRoute.withName('/login'));
         });
       }
     } catch (e) {

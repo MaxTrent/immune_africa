@@ -1,4 +1,4 @@
-package com.example.immunize_africa
+package com.example.immune_africa
 
 import io.flutter.embedding.android.FlutterActivity
 

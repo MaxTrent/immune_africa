@@ -1,4 +1,5 @@
 
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,14 +8,22 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:immune_africa/themes/app_themes.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class AddRecordProvider extends ChangeNotifier {
   bool _isExist = false;
   final _auth = FirebaseAuth.instance;
   int _selectedGender = 0;
-  XFile? _image;
+  File? _image;
+  XFile? _selectedImage;
   final _picker = ImagePicker();
+  String? downloadUrl;
+  double _uploadProgress = 0.0;
+  FirebaseStorage storage = FirebaseStorage.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  int allowedImageSize = 5242880;
 
+  double get uploadProgress => _uploadProgress;
   int get selectedGender => _selectedGender;
 
   Future<void> selectMale() async {
@@ -41,6 +50,7 @@ class AddRecordProvider extends ChangeNotifier {
           "gender": gender,
           "relationship": relationship,
           "country": country,
+             "imageUrl": downloadUrl,
         });
       } catch (e) {
         if (kDebugMode) {
@@ -85,9 +95,15 @@ class AddRecordProvider extends ChangeNotifier {
   Future<void> getImageFromGallery() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery, requestFullMetadata: false);
       if (pickedFile != null) {
-        _image = XFile(pickedFile.path);
-        notifyListeners();
+        _image = File(pickedFile.path);
+
       }
+      else{
+        return;
+      }
+
+
+
     notifyListeners();
 
   }
@@ -98,11 +114,75 @@ class AddRecordProvider extends ChangeNotifier {
 
 
       if (pickedFile != null) {
-        _image = XFile(pickedFile.path);
-        notifyListeners();
+        _image = File(pickedFile.path);
+
+          uploadImage(_image!);
+          print(_uploadProgress);
+
+      }
+      else{
+        return;
       }
     notifyListeners();
   }
+
+  Future<int> getImageFileSize(File imageFile) async {
+    final fileStat = await imageFile.stat();
+    return fileStat.size;
+  }
+
+  // Future<void> uploadImage(BuildContext context) async {
+  //   if (_image == null) return;
+  //
+  //   final fileName = _image!.path.split('/').last;
+  //   final storageReference = storage.ref().child('images/$fileName');
+  //
+  //   final imageSize = await getImageFileSize(_image!);
+  //   if (imageSize > allowedImageSize) {
+  //     error(context, "File Size exceeded limit");
+  //     return;
+  //   } else if (imageSize > allowedImageSize * 0.9) {
+  //     // Show warning message
+  //   }
+  //
+  //   try {
+  //     final uploadTask = storageReference.putFile(_image!);
+  //
+  //     uploadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
+  //       _uploadProgress = snapshot.bytesTransferred / snapshot.totalBytes;
+  //       notifyListeners();
+  //     }, onDone: () async {
+  //       final downloadUrl = await storageReference.getDownloadURL();
+  //
+  //       // Save download URL to Cloud Firestore (if needed)
+  //       // await saveImageUrlToFirestore(downloadUrl);
+  //
+  //       print('Upload successful. Download URL: $downloadUrl');
+  //     });
+  //   } catch (e) {
+  //     print('Error uploading: $e');
+  //   }
+  // }
+
+  Future uploadImage(File image) async {
+    Reference ref = storage.ref().child('images/${image.path.split('/').last}');
+    UploadTask uploadTask = ref.putFile(File(image.path));
+
+    uploadTask.snapshotEvents.listen((event) {
+        _uploadProgress = event.bytesTransferred / event.totalBytes;
+        notifyListeners();
+        print('upload progress: $_uploadProgress');
+
+    });
+    await uploadTask.whenComplete(() async {
+      String downloadURL = await ref.getDownloadURL();
+      await firestore.collection('images').add({'url': downloadURL});
+      print('Image uploaded and URL stored in Firestore: $downloadURL');
+    });
+  }
+
+
+
 
   Future<void> showOptions(BuildContext context) async {
     showCupertinoModalPopup(
@@ -130,5 +210,15 @@ class AddRecordProvider extends ChangeNotifier {
         ],
       ),
     );
+  }
+  void error(BuildContext context, errorMessage) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.red[600],
+        elevation: 0,
+        content: Text(
+          errorMessage,
+          textAlign: TextAlign.center,
+        )));
   }
 }
