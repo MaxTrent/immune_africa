@@ -17,14 +17,17 @@ class AddRecordProvider extends ChangeNotifier {
   File? _image;
   XFile? _selectedImage;
   final _picker = ImagePicker();
-  String? downloadUrl;
   double _uploadProgress = 0.0;
   FirebaseStorage storage = FirebaseStorage.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   int allowedImageSize = 5242880;
+  bool _isUploading = false;
+  String _downloadUrl = '';
 
   double get uploadProgress => _uploadProgress;
   int get selectedGender => _selectedGender;
+  bool get isUploading => _isUploading;
+  String get downloadUrl => _downloadUrl;
 
   Future<void> selectMale() async {
     _selectedGender = 1;
@@ -36,8 +39,8 @@ class AddRecordProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addRecordToDB(String firstName, String lastName, String dob,
-      String gender, String relationship, String country) async {
+  Future<void> addRecordToDB(BuildContext context, String firstName, String lastName, String dob,
+      String gender, String relationship, String country, String imageUrl) async {
     // bool childRecordExist = await doesChildRecordExist(firstName);
     final user = _auth.currentUser;
     notifyListeners();
@@ -50,11 +53,12 @@ class AddRecordProvider extends ChangeNotifier {
           "gender": gender,
           "relationship": relationship,
           "country": country,
-             "imageUrl": downloadUrl,
+             "imageUrl": imageUrl,
         });
       } catch (e) {
         if (kDebugMode) {
           print(e.toString());
+          error(context, 'Not all fields were filled');
         }
       }
     }
@@ -96,6 +100,9 @@ class AddRecordProvider extends ChangeNotifier {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery, requestFullMetadata: false);
       if (pickedFile != null) {
         _image = File(pickedFile.path);
+
+        uploadImage(_image!);
+        print(_uploadProgress);
 
       }
       else{
@@ -167,6 +174,7 @@ class AddRecordProvider extends ChangeNotifier {
   Future uploadImage(File image) async {
     Reference ref = storage.ref().child('images/${image.path.split('/').last}');
     UploadTask uploadTask = ref.putFile(File(image.path));
+    _isUploading = true;
 
     uploadTask.snapshotEvents.listen((event) {
         _uploadProgress = event.bytesTransferred / event.totalBytes;
@@ -175,10 +183,12 @@ class AddRecordProvider extends ChangeNotifier {
 
     });
     await uploadTask.whenComplete(() async {
-      String downloadURL = await ref.getDownloadURL();
-      await firestore.collection('images').add({'url': downloadURL});
-      print('Image uploaded and URL stored in Firestore: $downloadURL');
+       _downloadUrl = await ref.getDownloadURL();
+      // await firestore.collection('images').add({'url': downloadURL});
+      // _isUploading = false;
+      print('Image uploaded and URL stored in Firestore: $downloadUrl');
     });
+    notifyListeners();
   }
 
 

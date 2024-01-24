@@ -7,9 +7,10 @@ import 'package:table_calendar/table_calendar.dart';
 import 'screens.dart';
 
 class RecordDetails extends StatelessWidget {
-  RecordDetails({Key? key, required this.name, required this.date}):super(key:key);
+  RecordDetails({Key? key, required this.name, required this.date, required this.image}):super(key:key);
   String name;
   String date;
+  String image;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class RecordDetails extends StatelessWidget {
                   IconButton(icon: const Icon(Icons.arrow_back), onPressed: (){Navigator.of(context).pop();},),
                   Column(crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const CircleAvatar(backgroundImage: AssetImage('assets/baby2.png'), radius: 30,),
+                      CircleAvatar(backgroundImage: NetworkImage(image,)),
                       Text(name, style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
                       Text(date, style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 16),),
 

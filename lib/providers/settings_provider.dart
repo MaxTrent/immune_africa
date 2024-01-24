@@ -22,7 +22,7 @@ class SettingsProvider extends ChangeNotifier {
             print('Signed Out');
           }});
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.popUntil(context,
+          Navigator.pop(context,
               ModalRoute.withName('/login'));
         });
       }
