@@ -1,5 +1,7 @@
 
 
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +21,7 @@ class IndividualSignUpProvider extends ChangeNotifier {
 
   bool get isConfirmPasswordVisible => _isConfirmPasswordVisible;
   bool _isButtonEnabled = false;
+  bool get isEmailVerified => _isEmailVerified;
 
   bool get isButtonEnabled => _isButtonEnabled;
   final _auth = FirebaseAuth.instance;
@@ -52,6 +55,7 @@ class IndividualSignUpProvider extends ChangeNotifier {
     // user!.reload();
     if (!user!.emailVerified) {
       await user.sendEmailVerification();
+      print('email verified');
       // Navigator.pushReplacement(
       //   context,
       //   MaterialPageRoute(builder: (context) => Home()),
@@ -60,15 +64,29 @@ class IndividualSignUpProvider extends ChangeNotifier {
   }
 
   Future<void> checkEmailVerification(BuildContext context) async{
-    final user = _auth.currentUser;
-    await user!.reload();
-    _isEmailVerified = user.emailVerified;
-    notifyListeners();
+    var user = _auth.currentUser;
+    print("Before reload: ${user!.emailVerified}");
+    Timer.periodic(const Duration(seconds: 5), (timer) async {
+      await user!.reload();
+      user = _auth.currentUser;
+
+      print("After reload: ${user!.emailVerified}");
+      if (user!.emailVerified) {
+        timer.cancel();
+        // Navigator.pop(context, true);
+      }
+    });
+
+    _isEmailVerified = user!.emailVerified;
+
+
 
     if(_isEmailVerified){
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Email Successfully Verified")));
+          .showSnackBar(const SnackBar(content: Text("Email Successfully Verified")));
     }
+    print(_isEmailVerified);
+    notifyListeners();
   }
 
   Future<void> signUp(BuildContext context, String username, String firstName,
