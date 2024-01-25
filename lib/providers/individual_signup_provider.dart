@@ -9,6 +9,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../screens/screens.dart';
 
+
+
 class IndividualSignUpProvider extends ChangeNotifier {
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
@@ -53,14 +55,20 @@ class IndividualSignUpProvider extends ChangeNotifier {
   Future<void> verifyEmail(BuildContext context) async {
     final user = _auth.currentUser;
     // user!.reload();
-    if (!user!.emailVerified) {
-      await user.sendEmailVerification();
-      print('email verified');
-      // Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => Home()),
-      // );
+
+    try{
+      if (!user!.emailVerified) {
+        await user.sendEmailVerification();
+        print('email verified');
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => Home()),
+        // );
+      }
+    }on FirebaseAuthException catch(e){
+      error(context, e);
     }
+
   }
 
   Future<void> checkEmailVerification(BuildContext context) async{
@@ -72,20 +80,22 @@ class IndividualSignUpProvider extends ChangeNotifier {
 
       print("After reload: ${user!.emailVerified}");
       if (user!.emailVerified) {
+        _isEmailVerified = user!.emailVerified;
+          success(context, 'Email Successfully Verified');
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> const Home()));
+        if (kDebugMode) {
+          print(_isEmailVerified);
+        }
         timer.cancel();
         // Navigator.pop(context, true);
       }
     });
 
-    _isEmailVerified = user!.emailVerified;
 
 
 
-    if(_isEmailVerified){
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Email Successfully Verified")));
-    }
-    print(_isEmailVerified);
+
+
     notifyListeners();
   }
 
@@ -202,6 +212,17 @@ class IndividualSignUpProvider extends ChangeNotifier {
         elevation: 0,
         content: Text(
           errorMessage,
+          textAlign: TextAlign.center,
+        )));
+  }
+
+  void success(BuildContext context, successMessage) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.green[600],
+        elevation: 0,
+        content: Text(
+          successMessage,
           textAlign: TextAlign.center,
         )));
   }

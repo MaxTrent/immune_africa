@@ -7,7 +7,7 @@ import 'package:immune_africa/themes/app_themes.dart';
 import '../Widgets/widgets.dart';
 
 
-extension ExtString on String{
+extension ExtensionString on String{
   bool get isValidPhone {
     final phoneRegExp = RegExp(r"^\+?0[0-9]{10}$");
     return phoneRegExp.hasMatch(this);
@@ -85,6 +85,11 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
                           ],
                         ),
                         child: TextFormField(
+                          validator: (value){
+                            if(!value!.isValidPhone){
+                              return 'Invalid Phone Number';
+                            }
+                          },
                           keyboardType: TextInputType.phone,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           inputFormatters: [

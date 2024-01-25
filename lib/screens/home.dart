@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:immune_africa/providers/dashboard_provider.dart';
 import 'package:provider/provider.dart';
 import 'screens.dart';
@@ -18,16 +19,26 @@ class _HomeState extends State<Home> {
     Profile(),
     Settings(),
   ];
+  DateTime? currentBackPressTime;
 
+
+  Future<bool> onWillPop() {
+    DateTime now = DateTime.now();
+    if (currentBackPressTime == null ||
+        now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
+      currentBackPressTime = now;
+      Fluttertoast.showToast(msg: 'Tap again to exit');
+      return Future.value(false);
+    }
+    return Future.value(true);
+  }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<DashBoardProvider>(
       create: (_)=> DashBoardProvider(),
       child: WillPopScope(
-        onWillPop: () async {
-          return true;
-        },
+        onWillPop: onWillPop,
         child: Scaffold(
           body: _pages[_selectedIndex],
           bottomNavigationBar: BottomNavigationBar(
@@ -55,4 +66,5 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
 }

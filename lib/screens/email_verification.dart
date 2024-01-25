@@ -69,7 +69,7 @@ user = _auth.currentUser;
                 ),
               );
             } else if (context.watch<IndividualSignUpProvider>().isEmailVerified){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> const Home()));
+
               return Container();
             }
             else{
