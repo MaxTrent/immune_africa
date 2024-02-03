@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:immune_africa/providers/dashboard_provider.dart';
 import 'package:provider/provider.dart';
@@ -55,10 +56,10 @@ class _HomeState extends State<Home> {
             // unselectedLabelStyle: Theme.of(context).textTheme.headline1,
             // selectedLabelStyle: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 12, color:primaryAppColor),
             currentIndex: _selectedIndex,
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home_filled, size: 40,), label: 'Home',),
-              BottomNavigationBarItem(icon: Icon(Icons.person, size: 40,), label: 'Profile'),
-              BottomNavigationBarItem(icon: Icon(Icons.settings, size: 40,), label: 'Settings'),
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.home_filled, size: 40.r,), label: 'Home',),
+              BottomNavigationBarItem(icon: Icon(Icons.person, size: 40.r,), label: 'Profile'),
+              BottomNavigationBarItem(icon: Icon(Icons.settings, size: 40.r,), label: 'Settings'),
             ],
           ),
 

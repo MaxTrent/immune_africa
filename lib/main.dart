@@ -1,5 +1,6 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:immune_africa/providers/dashboard_provider.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 import 'package:provider/provider.dart';
@@ -31,18 +32,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: appTheme.light,
-      themeMode: ThemeMode.system,
-      initialRoute: '/splashscreen',
-      routes: {
-        '/login': (context) => SignIn(),
-        '/splashscreen': (context) => const SplashScreen(),
-        '/phone': (context) => const PhoneRegistration(),
-        '/home': (context) => const Home(),
-        '/emailverification': (context) => EmailVerification(),
-      },
+    return ScreenUtilInit(
+      designSize: const Size(393, 852),
+      builder:(context, child)=> MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: appTheme.light,
+        themeMode: ThemeMode.system,
+        initialRoute: '/splashscreen',
+        routes: {
+          '/login': (context) => SignIn(),
+          '/splashscreen': (context) => const SplashScreen(),
+          '/phone': (context) => const PhoneRegistration(),
+          '/home': (context) => const Home(),
+          '/emailverification': (context) => EmailVerification(),
+        },
+      ),
     );
   }
 }

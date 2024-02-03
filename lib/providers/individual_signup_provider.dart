@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -8,8 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../screens/screens.dart';
-
-
 
 class IndividualSignUpProvider extends ChangeNotifier {
   bool _isPasswordVisible = false;
@@ -23,6 +19,7 @@ class IndividualSignUpProvider extends ChangeNotifier {
 
   bool get isConfirmPasswordVisible => _isConfirmPasswordVisible;
   bool _isButtonEnabled = false;
+
   bool get isEmailVerified => _isEmailVerified;
 
   bool get isButtonEnabled => _isButtonEnabled;
@@ -56,7 +53,7 @@ class IndividualSignUpProvider extends ChangeNotifier {
     final user = _auth.currentUser;
     // user!.reload();
 
-    try{
+    try {
       if (!user!.emailVerified) {
         await user.sendEmailVerification();
         print('email verified');
@@ -65,13 +62,12 @@ class IndividualSignUpProvider extends ChangeNotifier {
         //   MaterialPageRoute(builder: (context) => Home()),
         // );
       }
-    }on FirebaseAuthException catch(e){
+    } on FirebaseAuthException catch (e) {
       error(context, e);
     }
-
   }
 
-  Future<void> checkEmailVerification(BuildContext context) async{
+  Future<void> checkEmailVerification(BuildContext context) async {
     var user = _auth.currentUser;
     print("Before reload: ${user!.emailVerified}");
     Timer.periodic(const Duration(seconds: 5), (timer) async {
@@ -81,8 +77,14 @@ class IndividualSignUpProvider extends ChangeNotifier {
       print("After reload: ${user!.emailVerified}");
       if (user!.emailVerified) {
         _isEmailVerified = user!.emailVerified;
-          success(context, 'Email Successfully Verified');
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> const Home()));
+        success(context, 'Email Successfully Verified');
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RegisterSuccess(callback: () {
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => Home()));
+                    })));
         if (kDebugMode) {
           print(_isEmailVerified);
         }
@@ -90,11 +92,6 @@ class IndividualSignUpProvider extends ChangeNotifier {
         // Navigator.pop(context, true);
       }
     });
-
-
-
-
-
 
     notifyListeners();
   }
@@ -122,8 +119,8 @@ class IndividualSignUpProvider extends ChangeNotifier {
         print('add data ${addData.toString()}');
       }
       if (addData == true) {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => EmailVerification()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => EmailVerification()));
       } else {
         error(context, 'Error signing up');
       }
@@ -142,8 +139,9 @@ class IndividualSignUpProvider extends ChangeNotifier {
               print('add data ${addData.toString()}');
             }
             if (addData == true) {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dashboard()));
+              return;
+              // Navigator.of(context)
+              //     .push(MaterialPageRoute(builder: (context) => Dashboard()));
             } else {
               error(context, 'Error signing user up');
             }

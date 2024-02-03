@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -14,19 +15,19 @@ class AppTheme{
     primaryColor: primaryAppColor,
     textTheme: TextTheme(
       headline1: GoogleFonts.montserrat(
-        textStyle: const TextStyle(
+        textStyle: TextStyle(
             color: Colors.white,
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w500,
-            fontSize: 16,
+            fontSize: 16.sp,
         ),
       ),
       headline2: GoogleFonts.montserrat(
-        textStyle: const TextStyle(
+        textStyle: TextStyle(
           color: Colors.white,
           fontStyle: FontStyle.normal,
           fontWeight: FontWeight.w600,
-          fontSize: 24,
+          fontSize: 24.sp,
         )
       )
 

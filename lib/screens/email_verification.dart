@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:immune_africa/providers/providers.dart';
 import 'package:immune_africa/screens/screens.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,7 @@ user = _auth.currentUser;
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting){
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,7 +40,7 @@ user = _auth.currentUser;
                       style: Theme.of(context).textTheme.headline2!.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.w300,
-                          fontSize: 22),
+                          fontSize: 22.sp),
                     ),
                     TextButton(
                         onPressed: () {
@@ -55,13 +56,13 @@ user = _auth.currentUser;
                               .headline1!
                               .copyWith(color: Colors.black),
                         )),
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: 10.h,
                     ),
-                    const SizedBox(
-                        height: 30,
-                        width: 35,
-                        child: CircularProgressIndicator(
+                    SizedBox(
+                        height: 30.h,
+                        width: 35.w,
+                        child: const CircularProgressIndicator(
                           color: primaryAppColor,
                           // strokeWidth: 2,
                         )),
@@ -74,7 +75,7 @@ user = _auth.currentUser;
             }
             else{
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,7 +91,7 @@ user = _auth.currentUser;
                       style: Theme.of(context).textTheme.headline2!.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.w300,
-                          fontSize: 22),
+                          fontSize: 22.sp),
                     ),
                     TextButton(
                         onPressed: () {
@@ -106,13 +107,13 @@ user = _auth.currentUser;
                               .headline1!
                               .copyWith(color: Colors.black),
                         )),
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: 10.h,
                     ),
-                    const SizedBox(
-                        height: 30,
-                        width: 35,
-                        child: CircularProgressIndicator(
+                    SizedBox(
+                        height: 30.h,
+                        width: 35.w,
+                        child: const CircularProgressIndicator(
                           color: primaryAppColor,
                           // strokeWidth: 2,
                         )),

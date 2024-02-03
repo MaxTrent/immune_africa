@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:immune_africa/providers/providers.dart';
 import 'package:immune_africa/screens/individual_signup.dart';
 import 'package:provider/provider.dart';
@@ -27,14 +28,14 @@ class SignIn extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding: EdgeInsets.symmetric(horizontal: 15.0.w),
               child: Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 30,
+                    SizedBox(
+                      height: 30.h,
                     ),
                     Text(
                       'Login',
@@ -43,15 +44,15 @@ class SignIn extends StatelessWidget {
                           .headline2!
                           .copyWith(color: Colors.black),
                     ),
-                    const SizedBox(
-                      height: 40,
+                    SizedBox(
+                      height: 40.h,
                     ),
                     Text(
                       'Email Address',
                       style: Theme.of(context)
                           .textTheme
                           .headline1!
-                          .copyWith(color: Colors.black, fontSize: 18),
+                          .copyWith(color: Colors.black, fontSize: 18.sp),
                     ),
                     TextFormField(
                       validator: (value){
@@ -86,15 +87,15 @@ class SignIn extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: 10.h,
                     ),
                     Text(
                       'Password',
                       style: Theme.of(context)
                           .textTheme
                           .headline1!
-                          .copyWith(color: Colors.black, fontSize: 18),
+                          .copyWith(color: Colors.black, fontSize: 18.sp),
                     ),
                     TextFormField(
                       enableInteractiveSelection: false,
@@ -145,22 +146,22 @@ class SignIn extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 50,
+                    SizedBox(
+                      height: 50.h,
                     ),
                     Center(
                       child: context.watch<SignInProvider>().isLoading
-                          ? const SizedBox(
-                              height: 30,
-                              width: 35,
+                          ? SizedBox(
+                              height: 30.h,
+                              width: 35.w,
                               child: CircularProgressIndicator(
                                 color: primaryAppColor,
                                 // strokeWidth: 2,
                               ),
                             )
                           : SizedBox(
-                              height: 52,
-                              width: 317,
+                              height: 52.h,
+                              width: 317.w,
                               child: AppButton(
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {

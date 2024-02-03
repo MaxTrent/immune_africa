@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:immune_africa/screens/screens.dart';
 
@@ -16,7 +17,7 @@ class RegisterLogin extends StatelessWidget {
             Center(
               child: SizedBox(
                 // height: 1000,
-                  width: 400,
+                  width: 400.w,
                   child: SvgPicture.asset('assets/logo_background.svg')),
             ),
             Container(
@@ -35,16 +36,16 @@ class RegisterLogin extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(),
-                  SizedBox(height: 100,),
-                  AppLogo(),
+                  SizedBox(height: 100.h,),
+                  const AppLogo(),
                   SizedBox(
-                    height: 100,
+                    height: 100.h,
                   ),
                   Column(
                     children: [
                       SizedBox(
-                        height: 54,
-                        width: 317,
+                        height: 54.h,
+                        width: 317.w,
                         child: AppButton(btnBackgroundColor: Colors.white,
                             btnText: 'REGISTER',
                             btnTextColor: Theme
@@ -57,12 +58,12 @@ class RegisterLogin extends StatelessWidget {
                                   ));
                             }),
                       ),
-                      const SizedBox(
-                        height: 20,
+                       SizedBox(
+                        height: 20.h,
                       ),
                       SizedBox(
-                        height: 54,
-                        width: 317,
+                        height: 54.h,
+                        width: 317.w,
                         child: AppButton(
                           btnBackgroundColor: Theme.of(context).primaryColor,
                           btnText: 'LOGIN',

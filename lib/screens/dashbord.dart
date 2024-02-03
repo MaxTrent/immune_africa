@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:immune_africa/data/services.dart';
 import 'package:immune_africa/providers/providers.dart';
@@ -43,15 +44,15 @@ class Dashboard extends StatelessWidget {
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.0.w),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       _buildAppBar(),
                       const _buildInfoTiles(),
-                      const SizedBox(
-                        height: 30,
+                      SizedBox(
+                        height: 30.h,
                       ),
                       FutureBuilder(
                           future: Provider.of<DashBoardProvider>(context,
@@ -72,7 +73,7 @@ class Dashboard extends StatelessWidget {
                                     .textTheme
                                     .headline1!
                                     .copyWith(
-                                    fontSize: 19, color: Colors.black),
+                                    fontSize: 19.sp, color: Colors.black),
                               );
                             }
                             // else if (provider.retrievedRecordsList != null && provider.retrievedRecordsList!.isNotEmpty) {
@@ -95,10 +96,10 @@ class Dashboard extends StatelessWidget {
                                         .textTheme
                                         .headline1!
                                         .copyWith(
-                                            fontSize: 19, color: Colors.black),
+                                            fontSize: 19.sp, color: Colors.black),
                                   ),
-                                  const SizedBox(
-                                    height: 10,
+                                  SizedBox(
+                                    height: 10.h,
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -112,11 +113,11 @@ class Dashboard extends StatelessWidget {
                                               builder: (context) => AddRecord()));
                                     },
                                     child: Container(
-                                      height: 98,
-                                      width: 98,
+                                      height: 98.h,
+                                      width: 98.w,
                                       decoration: BoxDecoration(
                                         color: primaryAppColor,
-                                        borderRadius: BorderRadius.circular(50),
+                                        borderRadius: BorderRadius.circular(100.r),
                                       ),
                                       child: Column(
                                         mainAxisAlignment:
@@ -140,8 +141,7 @@ class Dashboard extends StatelessWidget {
                               );
                             } else {
                               return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10.0),
+                                padding:EdgeInsets.symmetric(horizontal: 10.0.w),
                                 child: Column(
                                   children: [
                                     Row(
@@ -154,7 +154,7 @@ class Dashboard extends StatelessWidget {
                                               .textTheme
                                               .headline1!
                                               .copyWith(
-                                                  fontSize: 22,
+                                                  fontSize: 22.sp,
                                                   color: Colors.black),
                                         ),
                                         GestureDetector(
@@ -170,12 +170,12 @@ class Dashboard extends StatelessWidget {
                                                         AddRecord()));
                                           },
                                           child: Container(
-                                            height: 63,
-                                            width: 63,
+                                            height: 63.h,
+                                            width: 63.w,
                                             decoration: BoxDecoration(
                                               color: primaryAppColor,
                                               borderRadius:
-                                                  BorderRadius.circular(50),
+                                                  BorderRadius.circular(100.r),
                                             ),
                                             child: Column(
                                               mainAxisAlignment:
@@ -183,8 +183,8 @@ class Dashboard extends StatelessWidget {
                                               children: [
                                                 SvgPicture.asset(
                                                   'assets/syringe.svg',
-                                                  width: 19,
-                                                  height: 20,
+                                                  width: 19.w,
+                                                  height: 20.h,
                                                   color: Colors.white,
                                                 ),
                                                 Text(
@@ -192,7 +192,7 @@ class Dashboard extends StatelessWidget {
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .headline1!
-                                                      .copyWith(fontSize: 14),
+                                                      .copyWith(fontSize: 14.sp),
                                                 ),
                                               ],
                                             ),
@@ -200,11 +200,11 @@ class Dashboard extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(
-                                      height: 10,
+                                    SizedBox(
+                                      height: 10.h,
                                     ),
                                     SizedBox(
-                                      height: 400,
+                                      height: 400.h,
                                       child: ListView.builder(
                                         scrollDirection: Axis.vertical,
                                         itemCount: context
@@ -257,7 +257,7 @@ class Dashboard extends StatelessWidget {
                                             // daysDif = totalDays - totalWeeks*7;
                                           }
                                           return Padding(
-                                            padding: const EdgeInsets.all(10.0),
+                                            padding: EdgeInsets.all(10.0.h),
                                             child: GestureDetector(
                                               onTap: () {
                                                 Navigator.of(context).push(
@@ -271,8 +271,8 @@ class Dashboard extends StatelessWidget {
                                                             )));
                                               },
                                               child: Container(
-                                                width: 337,
-                                                height: 171,
+                                                width: 337.w,
+                                                height: 171.h,
                                                 decoration: BoxDecoration(
                                                     gradient:
                                                         const LinearGradient(
@@ -286,11 +286,11 @@ class Dashboard extends StatelessWidget {
                                                     // color: primaryAppColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            20)),
+                                                            20.r)),
                                                 child: Padding(
                                                   padding:
-                                                      const EdgeInsets.symmetric(
-                                                          horizontal: 15.0),
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 15.0.w),
                                                   child: Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment.start,
@@ -317,7 +317,7 @@ class Dashboard extends StatelessWidget {
                                                                 backgroundImage: NetworkImage(context.watch<DashBoardProvider>().retrievedRecordsList![index].imgUrl),
                                                               //       AssetImage(
                                                               //           'assets/cute-baby-born 1.png'),
-                                                                radius: 40,
+                                                                radius: 40.r,
                                                               ),
                                                               Column(
                                                                 crossAxisAlignment:
@@ -347,20 +347,19 @@ class Dashboard extends StatelessWidget {
                                                           SvgPicture.asset(
                                                               'assets/calendar.svg'),
                                                         ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 10,
+                                                      ),SizedBox(
+                                                        height: 10.r,
                                                       ),
                                                       Padding(
-                                                        padding: const EdgeInsets
+                                                        padding: EdgeInsets
                                                                 .symmetric(
-                                                            horizontal: 20.0),
+                                                            horizontal: 20.0.w),
                                                         child: Row(
                                                           children: [
                                                             SvgPicture.asset(
                                                                 'assets/checkmark.svg'),
-                                                            const SizedBox(
-                                                              width: 10,
+                                                           SizedBox(
+                                                              width: 10.w,
                                                             ),
                                                             Text(
                                                               'Hepatitis B',
@@ -371,20 +370,19 @@ class Dashboard extends StatelessWidget {
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 10,
+                                                      ),SizedBox(
+                                                        height: 10.h,
                                                       ),
                                                       Padding(
-                                                        padding: const EdgeInsets
+                                                        padding:  EdgeInsets
                                                                 .symmetric(
-                                                            horizontal: 20.0),
+                                                            horizontal: 20.0.w),
                                                         child: Row(
                                                           children: [
                                                             SvgPicture.asset(
                                                                 'assets/checkmark.svg'),
-                                                            const SizedBox(
-                                                              width: 10,
+                                                            SizedBox(
+                                                              width: 10.w,
                                                             ),
                                                             Text(
                                                               'Oral polio vaccine',
@@ -450,9 +448,9 @@ class _buildAppBar extends StatelessWidget {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const NotificationScreen()));
                 },
-                icon: const Icon(
+                icon:  Icon(
                   Icons.notifications_none,
-                  size: 38,
+                  size: 38.h,
                   color: primaryAppColor,
                 ))
           ],
@@ -482,16 +480,16 @@ class _buildInfoTiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 190,
+      height: 190.h,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: 5,
           itemBuilder: (BuildContext context, int index) {
             return Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding:  EdgeInsets.all(10.0.h),
               child: Container(
-                height: 184,
-                width: 293,
+                height: 184.h,
+                width: 293.w,
                 decoration: BoxDecoration(
                     image: const DecorationImage(
                       image: AssetImage(
@@ -500,13 +498,13 @@ class _buildInfoTiles extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                     color: primaryAppColor,
-                    borderRadius: BorderRadius.circular(20)),
+                    borderRadius: BorderRadius.circular(20.r)),
                 child: Padding(
-                    padding: const EdgeInsets.only(top: 110, left: 30),
+                    padding:  EdgeInsets.only(top: 110.h, left: 30.w),
                     child: Text(
                       'Ease the pain of\nvaccination',
                       style: Theme.of(context).textTheme.headline1!.copyWith(
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.black),
                     )),

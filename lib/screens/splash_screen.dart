@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:immune_africa/providers/providers.dart';
 import 'package:immune_africa/screens/onboarding.dart';
@@ -56,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Center(
             child: SizedBox(
                 // height: 1000,
-                width: 400,
+                width: 400.w,
                 child: SvgPicture.asset('assets/logo_background.svg')),
           ),
           Container(

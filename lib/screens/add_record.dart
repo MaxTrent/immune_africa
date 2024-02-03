@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:immune_africa/Widgets/widgets.dart';
 import 'package:immune_africa/providers/providers.dart';
@@ -33,13 +34,13 @@ class AddRecord extends StatelessWidget {
               Form(
                 key: _formKey,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: EdgeInsets.symmetric(horizontal: 20.0.w),
                   child: Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: 100,
+                        SizedBox(
+                          height: 100.h,
                         ),
                         Text(
                           'NEW RECORD',
@@ -48,21 +49,21 @@ class AddRecord extends StatelessWidget {
                               .headline2!
                               .copyWith(color: Colors.black),
                         ),
-                        const SizedBox(
-                          height: 20,
+                        SizedBox(
+                          height: 20.h,
                         ),
                         SizedBox(
-                          height: 300,
-                          width: 352,
+                          height: 300.h,
+                          width: 352.w,
                           child: Card(
-                            shape: const RoundedRectangleBorder(
+                            shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(30),
-                                    bottomRight: Radius.circular(30))),
+                                    topLeft: Radius.circular(30.r),
+                                    bottomRight: Radius.circular(30.r))),
                             elevation: 15,
                             child: Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
+                                  EdgeInsets.symmetric(horizontal: 20.w),
                               child: Column(
                                 children: [
                                   TextFormField(
@@ -139,8 +140,8 @@ class AddRecord extends StatelessWidget {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10.0.h),
                                     child: Align(
                                       alignment: Alignment.bottomCenter,
                                       child: Row(
@@ -209,8 +210,8 @@ class AddRecord extends StatelessWidget {
                                           Align(
                                             alignment: Alignment.bottomCenter,
                                             child: Container(
-                                              height: 60,
-                                              width: 2,
+                                              height: 60.h,
+                                              width: 2.w,
                                               decoration: BoxDecoration(
                                                 color: const Color(0xffB66EE8)
                                                     .withOpacity(0.6),
@@ -233,7 +234,7 @@ class AddRecord extends StatelessWidget {
                                                 children: [
                                                   Icon(
                                                     Icons.female,
-                                                    size: 60,
+                                                    size: 60.r,
                                                     color: context
                                                                 .watch<
                                                                     AddRecordProvider>()
@@ -269,12 +270,12 @@ class AddRecord extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 70,
+                        SizedBox(
+                          height: 70.h,
                         ),
                         SizedBox(
-                            width: 317,
-                            height: 52,
+                            width: 317.w,
+                            height: 52.h,
                             child: AppButton(
                                 onPressed: () {
                                   _controller.nextPage(
@@ -297,8 +298,8 @@ class AddRecord extends StatelessWidget {
                     // mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                        height: 100,
+                      SizedBox(
+                        height: 100.h,
                       ),
                       Text(
                         'NEW RECORD',
@@ -307,20 +308,20 @@ class AddRecord extends StatelessWidget {
                             .headline2!
                             .copyWith(color: Colors.black),
                       ),
-                      const SizedBox(
-                        height: 20,
+                      SizedBox(
+                        height: 20.h,
                       ),
                       SizedBox(
-                        height: 271,
-                        width: 336,
+                        height: 271.h,
+                        width: 336.w,
                         child: Card(
-                          shape: const RoundedRectangleBorder(
+                          shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30),
-                                  bottomRight: Radius.circular(30))),
+                                  topLeft: Radius.circular(30.r),
+                                  bottomRight: Radius.circular(30.r))),
                           elevation: 15,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: EdgeInsets.symmetric(horizontal: 20.w),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -377,12 +378,12 @@ class AddRecord extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 70,
+                      SizedBox(
+                        height: 70.h,
                       ),
                       SizedBox(
-                          width: 317,
-                          height: 52,
+                          width: 317.w,
+                          height: 52.h,
                           child: AppButton(
                               onPressed: () {
                                 _controller.nextPage(
@@ -403,11 +404,11 @@ class AddRecord extends StatelessWidget {
                     // mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(
-                        height: 100,
+                      SizedBox(
+                        height: 100.h,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: EdgeInsets.symmetric(horizontal: 20.0.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -441,20 +442,20 @@ class AddRecord extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
+                      SizedBox(
+                        height: 20.h,
                       ),
                       SizedBox(
-                        height: 271,
-                        width: 336,
+                        height: 271.h,
+                        width: 336.w,
                         child: Card(
-                          shape: const RoundedRectangleBorder(
+                          shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30),
-                                  bottomRight: Radius.circular(30))),
+                                  topLeft: Radius.circular(30.r),
+                                  bottomRight: Radius.circular(30.r))),
                           elevation: 15,
                           child: Padding(
-                            padding: const EdgeInsets.all(70),
+                            padding: EdgeInsets.all(70.r),
                             child: GestureDetector(
                               onTap: () {
                                 context
@@ -462,29 +463,29 @@ class AddRecord extends StatelessWidget {
                                     .showOptions(context);
                               },
                               child: context.watch<AddRecordProvider>().isUploading ? Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 60.0),
+                                padding: EdgeInsets.symmetric(vertical: 60.0.h),
                                 child: LinearProgressIndicator(
                                   value: context.watch<AddRecordProvider>().uploadProgress,
                                   color: primaryAppColor,
                                   backgroundColor: Colors.grey[200],
-                                  minHeight: 10,
+                                  minHeight: 10.h,
 
                                 ),
                               ): DottedBorder(
                                 color: Colors.black,
-                                radius: const Radius.circular(20),
+                                radius: Radius.circular(20.r),
                                 dashPattern: const [5, 5],
                                 strokeWidth: 2,
                                 child: Center(
                                   child: Container(
-                                    height: 120,
-                                    width: 50,
+                                    height: 120.h,
+                                    width: 50.w,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
+                                      borderRadius: BorderRadius.circular(5.r),
                                     ),
-                                    child: const Icon(
+                                    child:  Icon(
                                       Icons.add,
-                                      size: 50,
+                                      size: 50.r,
                                       color: primaryAppColor,
                                     ),
                                   ),
@@ -495,12 +496,12 @@ class AddRecord extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 70,
+                      SizedBox(
+                        height: 70.h,
                       ),
                       SizedBox(
-                          width: 317,
-                          height: 52,
+                          width: 317.w,
+                          height: 52.h,
                           child: AppButton(
                               onPressed: () {
                                 context.read<AddRecordProvider>().addRecordToDB(context, _firstNameController.text, _lastNameController.text, _dateController.text, gender, _relationshipController.text, _countryController.text, context.read<AddRecordProvider>().downloadUrl);

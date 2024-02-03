@@ -271,8 +271,22 @@ class Profile extends StatelessWidget {
                           ],
                         ),
                       ),
-                      border: const OutlineInputBorder(
-                          borderSide: BorderSide.none)),
+                    enabledBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: accentColor,
+                      ),
+                    ),
+                    focusedBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: primaryAppColor,
+                      ),
+
+                    ),
+                    errorBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: (Colors.red[200])!,
+                      ),
+                    ),),
                 ),
                 const SizedBox(height: 30,),
                 Text(

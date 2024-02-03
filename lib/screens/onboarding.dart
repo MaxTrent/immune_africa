@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:immune_africa/screens/screens.dart';
 
 class Onboarding extends StatelessWidget {
@@ -54,13 +55,13 @@ class OnboardingPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 20,),
+                 SizedBox(height: 20.h,),
                 Text('Keep Your Children',
                 style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w200),),
-                const SizedBox(height: 10,),
+                 SizedBox(height: 10.h,),
                 SizedBox(
-                  width: 317,
-                  height: 52,
+                  width: 317.w,
+                  height: 52.h,
                   child: ElevatedButton(onPressed: (){pageController.animateToPage(
                     pageNumber,
                     duration: const Duration(milliseconds: 500),
@@ -68,7 +69,7 @@ class OnboardingPage extends StatelessWidget {
                   );},
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)
+                          borderRadius: BorderRadius.circular(20.r)
                         ),
                         backgroundColor: Colors.white,
                         textStyle: Theme.of(context).textTheme.headline2,
@@ -83,7 +84,7 @@ class OnboardingPage extends StatelessWidget {
                       ),
                   ),
                 ),
-                const SizedBox(height: 10,),
+                SizedBox(height: 10.h,),
                 TextButton(
                   onPressed: (){Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const RegisterLogin()));},
                   child: Text('Skip', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.normal),),
