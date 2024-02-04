@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:csc_picker/csc_picker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:immune_africa/Widgets/progress_indicator.dart';
 import 'screens.dart';
 import 'package:immune_africa/themes/app_themes.dart';
@@ -23,12 +24,12 @@ class _CountryChoiceState extends State<CountryChoice> {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: EdgeInsets.only(top: 20.0.h),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 50,),
+                  SizedBox(height: 50.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -37,22 +38,22 @@ class _CountryChoiceState extends State<CountryChoice> {
                       AppProgressIndicator(isFilled: false),
                     ],
                   ),
-                  const SizedBox(height: 20,),
+                  SizedBox(height: 20.h,),
                   Text(
                     'Which country do you\ncurrently live in?',
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
                         .headline2!
-                        .copyWith(color: Colors.black, fontSize: 24),
+                        .copyWith(color: Colors.black, fontSize: 24.sp),
                   ),
-                  const SizedBox(
-                    height: 50,
+                  SizedBox(
+                    height: 50.h,
                   ),
                   Image.asset('assets/map.png'),
-                  const SizedBox(height: 70),
+                  SizedBox(height: 70.h),
                   buildCountryPicker(context),
-                  SizedBox(height: 40,)
+                  SizedBox(height: 40.h,)
                 ],
               ),
             ),
@@ -64,8 +65,8 @@ class _CountryChoiceState extends State<CountryChoice> {
 
   SizedBox buildCountryPicker(BuildContext context) {
     return SizedBox(
-                height: 52,
-                width: 317,
+                height: 52.h,
+                width: 317.w,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         enableFeedback: true,
@@ -73,7 +74,7 @@ class _CountryChoiceState extends State<CountryChoice> {
                         // shadowColor: Colors.purple,
                         backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(10.r),
                         )),
                     onPressed: () {
                       showCountryPicker(
@@ -89,11 +90,11 @@ class _CountryChoiceState extends State<CountryChoice> {
                             textStyle: Theme.of(context)
                                 .textTheme
                                 .headline1!
-                                .copyWith(color: Colors.black, fontSize: 18),
+                                .copyWith(color: Colors.black, fontSize: 18.sp),
                             flagSize: 0,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(40.0),
-                              topRight: Radius.circular(40.0),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(40.0.r),
+                              topRight: Radius.circular(40.0.r),
                             ),
                             // Optional. Styles the search field.
                             inputDecoration: InputDecoration(
@@ -101,13 +102,13 @@ class _CountryChoiceState extends State<CountryChoice> {
                               floatingLabelStyle: Theme.of(context).textTheme.headline1!.copyWith(color: primaryAppColor),
                               hintText: 'Start typing to search',
                               focusColor: primaryAppColor,
-                              focusedBorder: const OutlineInputBorder(
+                              focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: primaryAppColor,
-                                  width: 3
+                                  width: 3.w
                                 ),
                               ),
-                              border: const OutlineInputBorder(
+                              border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: primaryAppColor,
                                 ),

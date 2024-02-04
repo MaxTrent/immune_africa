@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:immune_africa/Widgets/app_button.dart';
 import 'package:immune_africa/screens/country_choice.dart';
 import 'package:immune_africa/themes/app_themes.dart';
@@ -14,7 +15,7 @@ class ChooseLanguage extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: EdgeInsets.only(top: 20.0.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -26,22 +27,22 @@ class ChooseLanguage extends StatelessWidget {
                       .copyWith(color: Colors.black),
                 ),
                 Text('Which language are you\ncomfortable with?', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black),),
-                const SizedBox(height: 40,),
+                SizedBox(height: 40.h,),
                 GestureDetector(
                     onTap: (){
 
                     },
                     child: TileSelect(isLanguageSelected: isLanguageSelected, text: 'Hello! I speak English',)),
-                const SizedBox(height: 20,),
+                SizedBox(height: 20.h,),
                 TileSelect(isLanguageSelected: isLanguageSelected, text: 'bonjour je parle francais',),
-                const SizedBox(height: 20,),
+                SizedBox(height: 20.h,),
                 TileSelect(isLanguageSelected: isLanguageSelected, text: 'hallo ek praat frans',),
-                const SizedBox(height: 20,),
+                SizedBox(height: 20.h,),
                 TileSelect(isLanguageSelected: isLanguageSelected, text: 'habari nazungumza kifaransa',),
-                const SizedBox(height: 70,),
+                SizedBox(height: 70.h,),
                 SizedBox(
-                    height: 52,
-                    width: 317,
+                    height: 52.h,
+                    width: 317.w,
                     child: AppButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CountryChoice()));}, btnText: 'NEXT', btnBackgroundColor: primaryAppColor, btnTextColor: Colors.white)),
               ],
             ),
@@ -64,11 +65,11 @@ class TileSelect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 54,
-      width: 317,
+      height: 54.h,
+      width: 317.w,
       decoration: BoxDecoration(
         color: primaryAppColor,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.r),
       ),
       child: Center(
           child: Row(
@@ -79,9 +80,8 @@ class TileSelect extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .headline1!
-                .copyWith(color: Colors.white, fontSize: 18),
-          ),
-          const SizedBox(width: 20,),
+                .copyWith(color: Colors.white, fontSize: 18.sp),
+          ), SizedBox(width: 20.w,),
          isLanguageSelected ? Image.asset('assets/tick.png') : Container(),
         ],
       )),

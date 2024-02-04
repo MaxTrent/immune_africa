@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../Widgets/widgets.dart';
@@ -13,7 +14,7 @@ class AddVaccines extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0.r),
           child: Column(
             children: [
               Row(
@@ -23,16 +24,16 @@ class AddVaccines extends StatelessWidget {
                   IconButton(icon: const Icon(Icons.arrow_back), onPressed: (){Navigator.of(context).pop();},),
                   Column(crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const CircleAvatar(backgroundImage: AssetImage('assets/baby2.png'), radius: 30,),
-                      Text('Chloe Adams', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
-                      Text('1 week old', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 16),),
+                      CircleAvatar(backgroundImage: AssetImage('assets/baby2.png'), radius: 30.r,),
+                      Text('Chloe Adams', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18.sp),),
+                      Text('1 week old', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 16.sp),),
 
                     ],
                   ),
-                  const SizedBox(width: 20,),
+                  SizedBox(width: 20.w,),
                 ],
               ),
-              const SizedBox(height: 10,),
+              SizedBox(height: 10.h,),
 
               Expanded(
                 child: SingleChildScrollView(
@@ -44,20 +45,20 @@ class AddVaccines extends StatelessWidget {
                             // mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const SizedBox(height: 30,),
+                              SizedBox(height: 30.h,),
                               SizedBox(
-                                height: 423,
-                                width: 336,
+                                height: 423.h,
+                                width: 336.w,
                                 child: Card(
-                                  shape: const RoundedRectangleBorder(
+                                  shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(30),
-                                          bottomRight: Radius.circular(30)
+                                          topLeft: Radius.circular(30.r),
+                                          bottomRight: Radius.circular(30.r)
                                       )
                                   ),
                                   elevation: 15,
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                                    padding: EdgeInsets.symmetric(horizontal: 20.w),
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
@@ -66,7 +67,24 @@ class AddVaccines extends StatelessWidget {
                                               .onUserInteraction,
                                           controller: TextEditingController(),
                                           decoration: InputDecoration(
-                                            label: const Text('First Name'),
+                                            label: Text('First Name'),
+                                            labelStyle: Theme
+                                                .of(context)
+                                                .textTheme
+                                                .headline1!
+                                                .copyWith(color: Colors.black),
+                                            enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: primaryAppColor,
+                                              ),
+                                            ),
+                                          ),),
+                                        TextFormField(keyboardType: TextInputType.name,
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
+                                          controller: TextEditingController(),
+                                          decoration: InputDecoration(
+                                            label: Text('Last Name'),
                                             labelStyle: Theme
                                                 .of(context)
                                                 .textTheme
@@ -83,7 +101,7 @@ class AddVaccines extends StatelessWidget {
                                               .onUserInteraction,
                                           controller: TextEditingController(),
                                           decoration: InputDecoration(
-                                            label: const Text('Last Name'),
+                                            label: Text('Date of Birth'),
                                             labelStyle: Theme
                                                 .of(context)
                                                 .textTheme
@@ -100,7 +118,7 @@ class AddVaccines extends StatelessWidget {
                                               .onUserInteraction,
                                           controller: TextEditingController(),
                                           decoration: InputDecoration(
-                                            label: const Text('Date of Birth'),
+                                            labelText: 'Sex',
                                             labelStyle: Theme
                                                 .of(context)
                                                 .textTheme
@@ -117,7 +135,7 @@ class AddVaccines extends StatelessWidget {
                                               .onUserInteraction,
                                           controller: TextEditingController(),
                                           decoration: InputDecoration(
-                                            label: const Text('Sex'),
+                                            labelText: 'Relationship',
                                             labelStyle: Theme
                                                 .of(context)
                                                 .textTheme
@@ -134,24 +152,7 @@ class AddVaccines extends StatelessWidget {
                                               .onUserInteraction,
                                           controller: TextEditingController(),
                                           decoration: InputDecoration(
-                                            label: const Text('Relationship'),
-                                            labelStyle: Theme
-                                                .of(context)
-                                                .textTheme
-                                                .headline1!
-                                                .copyWith(color: Colors.black),
-                                            enabledBorder: const UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: primaryAppColor,
-                                              ),
-                                            ),
-                                          ),),
-                                        TextFormField(keyboardType: TextInputType.name,
-                                          autovalidateMode: AutovalidateMode
-                                              .onUserInteraction,
-                                          controller: TextEditingController(),
-                                          decoration: InputDecoration(
-                                            label: const Text('Country of Birth'),
+                                            labelText: 'Country of Birth',
                                             labelStyle: Theme
                                                 .of(context)
                                                 .textTheme
@@ -168,7 +169,7 @@ class AddVaccines extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 70,),
+                              SizedBox(height: 70.h,),
                               // SizedBox(
                               //     width: 317,
                               //     height: 52,
@@ -184,27 +185,27 @@ class AddVaccines extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20,),
+                      SizedBox(height: 20.h,),
                       Form(
                         child: Center(
                           child: Column(
                             // mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const SizedBox(height: 30,),
+                              SizedBox(height: 30.h,),
                               SizedBox(
-                                height: 423,
-                                width: 336,
+                                height: 423.h,
+                                width: 336.w,
                                 child: Card(
-                                  shape: const RoundedRectangleBorder(
+                                  shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(30),
-                                          bottomRight: Radius.circular(30)
+                                          topLeft: Radius.circular(30.r),
+                                          bottomRight: Radius.circular(30.r)
                                       )
                                   ),
                                   elevation: 15,
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                                    padding: EdgeInsets.symmetric(horizontal: 20.w),
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
@@ -213,7 +214,7 @@ class AddVaccines extends StatelessWidget {
                                               .onUserInteraction,
                                           controller: TextEditingController(),
                                           decoration: InputDecoration(
-                                            label: const Text('First Name'),
+                                            labelText: 'First Name',
                                             labelStyle: Theme
                                                 .of(context)
                                                 .textTheme
@@ -230,7 +231,7 @@ class AddVaccines extends StatelessWidget {
                                               .onUserInteraction,
                                           controller: TextEditingController(),
                                           decoration: InputDecoration(
-                                            label: const Text('Last Name'),
+                                            labelText: 'Last Name',
                                             labelStyle: Theme
                                                 .of(context)
                                                 .textTheme
@@ -247,7 +248,7 @@ class AddVaccines extends StatelessWidget {
                                               .onUserInteraction,
                                           controller: TextEditingController(),
                                           decoration: InputDecoration(
-                                            label: const Text('Date of Birth'),
+                                            labelText: 'Date of Birth',
                                             labelStyle: Theme
                                                 .of(context)
                                                 .textTheme
@@ -264,7 +265,7 @@ class AddVaccines extends StatelessWidget {
                                               .onUserInteraction,
                                           controller: TextEditingController(),
                                           decoration: InputDecoration(
-                                            label: const Text('Sex'),
+                                            labelText: 'Sex',
                                             labelStyle: Theme
                                                 .of(context)
                                                 .textTheme
@@ -281,7 +282,7 @@ class AddVaccines extends StatelessWidget {
                                               .onUserInteraction,
                                           controller: TextEditingController(),
                                           decoration: InputDecoration(
-                                            label: const Text('Relationship'),
+                                            labelText: 'Relationship',
                                             labelStyle: Theme
                                                 .of(context)
                                                 .textTheme
@@ -315,7 +316,7 @@ class AddVaccines extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 70,),
+                              SizedBox(height: 70.h,),
                               // SizedBox(
                               //     width: 317,
                               //     height: 52,
