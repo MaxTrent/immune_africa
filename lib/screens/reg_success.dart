@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:immune_africa/Widgets/widgets.dart';
 import 'screens.dart';
@@ -32,7 +33,7 @@ class _RegisterSuccessState extends State<RegisterSuccess> {
           Center(
             child: SizedBox(
                 // height: 1000,
-                width: 400,
+                width: 400.w,
                 child: SvgPicture.asset('assets/logo_background.svg')),
           ),
           Container(
@@ -42,10 +43,9 @@ class _RegisterSuccessState extends State<RegisterSuccess> {
               color: const Color(0xffA564D3).withOpacity(0.85),
             ),
             child: Stack(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 50.0),
-                  child: AppLogo(),
+              children: [Padding(
+                  padding: EdgeInsets.only(top: 50.0.h),
+                  child: const AppLogo(),
                 ),
                 Center(
                   child: Column(
@@ -53,7 +53,7 @@ class _RegisterSuccessState extends State<RegisterSuccess> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SvgPicture.asset('assets/success_tick.svg'),
-                      const SizedBox(height: 20,),
+                     SizedBox(height: 20.h,),
                       Text(
                         'REGISTRATION\nSUCCESSFUL', textAlign: TextAlign.center,
                         style: Theme.of(context)

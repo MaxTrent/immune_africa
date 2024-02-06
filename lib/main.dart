@@ -1,5 +1,6 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:immune_africa/providers/dashboard_provider.dart';
 import 'package:immune_africa/themes/app_themes.dart';
@@ -20,8 +21,10 @@ void main() async{
     // androidProvider: AndroidProvider.debug,
   );
   // await Provider.of<DashBoardProvider>(context, listen: false).retrieveRecords();
-  runApp(MyApp(
-    appTheme: AppTheme(),
+  runApp(ProviderScope(
+    child: MyApp(
+      appTheme: AppTheme(),
+    ),
   ));
 }
 

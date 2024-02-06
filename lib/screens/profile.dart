@@ -1,19 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:immune_africa/screens/individual_signup.dart';
 import 'package:immune_africa/screens/phone_registration.dart';
 
+import '../providers/profile_state.dart';
 import '../themes/themes.dart';
 
-class Profile extends StatelessWidget {
+// final readOnlyProvider = StateProvider<bool>((ref)=> true);
+
+class Profile extends ConsumerWidget {
   Profile({super.key});
 
   final _auth = FirebaseAuth.instance;
   User? _user;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     _user = _auth.currentUser;
 
     final _fullNameController = TextEditingController(text: '${_user!.displayName}');
@@ -24,7 +29,7 @@ class Profile extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0.w),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,15 +37,15 @@ class Profile extends StatelessWidget {
                 Center(
                   child: Column(crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 20,),
-                      const CircleAvatar(backgroundImage: AssetImage('assets/baby2.png'), radius: 30,),
-                      Text('${_user!.displayName}', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
+                      SizedBox(height: 20.h,),
+                      CircleAvatar(backgroundImage: const AssetImage('assets/baby2.png'), radius: 30.r,),
+                      Text('${_user!.displayName}', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18.sp),),
                     ],
                   ),
                 ),
                 const Divider(),
                 Text('Profile', style: Theme.of(context).textTheme.headline2!.copyWith(color: Colors.black),),
-                const SizedBox(height: 30,),
+                SizedBox(height: 30.h,),
                 Text(
                   'Full Name',
                   style: Theme.of(context)
@@ -49,7 +54,7 @@ class Profile extends StatelessWidget {
                       .copyWith(color: Colors.grey),
                 ),
                 TextFormField(
-                  readOnly: true,
+                  readOnly: ref.watch(readOnlyProvider('button1')),
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(30),
                     FilteringTextInputFormatter.allow(
@@ -83,6 +88,9 @@ class Profile extends StatelessWidget {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _fullNameController,
                   decoration: InputDecoration(
+                    suffixIcon: IconButton(icon: Image.asset('assets/edit.png'), onPressed: (){
+                      ref.read(readOnlyProvider('button1').notifier).state = !ref.watch(readOnlyProvider('button1'));
+                    },),
                     enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: accentColor,
@@ -101,7 +109,7 @@ class Profile extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30,),
+                SizedBox(height: 30.h,),
                 Text(
                   'Email Address',
                   style: Theme.of(context)
@@ -110,7 +118,7 @@ class Profile extends StatelessWidget {
                       .copyWith(color: Colors.grey),
                 ),
                 TextFormField(
-                  readOnly: true,
+                  readOnly: ref.watch(readOnlyProvider('button2')),
                   validator: (value) {
                     if (!value!.isValidEmail || value.isEmpty) {
                       return 'Enter a valid email address';
@@ -132,7 +140,9 @@ class Profile extends StatelessWidget {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _emailController,
                   decoration: InputDecoration(
-
+                    suffixIcon: IconButton(icon: Image.asset('assets/edit.png'), onPressed: (){
+                      ref.read(readOnlyProvider('button2').notifier).state = !ref.watch(readOnlyProvider('button2'));
+                    },),
                     enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: accentColor,
@@ -151,7 +161,7 @@ class Profile extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30,),
+                SizedBox(height: 30.h,),
                 Text(
                   'Password',
                   style: Theme.of(context)
@@ -222,7 +232,7 @@ class Profile extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30,),
+                SizedBox(height: 30.h,),
                 Text(
                   'Phone Number',
                   style: Theme.of(context)
@@ -231,7 +241,7 @@ class Profile extends StatelessWidget {
                       .copyWith(color: Colors.grey),
                 ),
                 TextFormField(
-                  readOnly: true,
+                  readOnly: ref.watch(readOnlyProvider('button3')),
                   validator: (value){
                     if(!value!.isValidPhone){
                       return 'Invalid Phone Number';
@@ -247,9 +257,12 @@ class Profile extends StatelessWidget {
                   ],
                   controller: _phoneController,
                   decoration: InputDecoration(
+                    suffixIcon: IconButton(icon: Image.asset('assets/edit.png'), onPressed: (){
+                      ref.read(readOnlyProvider('button3').notifier).state = !ref.watch(readOnlyProvider('button3'));
+                    },),
                       fillColor: Colors.white,
                       prefixIcon: SizedBox(
-                        width: 75,
+                        width: 75.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -260,9 +273,9 @@ class Profile extends StatelessWidget {
                                   .headline1!
                                   .copyWith(color: Colors.black),
                             ),
-                            const Padding(
-                              padding: EdgeInsets.all(10.0),
-                              child: VerticalDivider(
+                            Padding(
+                              padding: EdgeInsets.all(10.0.r),
+                              child: const VerticalDivider(
                                 color: Colors.black,
                                 width: 5,
                                 thickness: 1,
@@ -288,7 +301,7 @@ class Profile extends StatelessWidget {
                       ),
                     ),),
                 ),
-                const SizedBox(height: 30,),
+                SizedBox(height: 30.h,),
                 Text(
                   'Country of Residence',
                   style: Theme.of(context)
@@ -297,7 +310,7 @@ class Profile extends StatelessWidget {
                       .copyWith(color: Colors.grey),
                 ),
                 TextFormField(
-                  readOnly: true,
+                  readOnly: ref.watch(readOnlyProvider('button4')),
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(30),
                     FilteringTextInputFormatter.allow(
@@ -331,6 +344,9 @@ class Profile extends StatelessWidget {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _countryController,
                   decoration: InputDecoration(
+                    suffixIcon: IconButton(icon: Image.asset('assets/edit.png'), onPressed: (){
+                      ref.read(readOnlyProvider('button4').notifier).state = !ref.watch(readOnlyProvider('button4'));
+                    },),
                     enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: accentColor,
@@ -349,7 +365,7 @@ class Profile extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30,),
+                SizedBox(height: 30.h,),
               ],
             ),
           ),

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:immune_africa/Widgets/widgets.dart';
 import 'package:immune_africa/screens/add_vaccines.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 
 class VaccineDetails extends StatefulWidget {
-  const VaccineDetails({super.key});
+  VaccineDetails({required this.name, required this.age, required this.image, super.key});
+  String name;
+  String age;
+  String image;
 
   @override
   State<VaccineDetails> createState() => _VaccineDetailsState();
@@ -32,7 +36,7 @@ class _VaccineDetailsState extends State<VaccineDetails>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only( top: 20.0),
+        padding: EdgeInsets.only( top: 20.0.h),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -50,31 +54,31 @@ class _VaccineDetailsState extends State<VaccineDetails>
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const CircleAvatar(
-                        backgroundImage: AssetImage('assets/baby2.png'),
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(widget.image),
                         radius: 30,
                       ),
                       Text(
-                        'Chloe Adams',
+                        widget.name,
                         style: Theme.of(context)
                             .textTheme
                             .headline1!
-                            .copyWith(color: Colors.black, fontSize: 18),
+                            .copyWith(color: Colors.black, fontSize: 18.sp),
                       ),
                       Text(
-                        '1 week old',
+                        widget.age,
                         style: Theme.of(context)
                             .textTheme
                             .headline1!
-                            .copyWith(color: Colors.black, fontSize: 16),
+                            .copyWith(color: Colors.black, fontSize: 16.sp),
                       ),
                     ],
                   ),
                   SvgPicture.asset('assets/profile2.svg'),
                 ],
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -82,31 +86,31 @@ class _VaccineDetailsState extends State<VaccineDetails>
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const AddVaccines()));
+                            builder: (context) => AddVaccines()));
                       },
                       child: Text(
                         'Add Vaccines',
                         style: Theme.of(context).textTheme.headline1!.copyWith(
-                            color: const Color(0xff9F28F3), fontSize: 18),
+                            color: const Color(0xff9F28F3), fontSize: 18.sp),
                       )),
                   SvgPicture.asset(
                     'assets/syringe.svg',
                     color: const Color(0xff9F28F3),
-                    height: 19,
-                    width: 20,
+                    height: 19.h,
+                    width: 20.w,
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               Container(
-                height: 50,
-                width: 378,
+                height: 50.h,
+                width: 378.w,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(
-                      10.0,
+                      10.0.r,
                     ),
                     border: Border.all(color: primaryAppColor)),
                 child: TabBar(
@@ -114,13 +118,13 @@ class _VaccineDetailsState extends State<VaccineDetails>
                   padding: EdgeInsets.zero,
                   indicator: BoxDecoration(
                       borderRadius: BorderRadius.circular(
-                        10.0,
+                        10.0.r,
                       ),
                       border: const Border.symmetric()),
                   labelStyle: Theme.of(context)
                       .textTheme
                       .headline1!
-                      .copyWith(fontSize: 18),
+                      .copyWith(fontSize: 18.sp),
                   labelColor: Colors.black,
                   unselectedLabelColor: const Color(0xff3E3E3E80),
                   tabs: const [
@@ -144,7 +148,7 @@ class _VaccineDetailsState extends State<VaccineDetails>
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          padding: EdgeInsets.symmetric(vertical: 8.0.h),
                           child: Column(
                             children: [
                               AppDivider(),
@@ -155,7 +159,7 @@ class _VaccineDetailsState extends State<VaccineDetails>
                                     .textTheme
                                     .headline1!
                                     .copyWith(
-                                    fontSize: 18, color: Colors.black),),
+                                    fontSize: 18.sp, color: Colors.black),),
                                 trailing: const Icon(
                                   Icons.arrow_forward_ios,
                                   color: primaryAppColor,
@@ -171,7 +175,7 @@ class _VaccineDetailsState extends State<VaccineDetails>
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5.0),
+                          padding: EdgeInsets.symmetric(vertical: 5.0.w),
                           child: Column(
                             children: [
                               AppDivider(),
@@ -184,12 +188,12 @@ class _VaccineDetailsState extends State<VaccineDetails>
                                     .textTheme
                                     .headline1!
                                     .copyWith(
-                                    fontSize: 18, color: Colors.black),),
+                                    fontSize: 18.sp, color: Colors.black),),
                                 subtitle: Text('Date Received: 14th July 2023', style: Theme.of(context)
                                     .textTheme
                                     .headline1!
                                     .copyWith(
-                                    fontSize: 18, color: Colors.black),),
+                                    fontSize: 18.sp, color: Colors.black),),
                               ),
                               AppDivider(),
                             ],
@@ -211,21 +215,21 @@ class _VaccineDetailsState extends State<VaccineDetails>
                                 leading: SvgPicture.asset('assets/syringe_red.svg'),
                                 title: Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 10.0),
+                                      EdgeInsets.symmetric(vertical: 10.0.h),
                                   child: Text(
                                     'PCV II',
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline1!
                                         .copyWith(
-                                            fontSize: 18, color: Colors.black),
+                                            fontSize: 18.sp, color: Colors.black),
                                   ),
                                 ),
                                 subtitle: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const SizedBox(
-                                      height: 5,
+                                    SizedBox(
+                                      height: 5.h,
                                     ),
                                     Text(
                                       'Due Date: 11th July 2023',
@@ -233,7 +237,7 @@ class _VaccineDetailsState extends State<VaccineDetails>
                                           .textTheme
                                           .headline1!
                                           .copyWith(
-                                              fontSize: 18, color: Colors.black),
+                                              fontSize: 18.sp, color: Colors.black),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.zero,
@@ -245,7 +249,7 @@ class _VaccineDetailsState extends State<VaccineDetails>
                                                 .textTheme
                                                 .headline1!
                                                 .copyWith(
-                                                    fontSize: 18,
+                                                    fontSize: 18.sp,
                                                     color: primaryAppColor),
                                           )),
                                     ),

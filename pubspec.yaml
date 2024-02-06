@@ -55,6 +55,7 @@ dependencies:
   firebase_app_check: ^0.2.1+8
   fluttertoast: ^8.2.4
   local_auth: ^2.1.6
+  flutter_riverpod: ^2.3.7
 
 dev_dependencies:
   flutter_test:

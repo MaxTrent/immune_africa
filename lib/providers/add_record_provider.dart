@@ -6,9 +6,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+
+
 
 class AddRecordProvider extends ChangeNotifier {
   bool _isExist = false;
@@ -29,6 +32,8 @@ class AddRecordProvider extends ChangeNotifier {
   bool get isUploading => _isUploading;
   String get downloadUrl => _downloadUrl;
 
+
+
   Future<void> selectMale() async {
     _selectedGender = 1;
     notifyListeners();
@@ -41,7 +46,7 @@ class AddRecordProvider extends ChangeNotifier {
 
   Future<void> addRecordToDB(BuildContext context, String firstName, String lastName, String dob,
       String gender, String relationship, String country, String imageUrl) async {
-    // bool childRecordExist = await doesChildRecordExist(firstName);
+    bool childRecordExist = await doesChildRecordExist(firstName);
     final user = _auth.currentUser;
     notifyListeners();
     if (user!.uid.isNotEmpty) {

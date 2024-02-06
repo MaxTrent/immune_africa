@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:immune_africa/providers/dashboard_provider.dart';
 import 'package:immune_africa/themes/app_themes.dart';
@@ -35,7 +36,7 @@ class RecordDetails extends StatelessWidget {
 
                       ],
                     ),
-                    const SizedBox(width: 20,),
+                    SizedBox(width: 20.w,),
                   ],
                 ),
                 TableCalendar(
@@ -44,8 +45,8 @@ class RecordDetails extends StatelessWidget {
                   lastDay: DateTime.utc(2030, 3, 14),
                   focusedDay: DateTime.now(),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,13 +56,13 @@ class RecordDetails extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .headline1!
-                          .copyWith(color: Colors.black, fontSize: 18),
+                          .copyWith(color: Colors.black, fontSize: 18.sp),
                     ),
                     TextButton(
                         onPressed: () {
                           WidgetsBinding.instance.addPostFrameCallback((_) {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const VaccineDetails()));
+                                builder: (context) => VaccineDetails(name: name, age: date, image: image,)));
                           });
                         },
                         child: Text(
@@ -69,20 +70,20 @@ class RecordDetails extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
-                              .copyWith(color: Colors.grey, fontSize: 14),
+                              .copyWith(color: Colors.grey, fontSize: 14.sp),
                         ))
                   ],
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   children: [
                     SvgPicture.asset(
                       'assets/syringe_red.svg',
                     ),
-                    const SizedBox(
-                      width: 10,
+                    SizedBox(
+                      width: 10.w,
                     ),
                     Text(
                       'PCV II',
@@ -97,26 +98,26 @@ class RecordDetails extends StatelessWidget {
                   height: 10,
                   color: primaryAppColor,
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Text(
                   'Taken',
                   style: Theme.of(context)
                       .textTheme
                       .headline1!
-                      .copyWith(color: Colors.black, fontSize: 18),
+                      .copyWith(color: Colors.black, fontSize: 18.sp),
                 ),
-                const SizedBox(
-                  height: 10,
+                 SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   children: [
                     SvgPicture.asset(
                       'assets/syringe_green.svg',
                     ),
-                    const SizedBox(
-                      width: 10,
+                    SizedBox(
+                      width: 10.w,
                     ),
                     Text(
                       'Hepatitis  B',
@@ -131,26 +132,24 @@ class RecordDetails extends StatelessWidget {
                   height: 10,
                   color: primaryAppColor,
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Text(
                   'Upcoming',
                   style: Theme.of(context)
                       .textTheme
                       .headline1!
-                      .copyWith(color: Colors.black, fontSize: 18),
-                ),
-                const SizedBox(
-                  height: 10,
+                      .copyWith(color: Colors.black, fontSize: 18.sp),
+                ),SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   children: [
                     SvgPicture.asset(
                       'assets/syringe_yellow.svg',
-                    ),
-                    const SizedBox(
-                      width: 10,
+                    ),SizedBox(
+                      width: 10.w,
                     ),
                     Text(
                       'Hepatitis  B II',

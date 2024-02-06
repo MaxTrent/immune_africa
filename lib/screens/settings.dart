@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:immune_africa/Widgets/widgets.dart';
 import 'package:immune_africa/providers/providers.dart';
 import 'package:immune_africa/screens/screens.dart';
@@ -21,7 +22,7 @@ class Settings extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
+                      padding: EdgeInsets.symmetric(vertical: 20.0.h, horizontal: 20.w),
                       child: Text(
                         'Settings',
                         style: Theme.of(context)
@@ -30,11 +31,11 @@ class Settings extends StatelessWidget {
                             .copyWith(color: Colors.black),
                       ),
                     ),
-                    const SizedBox(
-                      height: 30,
+                    SizedBox(
+                      height: 30.h,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
                         onTap: () {
@@ -46,7 +47,7 @@ class Settings extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
-                              .copyWith(fontSize: 18, color: Colors.black),
+                              .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
@@ -56,7 +57,7 @@ class Settings extends StatelessWidget {
                     ),
                     const AppDivider(),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
                         onTap: (){Navigator.of(context).push(MaterialPageRoute(
@@ -66,7 +67,7 @@ class Settings extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
-                              .copyWith(fontSize: 18, color: Colors.black),
+                              .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
@@ -76,7 +77,7 @@ class Settings extends StatelessWidget {
                     ),
                     const AppDivider(),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.sp),
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
                         title: Text(
@@ -84,7 +85,7 @@ class Settings extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
-                              .copyWith(fontSize: 18, color: Colors.black),
+                              .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
@@ -94,7 +95,7 @@ class Settings extends StatelessWidget {
                     ),
                     const AppDivider(),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
                         title: Text(
@@ -102,7 +103,7 @@ class Settings extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
-                              .copyWith(fontSize: 18, color: Colors.black),
+                              .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
@@ -112,7 +113,7 @@ class Settings extends StatelessWidget {
                     ),
                     const AppDivider(),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.sp),
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
                         title: Text(
@@ -120,7 +121,7 @@ class Settings extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
-                              .copyWith(fontSize: 18, color: Colors.black),
+                              .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
@@ -130,7 +131,7 @@ class Settings extends StatelessWidget {
                     ),
                     const AppDivider(),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
                         title: Text(
@@ -138,7 +139,7 @@ class Settings extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
-                              .copyWith(fontSize: 18, color: Colors.black),
+                              .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
@@ -148,7 +149,7 @@ class Settings extends StatelessWidget {
                     ),
                     const AppDivider(),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
                         title: Text(
@@ -156,7 +157,7 @@ class Settings extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
-                              .copyWith(fontSize: 18, color: Colors.black),
+                              .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
@@ -166,7 +167,7 @@ class Settings extends StatelessWidget {
                     ),
                     const AppDivider(),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: ListTile(
                         onTap: (){
                           context.read<SettingsProvider>().signOut(context);
@@ -177,7 +178,7 @@ class Settings extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
-                              .copyWith(fontSize: 18, color: primaryAppColor),
+                              .copyWith(fontSize: 18.sp, color: primaryAppColor),
                         ),
                       ),
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 
@@ -30,9 +31,9 @@ class NotificationScreen extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height - 80,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight:Radius.circular(30)),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(30.r),topRight:Radius.circular(30.r)),
                   ),
                   child: SingleChildScrollView(
                     child: Column(
@@ -40,28 +41,28 @@ class NotificationScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 40.0, left: 40, bottom: 20),
+                          padding: EdgeInsets.only(top: 40.0.h, left: 40.w, bottom: 20.h),
                           child: Text('Today',
-                            style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600)
+                            style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.w600)
                           ),
                         ),
-                        NotificationTile(),
-                        SizedBox(height: 20,),
-                        NotificationTile(),
+                        const NotificationTile(),
+                        SizedBox(height: 20.h,),
+                        const NotificationTile(),
                         Padding(
-                          padding: const EdgeInsets.only(top: 20.0, left: 40, bottom: 20),
+                          padding: EdgeInsets.only(top: 20.0.h, left: 40.w, bottom: 20.h),
                           child: Text('This Week',
                               style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600)
                           ),
                         ),
-                        SizedBox(height: 20,),
-                        NotificationTile(),
-                        SizedBox(height: 20,),
-                        NotificationTile(),
-                        SizedBox(height: 20,),
-                        NotificationTile(),
-                        SizedBox(height: 20,),
-                        NotificationTile(),
+                        SizedBox(height: 20.h,),
+                        const NotificationTile(),
+                        SizedBox(height: 20.h,),
+                        const NotificationTile(),
+                        SizedBox(height: 20.h,),
+                        const NotificationTile(),
+                        SizedBox(height: 20.h,),
+                        const NotificationTile(),
 
                       ],
                     ),
@@ -86,19 +87,19 @@ class NotificationTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AppDivider(),
+        const AppDivider(),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10.0),
+          padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 10.0.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SvgPicture.asset('assets/notif.svg'),
-              Text('It’s 2 more days to Chloe’s\nHep B Vaccine!', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black,fontSize: 18),),
-              Text('Tuesday', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black,fontSize: 18),)
+              Text('It’s 2 more days to Chloe’s\nHep B Vaccine!', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black,fontSize: 18.sp),),
+              Text('Tuesday', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black,fontSize: 18.sp),)
             ],
           ),
         ),
-        AppDivider(),
+        const AppDivider(),
       ],
     );
   }

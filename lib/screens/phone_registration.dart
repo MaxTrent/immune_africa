@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:immune_africa/screens/screens.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 
@@ -27,7 +28,7 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30.0),
+          padding: EdgeInsets.symmetric(vertical: 30.0.h),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,7 +37,7 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
               children: [
                 Column(
                   children: [
-                    const SizedBox(height: 50,),
+                    SizedBox(height: 50.h,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -45,7 +46,7 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
                         AppProgressIndicator(isFilled: true),
                       ],
                     ),
-                    const SizedBox(height: 20,),
+                    SizedBox(height: 20.h),
                     Text(
                       'What is your phone\nnumber?',
                       textAlign: TextAlign.center,
@@ -54,8 +55,8 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
                           .headline2!
                           .copyWith(color: Colors.black),
                     ),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: 20.h,
                     ),
                     Text(
                       'We’ll send you text messages and notifications through your number',
@@ -63,18 +64,18 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
                       style: Theme.of(context)
                           .textTheme
                           .headline1!
-                          .copyWith(color: Colors.black, fontSize: 18),
-                    ),
-                    const SizedBox(
-                      height: 40,
+                          .copyWith(color: Colors.black, fontSize: 18.sp),
                     ),
                     SizedBox(
-                      height: 56,
-                      width: 328,
+                      height: 40.h,
+                    ),
+                    SizedBox(
+                      height: 56.h,
+                      width: 328.w,
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(8.r),
 
                           boxShadow: [
                             BoxShadow(
@@ -101,7 +102,7 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
                           decoration: InputDecoration(
                               fillColor: Colors.white,
                               prefixIcon: SizedBox(
-                                width: 75,
+                                width: 75.w,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -112,8 +113,8 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
                                           .headline1!
                                           .copyWith(color: Colors.black),
                                     ),
-                                    const Padding(
-                                      padding: EdgeInsets.all(10.0),
+                                    Padding(
+                                      padding: EdgeInsets.all(10.0.r),
                                       child: VerticalDivider(
                                         color: Colors.black,
                                         width: 5,
@@ -130,12 +131,12 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 50,
+                SizedBox(
+                  height: 50.h,
                 ),
                 SizedBox(
-                    height: 52,
-                    width: 317,
+                    height: 52.h,
+                    width: 317.w,
                     child: AppButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
