@@ -440,7 +440,7 @@ class _buildAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Welcome, ${_user!.displayName}!',
+              'Welcome, ${_user!.displayName!.split(' ').first}!',
               style: Theme.of(context)
                   .textTheme
                   .headline2!
