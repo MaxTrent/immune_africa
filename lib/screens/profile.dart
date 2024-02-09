@@ -10,54 +10,75 @@ import '../providers/profile_state.dart';
 import '../themes/themes.dart';
 
 // final readOnlyProvider = StateProvider<bool>((ref)=> true);
+final userProvider = FutureProvider<User?>((ref) async {
+  final user = FirebaseAuth.instance.currentUser;
+  return user;
+});
+
+final displayNameProvider = Provider<String?>((ref) {
+  final userAsync = ref.watch(userProvider);
+
+  return userAsync.when(
+    data: (user) => user?.displayName,
+    loading: () => null,
+    error: (error, stackTrace) {
+      // Handle error state if needed
+      return null;
+    },
+  );
+});
+
+final emailProvider = Provider<String?>((ref) {
+  final userAsync = ref.watch(userProvider);
+
+  return userAsync.when(
+    data: (user) => user?.email,
+    loading: () => null,
+    error: (error, stackTrace) {
+      // Handle error state if needed
+      return null;
+    },
+  );
+});
+
 
 class Profile extends ConsumerWidget {
   Profile({super.key});
 
-  final _firebaseAuthProvider = Provider((ref) => FirebaseAuth.instance);
+  // final _firebaseAuthProvider = Provider((ref) => FirebaseAuth.instance);
 
 
   // final _user = FirebaseAuth.instance.currentUser;
-  final fullNameProvider = StateProvider<String>((ref) => '');
+  // final fullNameProvider = StateProvider<String>((ref) => '');
   final readOnlyProvider =
       StateProvider.family<bool, String>((ref, id) => true);
-  final emailProvider = StateProvider<String>((ref) => '');
+  // final emailProvider = StateProvider<String>((ref) => '');
 
 
   @override
   Widget build(BuildContext context, ref) {
-    final authStateProvider = StreamProvider<User?>((ref) {
-      return ref.watch(_firebaseAuthProvider).authStateChanges();
-    });
-
-    final _user = Provider<User?>((ref) {
-      final authState = ref.watch(authStateProvider);
-      return authState?.user;
-    });
-    // _user = _auth.currentUser;
-    // String fullNameNotifier = ref.read(fullNameProvider.notifier).state;
-    // String emailNotifier = ref.read(emailProvider.notifier).state;
-    // ref.read(fullNameProvider.notifier).state = _user!.displayName!;
-    // emailNotifier = _user!.email!;
+    final user = ref.watch(userProvider);
+    final displayName = ref.watch(displayNameProvider);
+    final email = ref.watch(emailProvider);
 
     final _fullNameController =
-        TextEditingController(text: ref.watch(fullNameProvider));
+        TextEditingController(text: displayName);
     final _emailController =
-        TextEditingController(text: ref.watch(emailProvider));
+        TextEditingController(text: email);
     final _passwordController = TextEditingController(text: '******');
     final _phoneController = TextEditingController(
-        text: _user?.phoneNumber ?? '_ _ _ _ _ _ _ _ _ _');
+        text: displayName ?? '_ _ _ _ _ _ _ _ _ _');
     final _countryController = TextEditingController(text: '');
 
 
     // context.read<fullNameProvider>(listen: false).notifier.state = _user!.displayName!;
 
-    ref.listen<String>(fullNameProvider, (previous, next) {
-      if (next.isEmpty && (previous == null || previous.isEmpty)) {
-        ref.read(fullNameProvider.notifier).state = _user!.displayName!;
-      }
-      // _fullNameController.text = next;
-    });
+    // ref.listen<String>(fullNameProvider, (previous, next) {
+    //   if (next.isEmpty && (previous == null || previous.isEmpty)) {
+    //     ref.read(fullNameProvider.notifier).state = displayName!;
+    //   }
+    //   // _fullNameController.text = next;
+    // });
 
     return Scaffold(
       body: SafeArea(
@@ -79,7 +100,7 @@ class Profile extends ConsumerWidget {
                         radius: 30.r,
                       ),
                       Text(
-                        '${_user!.displayName}',
+                        '$displayName',
                         style: Theme.of(context)
                             .textTheme
                             .headline1!
@@ -108,9 +129,9 @@ class Profile extends ConsumerWidget {
                 ),
                 TextFormField(
                   autofocus: true,
-                  onFieldSubmitted: (value) {
-                    ref.read(fullNameProvider.notifier).state = value;
-                  },
+                  // onFieldSubmitted: (value) {
+                  //   ref.read(fullNameProvider.notifier).state = value;
+                  // },
                   // onFieldSubmitted: ,
                   // enabled: ref.watch(readOnlyProvider('button1')),
                   readOnly: ref.watch(readOnlyProvider('button1')),
@@ -152,11 +173,11 @@ class Profile extends ConsumerWidget {
                             .read(readOnlyProvider('button1').notifier)
                             .update((state) => !state);
 
-                        ref.read(fullNameProvider.notifier).state =
-                            currentValue;
-                        if (!ref.read(readOnlyProvider('button1'))) {
-                          _user!.updateDisplayName(_fullNameController.text);
-                        }
+                        // ref.read(fullNameProvider.notifier).state =
+                        //     currentValue;
+                        // if (!ref.read(readOnlyProvider('button1'))) {
+                        //   // user!.updateDisplayName(_fullNameController.text);
+                        // }
                         // _fullNameController.selection = TextSelection.collapsed(
                         //   offset: _fullNameController.text.length,
                         // );
@@ -197,7 +218,7 @@ class Profile extends ConsumerWidget {
                     }
                   },
                   onChanged: (value) {
-                    ref.read(emailProvider.notifier).state = value;
+                    // ref.read(emailProvider.notifier).state = value;
                   },
                   // onChanged: (value) {
                   //   if (value.isNotEmpty) {
