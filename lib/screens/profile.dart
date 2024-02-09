@@ -14,20 +14,30 @@ import '../themes/themes.dart';
 class Profile extends ConsumerWidget {
   Profile({super.key});
 
-  final _auth = FirebaseAuth.instance;
+  final _firebaseAuthProvider = Provider((ref) => FirebaseAuth.instance);
+
+
+  // final _user = FirebaseAuth.instance.currentUser;
   final fullNameProvider = StateProvider<String>((ref) => '');
   final readOnlyProvider =
       StateProvider.family<bool, String>((ref, id) => true);
   final emailProvider = StateProvider<String>((ref) => '');
-  User? _user;
+
 
   @override
   Widget build(BuildContext context, ref) {
-    _user = _auth.currentUser;
+    final authStateProvider = StreamProvider<User?>((ref) {
+      return ref.watch(_firebaseAuthProvider).authStateChanges();
+    });
+
+    final _user = Provider<User?>((ref) {
+      final authState = ref.watch(authStateProvider);
+      return authState?.user;
+    });
+    // _user = _auth.currentUser;
     // String fullNameNotifier = ref.read(fullNameProvider.notifier).state;
     // String emailNotifier = ref.read(emailProvider.notifier).state;
     // ref.read(fullNameProvider.notifier).state = _user!.displayName!;
-    String displayName = _user!.displayName!;
     // emailNotifier = _user!.email!;
 
     final _fullNameController =
@@ -39,8 +49,11 @@ class Profile extends ConsumerWidget {
         text: _user?.phoneNumber ?? '_ _ _ _ _ _ _ _ _ _');
     final _countryController = TextEditingController(text: '');
 
+
+    // context.read<fullNameProvider>(listen: false).notifier.state = _user!.displayName!;
+
     ref.listen<String>(fullNameProvider, (previous, next) {
-      if (next.isEmpty && _user != null) {
+      if (next.isEmpty && (previous == null || previous.isEmpty)) {
         ref.read(fullNameProvider.notifier).state = _user!.displayName!;
       }
       // _fullNameController.text = next;
