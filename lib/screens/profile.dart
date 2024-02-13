@@ -9,76 +9,60 @@ import 'package:immune_africa/screens/phone_registration.dart';
 import '../providers/profile_state.dart';
 import '../themes/themes.dart';
 
-// final readOnlyProvider = StateProvider<bool>((ref)=> true);
-final userProvider = FutureProvider<User?>((ref) async {
+
+final currentEmailProvider = StateProvider<String>((ref) {
   final user = FirebaseAuth.instance.currentUser;
-  return user;
+  return user?.email ?? '';
 });
 
-final displayNameProvider = Provider<String?>((ref) {
-  final userAsync = ref.watch(userProvider);
-
-  return userAsync.when(
-    data: (user) => user?.displayName,
-    loading: () => null,
-    error: (error, stackTrace) {
-      // Handle error state if needed
-      return null;
-    },
-  );
+final currentFullNameProvider = StateProvider<String>((ref) {
+  final user = FirebaseAuth.instance.currentUser;
+  return user?.displayName ?? '';
 });
 
-final emailProvider = Provider<String?>((ref) {
-  final userAsync = ref.watch(userProvider);
-
-  return userAsync.when(
-    data: (user) => user?.email,
-    loading: () => null,
-    error: (error, stackTrace) {
-      // Handle error state if needed
-      return null;
-    },
-  );
+final currentPhoneProvider = StateProvider<String>((ref) {
+  final user = FirebaseAuth.instance.currentUser;
+  return user?.phoneNumber ?? '';
 });
 
+final countryProvider = StateProvider<String>((ref) => '');
+
+final readOnlyProvider = StateProvider.family<bool, String>((ref, id) => true);
+//
+// final fullNameProvider = StateProvider<String?>((ref) => null);
 
 class Profile extends ConsumerWidget {
   Profile({super.key});
 
   // final _firebaseAuthProvider = Provider((ref) => FirebaseAuth.instance);
 
-
   // final _user = FirebaseAuth.instance.currentUser;
   // final fullNameProvider = StateProvider<String>((ref) => '');
-  final readOnlyProvider =
-      StateProvider.family<bool, String>((ref, id) => true);
-  // final emailProvider = StateProvider<String>((ref) => '');
 
+  // final emailProvider = StateProvider<String>((ref) => '');
 
   @override
   Widget build(BuildContext context, ref) {
-    final user = ref.watch(userProvider);
-    final displayName = ref.watch(displayNameProvider);
-    final email = ref.watch(emailProvider);
+    final displayName = ref
+        .watch(currentFullNameProvider.notifier)
+        .state;
+    final email = ref
+        .watch(currentEmailProvider.notifier)
+        .state;
+    final phone = ref
+        .watch(currentPhoneProvider.notifier)
+        .state;
+    final country = ref
+        .watch(countryProvider.notifier)
+        .state;
 
-    final _fullNameController =
-        TextEditingController(text: displayName);
-    final _emailController =
-        TextEditingController(text: email);
+    final _fullNameController = TextEditingController(text: displayName);
+    final _emailController = TextEditingController(text: email);
     final _passwordController = TextEditingController(text: '******');
-    final _phoneController = TextEditingController(
-        text: displayName ?? '_ _ _ _ _ _ _ _ _ _');
-    final _countryController = TextEditingController(text: '');
+    final _phoneController =
+    TextEditingController(text: phone);
+    final _countryController = TextEditingController(text: country);
 
-
-    // context.read<fullNameProvider>(listen: false).notifier.state = _user!.displayName!;
-
-    // ref.listen<String>(fullNameProvider, (previous, next) {
-    //   if (next.isEmpty && (previous == null || previous.isEmpty)) {
-    //     ref.read(fullNameProvider.notifier).state = displayName!;
-    //   }
-    //   // _fullNameController.text = next;
-    // });
 
     return Scaffold(
       body: SafeArea(
@@ -100,8 +84,9 @@ class Profile extends ConsumerWidget {
                         radius: 30.r,
                       ),
                       Text(
-                        '$displayName',
-                        style: Theme.of(context)
+                        displayName,
+                        style: Theme
+                            .of(context)
                             .textTheme
                             .headline1!
                             .copyWith(color: Colors.black, fontSize: 18.sp),
@@ -112,7 +97,8 @@ class Profile extends ConsumerWidget {
                 const Divider(),
                 Text(
                   'Profile',
-                  style: Theme.of(context)
+                  style: Theme
+                      .of(context)
                       .textTheme
                       .headline2!
                       .copyWith(color: Colors.black),
@@ -122,16 +108,19 @@ class Profile extends ConsumerWidget {
                 ),
                 Text(
                   'Full Name',
-                  style: Theme.of(context)
+                  style: Theme
+                      .of(context)
                       .textTheme
                       .headline1!
                       .copyWith(color: Colors.grey),
                 ),
                 TextFormField(
                   autofocus: true,
-                  // onFieldSubmitted: (value) {
-                  //   ref.read(fullNameProvider.notifier).state = value;
-                  // },
+                  onChanged: (value) {
+                    ref
+                        .read(currentFullNameProvider.notifier)
+                        .state = value;
+                  },
                   // onFieldSubmitted: ,
                   // enabled: ref.watch(readOnlyProvider('button1')),
                   readOnly: ref.watch(readOnlyProvider('button1')),
@@ -148,17 +137,6 @@ class Profile extends ConsumerWidget {
                       return 'Full Name is not valid';
                     }
                   },
-                  // onChanged: (value) {
-                  //   if (value.isNotEmpty) {
-                  //     context
-                  //         .read<IndividualSignUpProvider>()
-                  //         .changeButtonStatusTrue();
-                  //   } else {
-                  //     context
-                  //         .read<IndividualSignUpProvider>()
-                  //         .changeButtonStatusFalse();
-                  //   }
-                  // },
                   cursorColor: primaryAppColor,
                   keyboardType: TextInputType.name,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -167,20 +145,25 @@ class Profile extends ConsumerWidget {
                     suffixIcon: IconButton(
                       icon: Image.asset('assets/edit.png'),
                       onPressed: () {
-                        final currentValue = _fullNameController.text;
-
+                        final currentStatus = ref
+                            .read(readOnlyProvider('button1').notifier)
+                            .state;
                         ref
                             .read(readOnlyProvider('button1').notifier)
-                            .update((state) => !state);
+                            .state =
+                        !currentStatus;
 
-                        // ref.read(fullNameProvider.notifier).state =
-                        //     currentValue;
-                        // if (!ref.read(readOnlyProvider('button1'))) {
-                        //   // user!.updateDisplayName(_fullNameController.text);
-                        // }
-                        // _fullNameController.selection = TextSelection.collapsed(
-                        //   offset: _fullNameController.text.length,
-                        // );
+                        if (!currentStatus) {
+                          final newFullName =
+                              ref
+                                  .watch(currentFullNameProvider.notifier)
+                                  .state;
+                          final user = FirebaseAuth.instance.currentUser;
+                          user?.updateDisplayName(newFullName);
+
+                          // Update the text controller
+                          _fullNameController.text = newFullName;
+                        }
                       },
                     ),
                     enabledBorder: const UnderlineInputBorder(
@@ -205,7 +188,8 @@ class Profile extends ConsumerWidget {
                 ),
                 Text(
                   'Email Address',
-                  style: Theme.of(context)
+                  style: Theme
+                      .of(context)
                       .textTheme
                       .headline1!
                       .copyWith(color: Colors.grey),
@@ -218,19 +202,10 @@ class Profile extends ConsumerWidget {
                     }
                   },
                   onChanged: (value) {
-                    // ref.read(emailProvider.notifier).state = value;
+                    ref
+                        .read(currentEmailProvider.notifier)
+                        .state = value;
                   },
-                  // onChanged: (value) {
-                  //   if (value.isNotEmpty) {
-                  //     context
-                  //         .read<IndividualSignUpProvider>()
-                  //         .changeButtonStatusTrue();
-                  //   } else {
-                  //     context
-                  //         .read<IndividualSignUpProvider>()
-                  //         .changeButtonStatusFalse();
-                  //   }
-                  // },
                   cursorColor: primaryAppColor,
                   keyboardType: TextInputType.emailAddress,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -239,8 +214,20 @@ class Profile extends ConsumerWidget {
                     suffixIcon: IconButton(
                       icon: Image.asset('assets/edit.png'),
                       onPressed: () {
-                        ref.read(readOnlyProvider('button2').notifier).state =
-                            !ref.watch(readOnlyProvider('button2'));
+                        // final currentStatus = ref
+                        //     .read(readOnlyProvider('button2').notifier)
+                        //     .state;
+                        // ref.read(readOnlyProvider('button2').notifier).state =
+                        // !currentStatus;
+                        //
+                        // if (!currentStatus) {
+                        //   final newEmail =
+                        //       ref.watch(currentEmailProvider.notifier).state;
+                        //   final user = FirebaseAuth.instance.currentUser;
+                        //   user?.updateEmail(newEmail);
+                        //
+                        //   _emailController.text = newEmail;
+                        // }
                       },
                     ),
                     enabledBorder: const UnderlineInputBorder(
@@ -265,7 +252,8 @@ class Profile extends ConsumerWidget {
                 ),
                 Text(
                   'Password',
-                  style: Theme.of(context)
+                  style: Theme
+                      .of(context)
                       .textTheme
                       .headline1!
                       .copyWith(color: Colors.grey),
@@ -338,7 +326,8 @@ class Profile extends ConsumerWidget {
                 ),
                 Text(
                   'Phone Number',
-                  style: Theme.of(context)
+                  style: Theme
+                      .of(context)
                       .textTheme
                       .headline1!
                       .copyWith(color: Colors.grey),
@@ -358,13 +347,33 @@ class Profile extends ConsumerWidget {
                       RegExp(r"[0-9]"),
                     ),
                   ],
+                  onChanged: (value){
+                    ref.read(currentPhoneProvider.notifier).state = value;
+                  },
                   controller: _phoneController,
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
                       icon: Image.asset('assets/edit.png'),
                       onPressed: () {
-                        ref.read(readOnlyProvider('button3').notifier).state =
-                            !ref.watch(readOnlyProvider('button3'));
+                        final currentStatus = ref
+                            .read(readOnlyProvider('button3').notifier)
+                            .state;
+                        ref
+                            .read(readOnlyProvider('button3').notifier)
+                            .state =
+                        !currentStatus;
+
+                        if (!currentStatus) {
+                          final newPhone =
+                              ref
+                                  .watch(currentFullNameProvider.notifier)
+                                  .state;
+                          // final user = FirebaseAuth.instance.currentUser;
+                          // user?.updatePhoneNumber(newPhone);
+
+                          // Update the text controller
+                          _phoneController.text = newPhone;
+                        }
                       },
                     ),
                     fillColor: Colors.white,
@@ -375,7 +384,8 @@ class Profile extends ConsumerWidget {
                         children: [
                           Text(
                             '  +234',
-                            style: Theme.of(context)
+                            style: Theme
+                                .of(context)
                                 .textTheme
                                 .headline1!
                                 .copyWith(color: Colors.black),
@@ -413,7 +423,8 @@ class Profile extends ConsumerWidget {
                 ),
                 Text(
                   'Country of Residence',
-                  style: Theme.of(context)
+                  style: Theme
+                      .of(context)
                       .textTheme
                       .headline1!
                       .copyWith(color: Colors.grey),
@@ -426,22 +437,16 @@ class Profile extends ConsumerWidget {
                       RegExp(r"[a-zA-Z]+|\s"),
                     )
                   ],
-                  validator: (value) {
-                    if (value!.trim().isEmpty) {
-                      return 'First Name is required';
-                    } else if (value.startsWith(RegExp(r'[0-9]'))) {
-                      return 'First name is not valid';
-                    }
+                  onChanged: (value) {
+                    ref
+                        .read(countryProvider.notifier)
+                        .state = value;
                   },
-                  // onChanged: (value) {
-                  //   if (value.isNotEmpty) {
-                  //     context
-                  //         .read<IndividualSignUpProvider>()
-                  //         .changeButtonStatusTrue();
-                  //   } else {
-                  //     context
-                  //         .read<IndividualSignUpProvider>()
-                  //         .changeButtonStatusFalse();
+                  // validator: (value) {
+                  //   if (value!.trim().isEmpty) {
+                  //     return 'First Name is required';
+                  //   } else if (value.startsWith(RegExp(r'[0-9]'))) {
+                  //     return 'First name is not valid';
                   //   }
                   // },
                   cursorColor: primaryAppColor,
@@ -452,8 +457,25 @@ class Profile extends ConsumerWidget {
                     suffixIcon: IconButton(
                       icon: Image.asset('assets/edit.png'),
                       onPressed: () {
-                        ref.read(readOnlyProvider('button4').notifier).state =
-                            !ref.watch(readOnlyProvider('button4'));
+                        final currentStatus = ref
+                            .read(readOnlyProvider('button4').notifier)
+                            .state;
+                        ref
+                            .read(readOnlyProvider('button4').notifier)
+                            .state =
+                        !currentStatus;
+
+                        if (!currentStatus) {
+                          final newCountry =
+                              ref
+                                  .watch(countryProvider.notifier)
+                                  .state;
+                          final user = FirebaseAuth.instance.currentUser;
+                          // user?.
+
+                          // Update the text controller
+                          _countryController.text = newCountry;
+                        }
                       },
                     ),
                     enabledBorder: const UnderlineInputBorder(
