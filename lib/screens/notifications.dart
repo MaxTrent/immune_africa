@@ -20,7 +20,7 @@ class NotificationScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(onPressed: (){Navigator.pop(context);}, icon: const Icon(Icons.arrow_back), color: Colors.white,),
-                Text('Notification', style: Theme.of(context).textTheme.headline2!.copyWith(color: Colors.white),),
+                Text('Notification', style: Theme.of(context).textTheme.displayLarge!.copyWith(color: Colors.white),),
                 IconButton(onPressed: (){}, icon: const Icon(Icons.settings, size: 28,), color: Colors.white, )
               ],
             ),
@@ -43,7 +43,7 @@ class NotificationScreen extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(top: 40.0.h, left: 40.w, bottom: 20.h),
                           child: Text('Today',
-                            style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.w600)
+                            style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.w600)
                           ),
                         ),
                         const NotificationTile(),
@@ -52,7 +52,7 @@ class NotificationScreen extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(top: 20.0.h, left: 40.w, bottom: 20.h),
                           child: Text('This Week',
-                              style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600)
+                              style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600)
                           ),
                         ),
                         SizedBox(height: 20.h,),
@@ -94,8 +94,8 @@ class NotificationTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SvgPicture.asset('assets/notif.svg'),
-              Text('It’s 2 more days to Chloe’s\nHep B Vaccine!', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black,fontSize: 18.sp),),
-              Text('Tuesday', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black,fontSize: 18.sp),)
+              Text('It’s 2 more days to Chloe’s\nHep B Vaccine!', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black,fontSize: 18.sp),),
+              Text('Tuesday', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black,fontSize: 18.sp),)
             ],
           ),
         ),

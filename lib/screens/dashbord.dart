@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:immune_africa/data/services.dart';
 import 'package:immune_africa/providers/providers.dart';
-import 'package:immune_africa/screens/add_record.dart';
 import 'package:immune_africa/screens/screens.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -25,10 +24,8 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return true;
-      },
+    return PopScope(
+      canPop: true,
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_)=> DashBoardProvider()),
@@ -73,7 +70,7 @@ class Dashboard extends StatelessWidget {
                                   'An Error Occurred\n${snapshot.error}',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .headline1!
+                                      .displaySmall!
                                       .copyWith(
                                       fontSize: 19.sp, color: Colors.black),
                                 );
@@ -96,7 +93,7 @@ class Dashboard extends StatelessWidget {
                                       'Nothing to show yet',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headline1!
+                                          .displaySmall!
                                           .copyWith(
                                               fontSize: 19.sp, color: Colors.black),
                                     ),
@@ -116,7 +113,7 @@ class Dashboard extends StatelessWidget {
                                       },
                                       child: Container(
                                         height: 98.h,
-                                        width: 98.w,
+                                        width: 98.h,
                                         decoration: BoxDecoration(
                                           color: primaryAppColor,
                                           borderRadius: BorderRadius.circular(100.r),
@@ -133,7 +130,7 @@ class Dashboard extends StatelessWidget {
                                               'ADD',
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .headline1,
+                                                  .displaySmall,
                                             )
                                           ],
                                         ),
@@ -154,7 +151,7 @@ class Dashboard extends StatelessWidget {
                                             'MY RECORDS',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline1!
+                                                .displaySmall!
                                                 .copyWith(
                                                     fontSize: 22.sp,
                                                     color: Colors.black),
@@ -193,7 +190,7 @@ class Dashboard extends StatelessWidget {
                                                     'ADD',
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .headline1!
+                                                        .displaySmall!
                                                         .copyWith(fontSize: 14.sp),
                                                   ),
                                                 ],
@@ -332,7 +329,7 @@ class Dashboard extends StatelessWidget {
                                                                       style: Theme.of(
                                                                               context)
                                                                           .textTheme
-                                                                          .headline1,
+                                                                          .displaySmall,
                                                                     ),
                                                                     Text(
                                                                       // '1 week old',
@@ -340,7 +337,7 @@ class Dashboard extends StatelessWidget {
                                                                       style: Theme.of(
                                                                               context)
                                                                           .textTheme
-                                                                          .headline1,
+                                                                          .displaySmall,
                                                                     ),
                                                                   ],
                                                                 ),
@@ -368,7 +365,7 @@ class Dashboard extends StatelessWidget {
                                                                 style: Theme.of(
                                                                         context)
                                                                     .textTheme
-                                                                    .headline1,
+                                                                    .displaySmall,
                                                               ),
                                                             ],
                                                           ),
@@ -391,7 +388,7 @@ class Dashboard extends StatelessWidget {
                                                                 style: Theme.of(
                                                                         context)
                                                                     .textTheme
-                                                                    .headline1,
+                                                                    .displaySmall,
                                                               ),
                                                             ],
                                                           ),
@@ -443,7 +440,7 @@ class _buildAppBar extends StatelessWidget {
               'Welcome, ${_user!.displayName!.split(' ').first}!',
               style: Theme.of(context)
                   .textTheme
-                  .headline2!
+                  .displayLarge!
                   .copyWith(color: Colors.black),
             ),
             IconButton(
@@ -467,7 +464,7 @@ class _buildAppBar extends StatelessWidget {
               'Read More',
               style: Theme.of(context)
                   .textTheme
-                  .headline1!
+                  .displaySmall!
                   .copyWith(color: primaryAppColor),
             )),
       ],
@@ -506,7 +503,7 @@ class _buildInfoTiles extends StatelessWidget {
                     padding:  EdgeInsets.only(top: 110.h, left: 30.w),
                     child: Text(
                       'Ease the pain of\nvaccination',
-                      style: Theme.of(context).textTheme.headline1!.copyWith(
+                      style: Theme.of(context).textTheme.displaySmall!.copyWith(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.black),

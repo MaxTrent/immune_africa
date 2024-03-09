@@ -31,8 +31,8 @@ class RecordDetails extends StatelessWidget {
                   Column(crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CircleAvatar(backgroundImage: NetworkImage(image,)),
-                      Text(name, style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
-                      Text(date, style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 16),),
+                      Text(name, style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black, fontSize: 18),),
+                      Text(date, style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black, fontSize: 16),),
 
                       ],
                     ),
@@ -55,7 +55,7 @@ class RecordDetails extends StatelessWidget {
                       'Due',
                       style: Theme.of(context)
                           .textTheme
-                          .headline1!
+                          .displaySmall!
                           .copyWith(color: Colors.black, fontSize: 18.sp),
                     ),
                     TextButton(
@@ -69,7 +69,7 @@ class RecordDetails extends StatelessWidget {
                           'View all',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(color: Colors.grey, fontSize: 14.sp),
                         ))
                   ],
@@ -89,7 +89,7 @@ class RecordDetails extends StatelessWidget {
                       'PCV II',
                       style: Theme.of(context)
                           .textTheme
-                          .headline1!
+                          .displaySmall!
                           .copyWith(color: Colors.black),
                     ),
                   ],
@@ -105,7 +105,7 @@ class RecordDetails extends StatelessWidget {
                   'Taken',
                   style: Theme.of(context)
                       .textTheme
-                      .headline1!
+                      .displaySmall!
                       .copyWith(color: Colors.black, fontSize: 18.sp),
                 ),
                  SizedBox(
@@ -123,7 +123,7 @@ class RecordDetails extends StatelessWidget {
                       'Hepatitis  B',
                       style: Theme.of(context)
                           .textTheme
-                          .headline1!
+                          .displaySmall!
                           .copyWith(color: Colors.black),
                     ),
                   ],
@@ -139,7 +139,7 @@ class RecordDetails extends StatelessWidget {
                   'Upcoming',
                   style: Theme.of(context)
                       .textTheme
-                      .headline1!
+                      .displaySmall!
                       .copyWith(color: Colors.black, fontSize: 18.sp),
                 ),SizedBox(
                   height: 10.h,
@@ -155,7 +155,7 @@ class RecordDetails extends StatelessWidget {
                       'Hepatitis  B II',
                       style: Theme.of(context)
                           .textTheme
-                          .headline1!
+                          .displaySmall!
                           .copyWith(color: Colors.black),
                     ),
                   ],

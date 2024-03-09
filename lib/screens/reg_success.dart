@@ -58,7 +58,7 @@ class _RegisterSuccessState extends State<RegisterSuccess> {
                         'REGISTRATION\nSUCCESSFUL', textAlign: TextAlign.center,
                         style: Theme.of(context)
                             .textTheme
-                            .headline2!
+                            .displayLarge!
                             .copyWith(color: Colors.white),
                       ),
                     ],

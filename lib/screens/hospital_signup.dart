@@ -16,7 +16,7 @@ class HospitalSignUp extends StatelessWidget {
   final _countryController = TextEditingController(text: 'Nigeria');
   final _passwordController = TextEditingController();
   final _addressController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
   String? password;
 
   @override
@@ -41,7 +41,7 @@ class HospitalSignUp extends StatelessWidget {
                             'Welcome!',
                             style: Theme.of(context)
                                 .textTheme
-                                .headline2!
+                                .displayLarge!
                                 .copyWith(color: Colors.black),
                           ),
                           SizedBox(
@@ -51,7 +51,7 @@ class HospitalSignUp extends StatelessWidget {
                             'Let\'s get started!',
                             style: Theme.of(context)
                                 .textTheme
-                                .headline1!
+                                .displaySmall!
                                 .copyWith(color: Colors.black, fontSize: 18.sp),
                           ),
                           SizedBox(
@@ -61,7 +61,7 @@ class HospitalSignUp extends StatelessWidget {
                             'Name of Hospital',
                             style: Theme.of(context)
                                 .textTheme
-                                .headline1!
+                                .displaySmall!
                                 .copyWith(color: Colors.black, fontSize: 18.sp),
                           ),
                           TextFormField(
@@ -117,7 +117,7 @@ class HospitalSignUp extends StatelessWidget {
                             'Hospital\'s Email Address',
                             style: Theme.of(context)
                                 .textTheme
-                                .headline1!
+                                .displaySmall!
                                 .copyWith(color: Colors.black, fontSize: 18.sp),
                           ),
                           TextFormField(
@@ -167,7 +167,7 @@ class HospitalSignUp extends StatelessWidget {
                             'Country',
                             style: Theme.of(context)
                                 .textTheme
-                                .headline1!
+                                .displaySmall!
                                 .copyWith(color: Colors.black, fontSize: 18.sp),
                           ),
                           TextFormField(
@@ -224,7 +224,7 @@ class HospitalSignUp extends StatelessWidget {
                             'Address',
                             style: Theme.of(context)
                                 .textTheme
-                                .headline1!
+                                .displaySmall!
                                 .copyWith(color: Colors.black, fontSize: 18.sp),
                           ),
                           TextFormField(
@@ -280,7 +280,7 @@ class HospitalSignUp extends StatelessWidget {
                             'Password',
                             style: Theme.of(context)
                                 .textTheme
-                                .headline1!
+                                .displaySmall!
                                 .copyWith(color: Colors.black, fontSize: 18.sp),
                           ),
                           TextFormField(
@@ -355,7 +355,7 @@ class HospitalSignUp extends StatelessWidget {
                           //   'Confirm Password',
                           //   style: Theme.of(context)
                           //       .textTheme
-                          //       .headline1!
+                          //       .displaySmall!
                           //       .copyWith(color: Colors.black, fontSize: 18),
                           // ),
                           // TextFormField(

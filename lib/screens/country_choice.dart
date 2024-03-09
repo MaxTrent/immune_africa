@@ -44,7 +44,7 @@ class _CountryChoiceState extends State<CountryChoice> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .headline2!
+                        .displayLarge!
                         .copyWith(color: Colors.black, fontSize: 24.sp),
                   ),
                   SizedBox(
@@ -89,7 +89,7 @@ class _CountryChoiceState extends State<CountryChoice> {
                           countryListTheme: CountryListThemeData(
                             textStyle: Theme.of(context)
                                 .textTheme
-                                .headline1!
+                                .displaySmall!
                                 .copyWith(color: Colors.black, fontSize: 18.sp),
                             flagSize: 0,
                             borderRadius: BorderRadius.only(
@@ -99,7 +99,7 @@ class _CountryChoiceState extends State<CountryChoice> {
                             // Optional. Styles the search field.
                             inputDecoration: InputDecoration(
                               labelText: 'Search Country',
-                              floatingLabelStyle: Theme.of(context).textTheme.headline1!.copyWith(color: primaryAppColor),
+                              floatingLabelStyle: Theme.of(context).textTheme.displaySmall!.copyWith(color: primaryAppColor),
                               hintText: 'Start typing to search',
                               focusColor: primaryAppColor,
                               focusedBorder: OutlineInputBorder(
@@ -126,7 +126,7 @@ class _CountryChoiceState extends State<CountryChoice> {
                           !isCountrySelected ? 'Country' : countryValue,
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(color: Colors.black),
                         ),
                         const Icon(

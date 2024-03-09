@@ -88,7 +88,7 @@ class Profile extends ConsumerWidget {
                         style: Theme
                             .of(context)
                             .textTheme
-                            .headline1!
+                            .displaySmall!
                             .copyWith(color: Colors.black, fontSize: 18.sp),
                       ),
                     ],
@@ -100,7 +100,7 @@ class Profile extends ConsumerWidget {
                   style: Theme
                       .of(context)
                       .textTheme
-                      .headline2!
+                      .displayLarge!
                       .copyWith(color: Colors.black),
                 ),
                 SizedBox(
@@ -111,7 +111,7 @@ class Profile extends ConsumerWidget {
                   style: Theme
                       .of(context)
                       .textTheme
-                      .headline1!
+                      .displaySmall!
                       .copyWith(color: Colors.grey),
                 ),
                 TextFormField(
@@ -191,7 +191,7 @@ class Profile extends ConsumerWidget {
                   style: Theme
                       .of(context)
                       .textTheme
-                      .headline1!
+                      .displaySmall!
                       .copyWith(color: Colors.grey),
                 ),
                 TextFormField(
@@ -255,7 +255,7 @@ class Profile extends ConsumerWidget {
                   style: Theme
                       .of(context)
                       .textTheme
-                      .headline1!
+                      .displaySmall!
                       .copyWith(color: Colors.grey),
                 ),
                 TextFormField(
@@ -329,7 +329,7 @@ class Profile extends ConsumerWidget {
                   style: Theme
                       .of(context)
                       .textTheme
-                      .headline1!
+                      .displaySmall!
                       .copyWith(color: Colors.grey),
                 ),
                 TextFormField(
@@ -387,7 +387,7 @@ class Profile extends ConsumerWidget {
                             style: Theme
                                 .of(context)
                                 .textTheme
-                                .headline1!
+                                .displaySmall!
                                 .copyWith(color: Colors.black),
                           ),
                           Padding(
@@ -426,7 +426,7 @@ class Profile extends ConsumerWidget {
                   style: Theme
                       .of(context)
                       .textTheme
-                      .headline1!
+                      .displaySmall!
                       .copyWith(color: Colors.grey),
                 ),
                 TextFormField(

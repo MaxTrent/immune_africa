@@ -28,7 +28,7 @@ class RegisterOption extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('REGISTER', style: Theme.of(context).textTheme.headline2!.copyWith(fontSize: 29.sp),),
+                  Text('REGISTER', style: Theme.of(context).textTheme.displayLarge!.copyWith(fontSize: 29.sp),),
                   SizedBox(
                     height: 35.h,
                   ),

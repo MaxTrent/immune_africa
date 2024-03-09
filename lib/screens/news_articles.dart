@@ -22,7 +22,7 @@ class NewsArticles extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('News Articles', style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 24.sp, color: Colors.black),),
+              Text('News Articles', style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 24.sp, color: Colors.black),),
             SizedBox(height: 10.h,),
               Container(height: 374.h,
               width: 333.w,
@@ -32,7 +32,7 @@ class NewsArticles extends StatelessWidget {
                 child: Image.asset('assets/cute-baby-born 1.png',fit: BoxFit.contain,),
               ),
               SizedBox(height: 10.h,),
-              Text(text, style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18.sp),),
+              Text(text, style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black, fontSize: 18.sp),),
 
             ],
           ),

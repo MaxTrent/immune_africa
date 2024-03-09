@@ -17,7 +17,7 @@ class AddRecord extends StatelessWidget {
   final _dateController = TextEditingController();
   final _relationshipController = TextEditingController();
   final _countryController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
   String gender = '';
 
@@ -46,7 +46,7 @@ class AddRecord extends StatelessWidget {
                           'NEW RECORD',
                           style: Theme.of(context)
                               .textTheme
-                              .headline2!
+                              .displayLarge!
                               .copyWith(color: Colors.black),
                         ),
                         SizedBox(
@@ -76,7 +76,7 @@ class AddRecord extends StatelessWidget {
                                       label: const Text('First Name'),
                                       labelStyle: Theme.of(context)
                                           .textTheme
-                                          .headline1!
+                                          .displaySmall!
                                           .copyWith(color: Colors.black),
                                       enabledBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
@@ -99,7 +99,7 @@ class AddRecord extends StatelessWidget {
                                       label: const Text('Last Name'),
                                       labelStyle: Theme.of(context)
                                           .textTheme
-                                          .headline1!
+                                          .displaySmall!
                                           .copyWith(color: Colors.black),
                                       enabledBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
@@ -126,7 +126,7 @@ class AddRecord extends StatelessWidget {
                                       label: const Text('Date of Birth'),
                                       labelStyle: Theme.of(context)
                                           .textTheme
-                                          .headline1!
+                                          .displaySmall!
                                           .copyWith(color: Colors.black),
                                       enabledBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
@@ -180,7 +180,7 @@ class AddRecord extends StatelessWidget {
                                                   'Male',
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .headline1!
+                                                      .displaySmall!
                                                       .copyWith(
                                                         color: context
                                                                     .watch<
@@ -248,7 +248,7 @@ class AddRecord extends StatelessWidget {
                                                     'Female',
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .headline1!
+                                                        .displaySmall!
                                                         .copyWith(
                                                             color: context
                                                                         .watch<
@@ -305,7 +305,7 @@ class AddRecord extends StatelessWidget {
                         'NEW RECORD',
                         style: Theme.of(context)
                             .textTheme
-                            .headline2!
+                            .displayLarge!
                             .copyWith(color: Colors.black),
                       ),
                       SizedBox(
@@ -335,7 +335,7 @@ class AddRecord extends StatelessWidget {
                                     label: const Text('Relationship to child'),
                                     labelStyle: Theme.of(context)
                                         .textTheme
-                                        .headline1!
+                                        .displaySmall!
                                         .copyWith(color: Colors.black),
                                     enabledBorder: const UnderlineInputBorder(
                                       borderSide: BorderSide(
@@ -359,7 +359,7 @@ class AddRecord extends StatelessWidget {
                                     label: const Text('Country of Birth'),
                                     labelStyle: Theme.of(context)
                                         .textTheme
-                                        .headline1!
+                                        .displaySmall!
                                         .copyWith(color: Colors.black),
                                     enabledBorder: const UnderlineInputBorder(
                                       borderSide: BorderSide(
@@ -416,7 +416,7 @@ class AddRecord extends StatelessWidget {
                               'Upload Photo',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline2!
+                                  .displayLarge!
                                   .copyWith(color: Colors.black),
                             ),
                             TextButton(
@@ -436,7 +436,7 @@ class AddRecord extends StatelessWidget {
                                   'Skip',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .headline1!
+                                      .displaySmall!
                                       .copyWith(color: Colors.black),
                                 ))
                           ],

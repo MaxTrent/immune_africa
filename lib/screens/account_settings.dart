@@ -21,23 +21,23 @@ class AccountSettings extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Account Settings', style: Theme.of(context).textTheme.headline2!.copyWith(color: Colors.black)),
+            Text('Account Settings', style: Theme.of(context).textTheme.displayLarge!.copyWith(color: Colors.black)),
             SizedBox(height: 10.h,),
-            Text('This is where you can control your\nlogin settings', style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 18.sp, color: Colors.black),),
+            Text('This is where you can control your\nlogin settings', style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18.sp, color: Colors.black),),
           const Divider(thickness: 1, color: primaryAppColor,),
             SizedBox(height: 20.h,),
             ListTile(
               contentPadding: EdgeInsets.zero,
-              title: Text('Require password to\nlog in', style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 18.sp, color: Colors.black, fontWeight: FontWeight.w600),),
+              title: Text('Require password to\nlog in', style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 18.sp, color: Colors.black, fontWeight: FontWeight.w600),),
               trailing: CupertinoSwitch(value: true, onChanged: (value) {  },),
             ),
             SizedBox(height: 10.h,),
-            Text('Turning on this setting will require you to enter your ImmuneAfrica password each time you open the app.', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black.withOpacity(0.8)),),
+            Text('Turning on this setting will require you to enter your ImmuneAfrica password each time you open the app.', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black.withOpacity(0.8)),),
           SizedBox(height: 30.h,),
             ListTile(
               contentPadding: EdgeInsets.zero,
               trailing: CupertinoSwitch(value: false, onChanged: (value){},),
-              title: Text('Enable Touch ID or\nFace ID to unlock App', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.w600),),
+              title: Text('Enable Touch ID or\nFace ID to unlock App', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.w600),),
             ),
              SizedBox(height: 50.h,),
             Center(

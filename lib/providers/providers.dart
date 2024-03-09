@@ -4,3 +4,4 @@ export 'hospital_signup_provider.dart';
 export 'add_record_provider.dart';
 export 'dashboard_provider.dart';
 export 'settings_provider.dart';
+export 'biometric_provider.dart';

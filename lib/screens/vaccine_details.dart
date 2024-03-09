@@ -62,14 +62,14 @@ class _VaccineDetailsState extends State<VaccineDetails>
                         widget.name,
                         style: Theme.of(context)
                             .textTheme
-                            .headline1!
+                            .displaySmall!
                             .copyWith(color: Colors.black, fontSize: 18.sp),
                       ),
                       Text(
                         widget.age,
                         style: Theme.of(context)
                             .textTheme
-                            .headline1!
+                            .displaySmall!
                             .copyWith(color: Colors.black, fontSize: 16.sp),
                       ),
                     ],
@@ -90,7 +90,7 @@ class _VaccineDetailsState extends State<VaccineDetails>
                       },
                       child: Text(
                         'Add Vaccines',
-                        style: Theme.of(context).textTheme.headline1!.copyWith(
+                        style: Theme.of(context).textTheme.displaySmall!.copyWith(
                             color: const Color(0xff9F28F3), fontSize: 18.sp),
                       )),
                   SvgPicture.asset(
@@ -123,10 +123,10 @@ class _VaccineDetailsState extends State<VaccineDetails>
                       border: const Border.symmetric()),
                   labelStyle: Theme.of(context)
                       .textTheme
-                      .headline1!
+                      .displaySmall!
                       .copyWith(fontSize: 18.sp),
                   labelColor: Colors.black,
-                  unselectedLabelColor: const Color(0xff3E3E3E80),
+                  unselectedLabelColor: const Color(0xff3e3e3e80),
                   tabs: const [
                     Tab(
                       text: 'Vaccines',
@@ -157,7 +157,7 @@ class _VaccineDetailsState extends State<VaccineDetails>
                                     SvgPicture.asset('assets/syringe_purple.svg'),
                                 title: Text('Hepatitis  B', style: Theme.of(context)
                                     .textTheme
-                                    .headline1!
+                                    .displaySmall!
                                     .copyWith(
                                     fontSize: 18.sp, color: Colors.black),),
                                 trailing: const Icon(
@@ -186,12 +186,12 @@ class _VaccineDetailsState extends State<VaccineDetails>
                                     SvgPicture.asset('assets/syringe_green.svg'),
                                 title: Text('Oral Polio Vaccine', style: Theme.of(context)
                                     .textTheme
-                                    .headline1!
+                                    .displaySmall!
                                     .copyWith(
                                     fontSize: 18.sp, color: Colors.black),),
                                 subtitle: Text('Date Received: 14th July 2023', style: Theme.of(context)
                                     .textTheme
-                                    .headline1!
+                                    .displaySmall!
                                     .copyWith(
                                     fontSize: 18.sp, color: Colors.black),),
                               ),
@@ -220,7 +220,7 @@ class _VaccineDetailsState extends State<VaccineDetails>
                                     'PCV II',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .headline1!
+                                        .displaySmall!
                                         .copyWith(
                                             fontSize: 18.sp, color: Colors.black),
                                   ),
@@ -235,7 +235,7 @@ class _VaccineDetailsState extends State<VaccineDetails>
                                       'Due Date: 11th July 2023',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headline1!
+                                          .displaySmall!
                                           .copyWith(
                                               fontSize: 18.sp, color: Colors.black),
                                     ),
@@ -247,7 +247,7 @@ class _VaccineDetailsState extends State<VaccineDetails>
                                             'Send Reminder',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline1!
+                                                .displaySmall!
                                                 .copyWith(
                                                     fontSize: 18.sp,
                                                     color: primaryAppColor),
@@ -284,24 +284,24 @@ class _VaccineDetailsState extends State<VaccineDetails>
 //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //               children: [
 //                 IconButton(icon: const Icon(Icons.arrow_back), onPressed: (){Navigator.of(context).pop();},),
-//                 Text('Chloe Adams', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
+//                 Text('Chloe Adams', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black, fontSize: 18),),
 //                 SvgPicture.asset('assets/profile2.svg'),
 //               ],
 //             ),
-//             Text('1 week old', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 18),),
+//             Text('1 week old', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black, fontSize: 18),),
 //             Row(
 //               mainAxisAlignment: MainAxisAlignment.center,
 //               children: [
-//                 Text('Add Vaccines',style: Theme.of(context).textTheme.headline1!.copyWith(color: const Color(0xff9F28F3), fontSize: 18),),
+//                 Text('Add Vaccines',style: Theme.of(context).textTheme.displaySmall!.copyWith(color: const Color(0xff9F28F3), fontSize: 18),),
 //               SvgPicture.asset('assets/syringe.svg', color: const Color(0xff9F28F3), height: 19, width: 20,),
 //               ],
 //             ),
 //             TabBar(
 //                 controller: _tabController,
 //                 tabs: [
-//               Tab(child: Text('Vaccines', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black),),),
-//               Tab(child: Text('Taken', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black)),),
-//               Tab(child: Text('Not Yet Taken', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black)),),
+//               Tab(child: Text('Vaccines', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black),),),
+//               Tab(child: Text('Taken', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black)),),
+//               Tab(child: Text('Not Yet Taken', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black)),),
 //             ]),
 //             TabBarView(
 //                 controller: _tabController,

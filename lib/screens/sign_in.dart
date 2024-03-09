@@ -1,29 +1,28 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:immune_africa/providers/providers.dart';
 import 'package:immune_africa/screens/individual_signup.dart';
 import 'package:provider/provider.dart';
 import '../Widgets/widgets.dart';
 import '../themes/themes.dart';
 
-
-
-
 class SignIn extends StatelessWidget {
   SignIn({super.key});
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SignInProvider>(
       create: (_) => SignInProvider(),
-      builder: (context, child) => WillPopScope(
-        onWillPop: () async {
-            return !context.read<SignInProvider>().isLoading;
-        },
+      // Provider(create: (_) => BiometricProvider()),
+
+      builder: (context, child) => PopScope(
+        canPop: !context.read<SignInProvider>().isLoading,
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           body: SafeArea(
@@ -41,7 +40,7 @@ class SignIn extends StatelessWidget {
                       'Login',
                       style: Theme.of(context)
                           .textTheme
-                          .headline2!
+                          .displayLarge!
                           .copyWith(color: Colors.black),
                     ),
                     SizedBox(
@@ -51,12 +50,12 @@ class SignIn extends StatelessWidget {
                       'Email Address',
                       style: Theme.of(context)
                           .textTheme
-                          .headline1!
+                          .displaySmall!
                           .copyWith(color: Colors.black, fontSize: 18.sp),
                     ),
                     TextFormField(
-                      validator: (value){
-                        if(!value!.isValidEmail){
+                      validator: (value) {
+                        if (!value!.isValidEmail) {
                           return 'Enter valid email address';
                         }
                       },
@@ -64,7 +63,9 @@ class SignIn extends StatelessWidget {
                       cursorColor: primaryAppColor,
                       onChanged: (value1) {
                         if (value1.isNotEmpty) {
-                          context.read<SignInProvider>().changeButtonStatusTrue();
+                          context
+                              .read<SignInProvider>()
+                              .changeButtonStatusTrue();
                         } else {
                           context
                               .read<SignInProvider>()
@@ -94,7 +95,7 @@ class SignIn extends StatelessWidget {
                       'Password',
                       style: Theme.of(context)
                           .textTheme
-                          .headline1!
+                          .displaySmall!
                           .copyWith(color: Colors.black, fontSize: 18.sp),
                     ),
                     TextFormField(
@@ -108,7 +109,9 @@ class SignIn extends StatelessWidget {
                       },
                       onChanged: (value2) {
                         if (value2.isNotEmpty) {
-                          context.read<SignInProvider>().changeButtonStatusTrue();
+                          context
+                              .read<SignInProvider>()
+                              .changeButtonStatusTrue();
                         } else {
                           context
                               .read<SignInProvider>()
@@ -118,8 +121,9 @@ class SignIn extends StatelessWidget {
                       keyboardType: TextInputType.name,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: _passwordController,
-                      obscureText:
-                          context.watch<SignInProvider>().visible ? false : true,
+                      obscureText: context.watch<SignInProvider>().visible
+                          ? false
+                          : true,
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
                             onPressed: () {
@@ -150,36 +154,51 @@ class SignIn extends StatelessWidget {
                       height: 50.h,
                     ),
                     Center(
-                      child: context.watch<SignInProvider>().isLoading
-                          ? SizedBox(
-                              height: 30.h,
-                              width: 35.w,
-                              child: CircularProgressIndicator(
-                                color: primaryAppColor,
-                                // strokeWidth: 2,
-                              ),
-                            )
-                          : SizedBox(
-                              height: 52.h,
-                              width: 317.w,
-                              child: AppButton(
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      context.read<SignInProvider>().signIn(
-                                          context,
-                                          _emailController.text.toString(),
-                                          _passwordController.text.toString());
-                                    }
-                                  },
-                                  // onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard()));},
-                                  btnText: 'LOGIN',
-                                  btnBackgroundColor: context
-                                          .watch<SignInProvider>()
-                                          .isButtonEnabled
-                                      ? primaryAppColor
-                                      : accentColor,
-                                  btnTextColor: Colors.white)),
-                    )
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        context.watch<SignInProvider>().isLoading
+                            ? SizedBox(
+                                height: 30.h,
+                                width: 30.w,
+                                child: CircularProgressIndicator(
+                                  color: primaryAppColor,
+                                  // strokeWidth: 2,
+                                ),
+                              )
+                            : SizedBox(
+                                height: 52.h,
+                                width: 300.w,
+                                child: AppButton(
+                                    onPressed: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        context.read<SignInProvider>().signIn(
+                                            context,
+                                            _emailController.text.toString(),
+                                            _passwordController.text
+                                                .toString());
+                                      }
+                                    },
+                                    // onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Dashboard()));},
+                                    btnText: 'LOGIN',
+                                    btnBackgroundColor: context
+                                            .watch<SignInProvider>()
+                                            .isButtonEnabled
+                                        ? primaryAppColor
+                                        : accentColor,
+                                    btnTextColor: Colors.white)),
+                        IconButton(
+                            visualDensity:
+                                VisualDensity.adaptivePlatformDensity,
+                            splashRadius: 2,
+                            onPressed: () {
+                              context
+                                  .read<BiometricProvider>()
+                                  .authenticateUser(context);
+                            },
+                            icon: SvgPicture.asset('assets/biometric.svg'))
+                      ],
+                    ))
                   ],
                 ),
               ),

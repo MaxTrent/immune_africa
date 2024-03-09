@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../data/storage.dart';
 import '../screens/screens.dart';
 
 class IndividualSignUpProvider extends ChangeNotifier {
@@ -85,6 +86,7 @@ class IndividualSignUpProvider extends ChangeNotifier {
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => Home()));
                     })));
+        SharedPreferencesHelper.setLoggedIn();
         if (kDebugMode) {
           print(_isEmailVerified);
         }

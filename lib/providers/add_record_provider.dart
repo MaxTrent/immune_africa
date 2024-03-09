@@ -26,7 +26,6 @@ class AddRecordProvider extends ChangeNotifier {
   int allowedImageSize = 5242880;
   bool _isUploading = false;
   String _downloadUrl = '';
-
   double get uploadProgress => _uploadProgress;
   int get selectedGender => _selectedGender;
   bool get isUploading => _isUploading;
@@ -206,7 +205,7 @@ class AddRecordProvider extends ChangeNotifier {
         actions: [
           CupertinoActionSheetAction(
             child:  Text('Gallery',
-            style: Theme.of(context).textTheme.headline2!.copyWith(color: primaryAppColor),),
+            style: Theme.of(context).textTheme.displayLarge!.copyWith(color: primaryAppColor),),
             onPressed: () {
               Navigator.of(context).pop();
               getImageFromGallery();
@@ -215,7 +214,7 @@ class AddRecordProvider extends ChangeNotifier {
           ),
           CupertinoActionSheetAction(
             child: Text('Camera',
-            style:Theme.of(context).textTheme.headline2!.copyWith(color: primaryAppColor),),
+            style:Theme.of(context).textTheme.displayLarge!.copyWith(color: primaryAppColor),),
             onPressed: () {
               Navigator.of(context).pop();
               getImageFromCamera();

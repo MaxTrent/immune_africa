@@ -14,7 +14,7 @@ class AppTheme{
     scaffoldBackgroundColor: Colors.white,
     primaryColor: primaryAppColor,
     textTheme: TextTheme(
-      headline1: GoogleFonts.montserrat(
+      displaySmall: GoogleFonts.montserrat(
         textStyle: TextStyle(
             color: Colors.white,
             fontStyle: FontStyle.normal,
@@ -22,7 +22,7 @@ class AppTheme{
             fontSize: 16.sp,
         ),
       ),
-      headline2: GoogleFonts.montserrat(
+      displayLarge: GoogleFonts.montserrat(
         textStyle: TextStyle(
           color: Colors.white,
           fontStyle: FontStyle.normal,

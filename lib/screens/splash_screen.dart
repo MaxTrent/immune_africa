@@ -8,9 +8,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:immune_africa/providers/providers.dart';
 import 'package:immune_africa/screens/onboarding.dart';
+import 'package:immune_africa/screens/screens.dart';
 import 'package:provider/provider.dart';
 
 import '../Widgets/widgets.dart';
+import '../data/storage.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -28,26 +30,44 @@ class _SplashScreenState extends State<SplashScreen> {
         const Duration(
           seconds: 5,
         ), () async {
-          await checkIfSignedIn();
-    });
-    super.initState();
-  }
-
-  Future<void> checkIfSignedIn() async {
-    User? user = _auth.currentUser;
-
-    if (user == null || user.uid.isEmpty) {
-      if (kDebugMode) {
-        print('Not Signed In');
+      if (await SharedPreferencesHelper.isOnboardingCompleted()) {
+        if (await SharedPreferencesHelper.isLoggedIn()) {
+          // User logged in, navigate to PIN screen
+          Navigator.pushReplacementNamed(context, '/home');
+        } else {
+          // User not logged in, navigate to login screen
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => RegisterLogin())
+          );
+        }
+      } else {
+        // Onboarding not completed, navigate to onboarding screen
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) => Onboarding()));
       }
-    } else {
-        Navigator.pushReplacementNamed(context, '/home');
-    }
+    });
+    super.initState();
   }
+  //
+  // Future<void> checkIfSignedIn() async {
+  //   User? user = _auth.currentUser;
+  //
+  //   if (user == null || user.uid.isEmpty) {
+  //     if (kDebugMode) {
+  //       print('Not Signed In');
+  //       Navigator.pushReplacement(
+  //           context,
+  //           MaterialPageRoute(
+  //               builder: (context) => Onboarding()));
+  //     }
+  //   } else {
+  //       Navigator.pushReplacementNamed(context, '/home');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

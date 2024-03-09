@@ -49,14 +49,14 @@ class AddVaccines extends StatelessWidget {
                           'Chloe Adams',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(color: Colors.black, fontSize: 18.sp),
                         ),
                         Text(
                           '1 week old',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(color: Colors.black, fontSize: 16.sp),
                         ),
                       ],
@@ -121,7 +121,7 @@ class AddVaccines extends StatelessWidget {
                                               label: Text('First Name'),
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .headline1!
+                                                  .displaySmall!
                                                   .copyWith(color: Colors.black),
                                               errorBorder: UnderlineInputBorder(
                                                 borderSide: BorderSide(
@@ -151,7 +151,7 @@ class AddVaccines extends StatelessWidget {
                                               label: Text('Last Name'),
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .headline1!
+                                                  .displaySmall!
                                                   .copyWith(color: Colors.black),
                                               enabledBorder:
                                                   const UnderlineInputBorder(
@@ -170,7 +170,7 @@ class AddVaccines extends StatelessWidget {
                                               label: Text('Date of Birth'),
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .headline1!
+                                                  .displaySmall!
                                                   .copyWith(color: Colors.black),
                                               enabledBorder:
                                                   const UnderlineInputBorder(
@@ -189,7 +189,7 @@ class AddVaccines extends StatelessWidget {
                                               labelText: 'Sex',
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .headline1!
+                                                  .displaySmall!
                                                   .copyWith(color: Colors.black),
                                               enabledBorder:
                                                   const UnderlineInputBorder(
@@ -208,7 +208,7 @@ class AddVaccines extends StatelessWidget {
                                               labelText: 'Relationship',
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .headline1!
+                                                  .displaySmall!
                                                   .copyWith(color: Colors.black),
                                               enabledBorder:
                                                   const UnderlineInputBorder(
@@ -227,7 +227,7 @@ class AddVaccines extends StatelessWidget {
                                               labelText: 'Country of Birth',
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .headline1!
+                                                  .displaySmall!
                                                   .copyWith(color: Colors.black),
                                               enabledBorder:
                                                   const UnderlineInputBorder(
@@ -297,7 +297,7 @@ class AddVaccines extends StatelessWidget {
                                               labelText: 'First Name',
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .headline1!
+                                                  .displaySmall!
                                                   .copyWith(color: Colors.black),
                                               enabledBorder:
                                                   const UnderlineInputBorder(
@@ -316,7 +316,7 @@ class AddVaccines extends StatelessWidget {
                                               labelText: 'Last Name',
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .headline1!
+                                                  .displaySmall!
                                                   .copyWith(color: Colors.black),
                                               enabledBorder:
                                                   const UnderlineInputBorder(
@@ -335,7 +335,7 @@ class AddVaccines extends StatelessWidget {
                                               labelText: 'Date of Birth',
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .headline1!
+                                                  .displaySmall!
                                                   .copyWith(color: Colors.black),
                                               enabledBorder:
                                                   const UnderlineInputBorder(
@@ -354,7 +354,7 @@ class AddVaccines extends StatelessWidget {
                                               labelText: 'Sex',
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .headline1!
+                                                  .displaySmall!
                                                   .copyWith(color: Colors.black),
                                               enabledBorder:
                                                   const UnderlineInputBorder(
@@ -373,7 +373,7 @@ class AddVaccines extends StatelessWidget {
                                               labelText: 'Relationship',
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .headline1!
+                                                  .displaySmall!
                                                   .copyWith(color: Colors.black),
                                               enabledBorder:
                                                   const UnderlineInputBorder(
@@ -393,7 +393,7 @@ class AddVaccines extends StatelessWidget {
                                                   const Text('Country of Birth'),
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .headline1!
+                                                  .displaySmall!
                                                   .copyWith(color: Colors.black),
                                               enabledBorder:
                                                   const UnderlineInputBorder(

@@ -23,10 +23,10 @@ class ChooseLanguage extends StatelessWidget {
                   'CHOOSE YOUR LANGUAGE',
                   style: Theme.of(context)
                       .textTheme
-                      .headline2!
+                      .displayLarge!
                       .copyWith(color: Colors.black),
                 ),
-                Text('Which language are you\ncomfortable with?', style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black),),
+                Text('Which language are you\ncomfortable with?', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.black),),
                 SizedBox(height: 40.h,),
                 GestureDetector(
                     onTap: (){
@@ -79,7 +79,7 @@ class TileSelect extends StatelessWidget {
             text,
             style: Theme.of(context)
                 .textTheme
-                .headline1!
+                .displaySmall!
                 .copyWith(color: Colors.white, fontSize: 18.sp),
           ), SizedBox(width: 20.w,),
          isLanguageSelected ? Image.asset('assets/tick.png') : Container(),

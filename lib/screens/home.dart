@@ -53,8 +53,8 @@ class _HomeState extends State<Home> {
             selectedItemColor: primaryAppColor,
             // unselectedFontSize: 12,
             // selectedFontSize: 12,
-            // unselectedLabelStyle: Theme.of(context).textTheme.headline1,
-            // selectedLabelStyle: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 12, color:primaryAppColor),
+            // unselectedLabelStyle: Theme.of(context).textTheme.displaySmall,
+            // selectedLabelStyle: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 12, color:primaryAppColor),
             currentIndex: _selectedIndex,
             items: [
               BottomNavigationBarItem(icon: Icon(Icons.home_filled, size: 40.r,), label: 'Home',),

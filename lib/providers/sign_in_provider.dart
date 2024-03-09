@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:immune_africa/data/storage.dart';
 
 enum Status{Uninitialized, Authenticated, Authenticating, Unauthenticated}
 
@@ -24,6 +25,7 @@ class SignInProvider extends ChangeNotifier{
           .signInWithEmailAndPassword(email: email, password: password)
           .then(
               (value) => Navigator.pushReplacementNamed(context, '/home'));
+      SharedPreferencesHelper.setLoggedIn();
       User? user = _auth.currentUser;
       var id = user!.uid;
       if (kDebugMode) {

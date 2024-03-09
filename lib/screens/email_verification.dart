@@ -32,12 +32,12 @@ user = _auth.currentUser;
                     Text('EMAIL VERIFICATION',
                         style: Theme.of(context)
                             .textTheme
-                            .headline2!
+                            .displayLarge!
                             .copyWith(color: Colors.black)),
                     Text(
                       'We have sent a confirmation to this email\n${user!.email}',
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headline2!.copyWith(
+                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.w300,
                           fontSize: 22.sp),
@@ -53,7 +53,7 @@ user = _auth.currentUser;
                           'Resend Verification Link',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(color: Colors.black),
                         )),
                     SizedBox(
@@ -83,12 +83,12 @@ user = _auth.currentUser;
                     Text('EMAIL VERIFICATION',
                         style: Theme.of(context)
                             .textTheme
-                            .headline2!
+                            .displayLarge!
                             .copyWith(color: Colors.black)),
                     Text(
                       'We have sent a confirmation to this email\n${user!.email}',
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headline2!.copyWith(
+                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.w300,
                           fontSize: 22.sp),
@@ -104,7 +104,7 @@ user = _auth.currentUser;
                           'Resend Verification Link',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(color: Colors.black),
                         )),
                     SizedBox(

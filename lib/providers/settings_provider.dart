@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:immune_africa/screens/screens.dart';
 
+import '../data/storage.dart';
+
 class SettingsProvider extends ChangeNotifier {
   final _auth = FirebaseAuth.instance;
   bool _loading = false;
@@ -20,11 +22,15 @@ class SettingsProvider extends ChangeNotifier {
           await _auth.signOut();
           if (kDebugMode) {
             print('Signed Out');
-          }});
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.pop(context,
-              ModalRoute.withName('/login'));
+          }
         });
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => SignIn()),
+              (route) => false);
+        });
+        SharedPreferencesHelper.setLoggedOut();
       }
     } catch (e) {
       if (kDebugMode) {

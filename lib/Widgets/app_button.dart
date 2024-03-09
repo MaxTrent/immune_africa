@@ -29,7 +29,7 @@ class AppButton extends StatelessWidget {
           btnText,
           style: Theme.of(context)
               .textTheme
-              .headline2!
+              .displayLarge!
               .copyWith(color: btnTextColor),
         ));
   }

@@ -15,33 +15,39 @@ extension ExtString on String {
   }
 }
 
-class IndividualSignUp extends StatelessWidget {
-  IndividualSignUp({super.key});
+class IndividualSignUp extends StatefulWidget {
+  const IndividualSignUp({super.key});
 
+
+  static final _formKey = GlobalKey<FormState>();
+
+  @override
+  State<IndividualSignUp> createState() => _IndividualSignUpState();
+}
+
+class _IndividualSignUpState extends State<IndividualSignUp> {
   final _firstNameController = TextEditingController();
-  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+
   String? password;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<IndividualSignUpProvider>(
         create: (_) => IndividualSignUpProvider(),
-        builder: ((context, child) => WillPopScope(
-          onWillPop: () async {
-            return !context.read<IndividualSignUpProvider>().isLoading;
-          },
-          child: Scaffold(
-                resizeToAvoidBottomInset: false,
-                body: GestureDetector(
-                  onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-                  child: SafeArea(
+        builder: ((context, child) => PopScope(
+          canPop: !context.read<IndividualSignUpProvider>().isLoading,
+          child: GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: Scaffold(
+                  resizeToAvoidBottomInset: false,
+                  body: SafeArea(
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.0.w),
                       child: Form(
-                        key: _formKey,
+                        key: IndividualSignUp._formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -52,7 +58,7 @@ class IndividualSignUp extends StatelessWidget {
                               'Welcome!',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline2!
+                                  .displayLarge!
                                   .copyWith(color: Colors.black),
                             ),
                             SizedBox(
@@ -62,7 +68,7 @@ class IndividualSignUp extends StatelessWidget {
                               'Let\'s get started!',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline1!
+                                  .displaySmall!
                                   .copyWith(color: Colors.black, fontSize: 18.sp),
                             ),
                             SizedBox(
@@ -83,7 +89,7 @@ class IndividualSignUp extends StatelessWidget {
                               'First Name',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline1!
+                                  .displaySmall!
                                   .copyWith(color: Colors.black, fontSize: 18.sp),
                             ),
                             TextFormField(
@@ -138,7 +144,7 @@ class IndividualSignUp extends StatelessWidget {
                               'Email Address',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline1!
+                                  .displaySmall!
                                   .copyWith(color: Colors.black, fontSize: 18.sp),
                             ),
                             TextFormField(
@@ -189,7 +195,7 @@ class IndividualSignUp extends StatelessWidget {
                               'Password',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline1!
+                                  .displaySmall!
                                   .copyWith(color: Colors.black, fontSize: 18.sp),
                             ),
                             TextFormField(
@@ -263,7 +269,7 @@ class IndividualSignUp extends StatelessWidget {
                               'Confirm Password',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline1!
+                                  .displaySmall!
                                   .copyWith(color: Colors.black, fontSize: 18.sp),
                             ),
                             TextFormField(
@@ -350,7 +356,7 @@ class IndividualSignUp extends StatelessWidget {
                                       width: 317.w,
                                       child: AppButton(
                                           onPressed: () {
-                                            if (_formKey.currentState!.validate()) {
+                                            if (IndividualSignUp._formKey.currentState!.validate()) {
                                               context
                                                   .read<IndividualSignUpProvider>()
                                                   .signUp(
@@ -383,7 +389,7 @@ class IndividualSignUp extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+          ),
         )));
   }
 }

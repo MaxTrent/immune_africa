@@ -27,7 +27,7 @@ class Settings extends StatelessWidget {
                         'Settings',
                         style: Theme.of(context)
                             .textTheme
-                            .headline2!
+                            .displayLarge!
                             .copyWith(color: Colors.black),
                       ),
                     ),
@@ -46,7 +46,7 @@ class Settings extends StatelessWidget {
                           'Account Settings',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
@@ -66,7 +66,7 @@ class Settings extends StatelessWidget {
                           'Notifications',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
@@ -84,7 +84,7 @@ class Settings extends StatelessWidget {
                           'Language',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
@@ -102,7 +102,7 @@ class Settings extends StatelessWidget {
                           'Help Center',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
@@ -120,7 +120,7 @@ class Settings extends StatelessWidget {
                           'Privacy and Security',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
@@ -138,7 +138,7 @@ class Settings extends StatelessWidget {
                           'About Us',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
@@ -156,7 +156,7 @@ class Settings extends StatelessWidget {
                           'Provide Feedback',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(fontSize: 18.sp, color: Colors.black),
                         ),
                         trailing: const Icon(
@@ -177,7 +177,7 @@ class Settings extends StatelessWidget {
                           'Logout',
                           style: Theme.of(context)
                               .textTheme
-                              .headline1!
+                              .displaySmall!
                               .copyWith(fontSize: 18.sp, color: primaryAppColor),
                         ),
                       ),

@@ -52,7 +52,7 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
-                          .headline2!
+                          .displayLarge!
                           .copyWith(color: Colors.black),
                     ),
                     SizedBox(
@@ -63,7 +63,7 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
-                          .headline1!
+                          .displaySmall!
                           .copyWith(color: Colors.black, fontSize: 18.sp),
                     ),
                     SizedBox(
@@ -110,7 +110,7 @@ class _PhoneRegistrationState extends State<PhoneRegistration> {
                                       '  +234',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headline1!
+                                          .displaySmall!
                                           .copyWith(color: Colors.black),
                                     ),
                                     Padding(
