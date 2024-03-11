@@ -20,12 +20,14 @@ class SignInProvider extends ChangeNotifier{
     try {
       _isLoading = true;
       _status = Status.Authenticating;
+
+      SharedPreferencesHelper.setLoggedIn();
+      print('Innnnn');
       notifyListeners();
       final credential = await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then(
               (value) => Navigator.pushReplacementNamed(context, '/home'));
-      SharedPreferencesHelper.setLoggedIn();
       User? user = _auth.currentUser;
       var id = user!.uid;
       if (kDebugMode) {

@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:immune_africa/themes/app_themes.dart';
@@ -26,9 +27,12 @@ class AddRecordProvider extends ChangeNotifier {
   int allowedImageSize = 5242880;
   bool _isUploading = false;
   String _downloadUrl = '';
+
+  bool _isUploadComplete = false;
   double get uploadProgress => _uploadProgress;
   int get selectedGender => _selectedGender;
   bool get isUploading => _isUploading;
+  bool get isUploadComplete => _isUploadComplete;
   String get downloadUrl => _downloadUrl;
 
 
@@ -105,7 +109,7 @@ class AddRecordProvider extends ChangeNotifier {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
 
-        uploadImage(_image!);
+        await uploadImage(_image!);
         print(_uploadProgress);
 
       }
@@ -127,7 +131,7 @@ class AddRecordProvider extends ChangeNotifier {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
 
-          uploadImage(_image!);
+         await uploadImage(_image!);
           print(_uploadProgress);
 
       }
@@ -180,16 +184,24 @@ class AddRecordProvider extends ChangeNotifier {
     UploadTask uploadTask = ref.putFile(File(image.path));
     _isUploading = true;
 
-    uploadTask.snapshotEvents.listen((event) {
-        _uploadProgress = event.bytesTransferred / event.totalBytes;
-        notifyListeners();
-        print('upload progress: $_uploadProgress');
-
-    });
+    for (int i = 0; i <= 100; i += 10) {
+      _uploadProgress = i / 100.0;
+      notifyListeners();
+      print('upload progress: $_uploadProgress');
+      await Future.delayed(const Duration(milliseconds: 500)); // Simulating upload delay
+    }
     await uploadTask.whenComplete(() async {
+      _isUploadComplete = true;
        _downloadUrl = await ref.getDownloadURL();
-      // await firestore.collection('images').add({'url': downloadURL});
-      // _isUploading = false;
+       Fluttertoast.showToast(
+         msg: 'Upload completed!',
+         toastLength: Toast.LENGTH_SHORT,
+         gravity: ToastGravity.BOTTOM,
+         timeInSecForIosWeb: 1,
+         backgroundColor: Colors.green,
+         textColor: Colors.white,
+         fontSize: 16.0,
+       );
       print('Image uploaded and URL stored in Firestore: $downloadUrl');
     });
     notifyListeners();
@@ -206,18 +218,18 @@ class AddRecordProvider extends ChangeNotifier {
           CupertinoActionSheetAction(
             child:  Text('Gallery',
             style: Theme.of(context).textTheme.displayLarge!.copyWith(color: primaryAppColor),),
-            onPressed: () {
+            onPressed: () async {
               Navigator.of(context).pop();
-              getImageFromGallery();
+              await getImageFromGallery();
               notifyListeners();
             },
           ),
           CupertinoActionSheetAction(
             child: Text('Camera',
             style:Theme.of(context).textTheme.displayLarge!.copyWith(color: primaryAppColor),),
-            onPressed: () {
+            onPressed: () async{
               Navigator.of(context).pop();
-              getImageFromCamera();
+              await getImageFromCamera();
               notifyListeners();
             },
           ),
