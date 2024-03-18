@@ -40,7 +40,7 @@ class Settings extends StatelessWidget {
                         contentPadding: EdgeInsets.zero,
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const AccountSettings()));
+                              builder: (context) =>  AccountSettings()));
                         },
                         title: Text(
                           'Account Settings',
@@ -61,7 +61,7 @@ class Settings extends StatelessWidget {
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
                         onTap: (){Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const NotificationSettings()));},
+                            builder: (context) =>  NotificationSettings()));},
                         title: Text(
                           'Notifications',
                           style: Theme.of(context)

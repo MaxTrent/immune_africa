@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 import 'package:intl/intl.dart';
 
-class VaccineDetails extends ConsumerStatefulWidget {
+class VaccineDetails extends HookConsumerWidget {
   VaccineDetails(
       {required this.name,
       required this.age,
@@ -17,73 +18,184 @@ class VaccineDetails extends ConsumerStatefulWidget {
   String age;
   String image;
   String dateOfBirth;
-
-  @override
-  ConsumerState<VaccineDetails> createState() => _VaccineDetailsState();
-}
-
-class _VaccineDetailsState extends ConsumerState<VaccineDetails>
-    with SingleTickerProviderStateMixin {
-  TabController? _tabController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-
+  // @override
   @override
-  void initState() {
-    super.initState();
-
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _tabController?.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final tabController = useTabController(initialLength: 2);
     DateFormat outputFormat = DateFormat("d MMMM yyyy", "en_US");
     DateFormat inputFormat = DateFormat("dd/MM/yyyy");
-    DateTime date = inputFormat.parse(widget.dateOfBirth);
-    DateTime newDate = date.add(const Duration(days: 6 * 7));
-    String formattedNewDate = outputFormat.format(newDate);
-    DateTime currentDate = DateTime.now();
-    int totalDays = currentDate.difference(date).inDays;
-    print(formattedNewDate);
+    DateTime date = inputFormat.parse(dateOfBirth);
+    String dob = outputFormat.format(date);
+
+    String getVaccinationDateWeeks(int weeks) {
+      DateFormat outputFormat = DateFormat("d MMMM yyyy", "en_US");
+      DateFormat inputFormat = DateFormat("dd/MM/yyyy");
+      DateTime date = inputFormat.parse(dateOfBirth);
+      DateTime newDate = date.add(Duration(days: weeks * 7));
+      String vaccinationDate = outputFormat.format(newDate);
+      DateTime currentDate = DateTime.now();
+      int totalDays = currentDate.difference(date).inDays;
+      return vaccinationDate;
+    }
+
+    String getVaccinationDateMonths(int months) {
+      DateFormat outputFormat = DateFormat("d MMMM yyyy", "en_US");
+      DateFormat inputFormat = DateFormat("dd/MM/yyyy");
+      DateTime date = inputFormat.parse(dateOfBirth);
+      DateTime newDate = DateTime(date.year, date.month + months, date.day);
+      String vaccinationDate = outputFormat.format(newDate);
+      DateTime currentDate = DateTime.now();
+      int totalDays = currentDate.difference(date).inDays;
+      return vaccinationDate;
+    }
 
     final List<Map<String, String>> vaccineList = [
-      {'vaccine': 'Hepatitis B', 'date': formattedNewDate},
-      {'vaccine': 'Oral Polio Vaccine', 'date': '14th July 2023'},
-      {'vaccine': 'BCG', 'date': '14th July 2023'},
-      {'vaccine': 'Pentavalent Vaccine', 'date': '14th July 2023'},
-      {'vaccine': 'OPV Pnuemococcal Conjugate (PCV)', 'date': '14th July 2023'},
-      {'vaccine': 'Rotavirus', 'date': '14th July 2023'},
+      {'vaccine': 'Hepatitis B', 'date': dob},
+      {'vaccine': 'Oral Polio Vaccine', 'date': dob},
+      {'vaccine': 'BCG', 'date': dob},
+      {'vaccine': 'Pentavalent Vaccine', 'date': getVaccinationDateWeeks(6)},
+      {
+        'vaccine': 'OPV Pnuemococcal Conjugate (PCV)',
+        'date': getVaccinationDateWeeks(6)
+      },
+      {'vaccine': 'Rotavirus', 'date': getVaccinationDateWeeks(6)},
+      {'vaccine': 'Pentavalent Vaccine', 'date': getVaccinationDateWeeks(10)},
+      {
+        'vaccine': 'OPV Pnuemococcal Conjugate (PCV)',
+        'date': getVaccinationDateWeeks(10)
+      },
+      {'vaccine': 'Rotavirus', 'date': getVaccinationDateWeeks(10)},
+      {'vaccine': 'Pentavalent Vaccine', 'date': getVaccinationDateWeeks(14)},
+      {
+        'vaccine': 'OPV Pnuemococcal Conjugate (PCV)',
+        'date': getVaccinationDateWeeks(14)
+      },
+      {
+        'vaccine': 'Inactivated Polio Vaccine',
+        'date': getVaccinationDateWeeks(14)
+      },
+      {
+        'vaccine': 'Menigococcal Conjugate',
+        'date': getVaccinationDateWeeks(18)
+      },
+      {'vaccine': 'Vitamin A', 'date': getVaccinationDateMonths(6)},
+      {'vaccine': 'Measles', 'date': getVaccinationDateMonths(9)},
+      {'vaccine': 'Yellow Fever', 'date': getVaccinationDateMonths(9)},
+      {
+        'vaccine': 'Measles Mumps and Rubella (MMR)',
+        'date': getVaccinationDateMonths(12)
+      },
+      {'vaccine': 'Chicken Pox', 'date': getVaccinationDateMonths(12)},
+      {'vaccine': 'Vitamin A', 'date': getVaccinationDateMonths(12)},
+      {
+        'vaccine': 'Menigococcal Conjugate',
+        'date': getVaccinationDateMonths(12)
+      },
+      {
+        'vaccine': 'Measles Mumps and Rubella (MMR)',
+        'date': getVaccinationDateMonths(13)
+      },
+      {'vaccine': 'Chicken Pox', 'date': getVaccinationDateMonths(13)},
+      {'vaccine': 'Hepatitis A', 'date': getVaccinationDateMonths(18)},
+      {'vaccine': 'Hepatitis B', 'date': getVaccinationDateMonths(18)},
+      {'vaccine': 'Vitamin A', 'date': getVaccinationDateMonths(18)},
+      {'vaccine': 'Hepatitis A', 'date': getVaccinationDateMonths(19)},
+      {'vaccine': 'Hepatitis B', 'date': getVaccinationDateMonths(19)},
+      {'vaccine': 'Typhoid', 'date': getVaccinationDateMonths(24)},
+      {'vaccine': 'Hepatitis A', 'date': getVaccinationDateMonths(24)},
+      {'vaccine': 'Hepatitis B', 'date': getVaccinationDateMonths(24)},
     ];
 
     final List<Map<String, String>> vaccineStatusList = [
-      {'vaccine': 'Hepatitis B', 'date': formattedNewDate, 'status': 'Received'},
-      {
-        'vaccine': 'Oral Polio Vaccine',
-        'date': '14th July 2023',
-        'status': 'Received'
-      },
-      {'vaccine': 'BCG', 'date': '14th July 2023', 'status': 'Not Received'},
+      {'vaccine': 'Hepatitis B', 'date': dob, 'status': 'Not Received'},
+      {'vaccine': 'Oral Polio Vaccine', 'date': dob, 'status': 'Not Received'},
+      {'vaccine': 'BCG', 'date': dob, 'status': 'Not Received'},
       {
         'vaccine': 'Pentavalent Vaccine',
-        'date': '14th July 2023',
-        'status': 'Received'
+        'date': getVaccinationDateWeeks(6),
+        'status': 'Not Received'
       },
       {
         'vaccine': 'OPV Pnuemococcal Conjugate (PCV)',
-        'date': '14th July 2023',
-        'status': 'Received'
+        'date': getVaccinationDateWeeks(6),
+        'status': 'Not Received'
       },
       {
         'vaccine': 'Rotavirus',
-        'date': '14th July 2023',
+        'date': getVaccinationDateWeeks(6),
         'status': 'Not Received'
       },
+      {'vaccine': 'Pentavalent Vaccine', 'date': getVaccinationDateWeeks(10),
+      'status': 'Not Received'},
+      {
+        'vaccine': 'OPV Pnuemococcal Conjugate (PCV)',
+        'date': getVaccinationDateWeeks(10),
+      'status': 'Not Received'
+      },
+      {'vaccine': 'Rotavirus', 'date': getVaccinationDateWeeks(10),
+        'status': 'Not Received'},
+      {'vaccine': 'Pentavalent Vaccine', 'date': getVaccinationDateWeeks(14),
+        'status': 'Not Received'},
+      {
+        'vaccine': 'OPV Pnuemococcal Conjugate (PCV)',
+        'date': getVaccinationDateWeeks(14),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Inactivated Polio Vaccine',
+        'date': getVaccinationDateWeeks(14),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Menigococcal Conjugate',
+        'date': getVaccinationDateWeeks(18),
+        'status': 'Not Received'
+      },
+      {'vaccine': 'Vitamin A', 'date': getVaccinationDateMonths(6),
+        'status': 'Not Received'},
+      {'vaccine': 'Measles', 'date': getVaccinationDateMonths(9),
+        'status': 'Not Received'},
+      {'vaccine': 'Yellow Fever', 'date': getVaccinationDateMonths(9),
+        'status': 'Not Received'},
+      {
+        'vaccine': 'Measles Mumps and Rubella (MMR)',
+        'date': getVaccinationDateMonths(12),
+        'status': 'Not Received'
+      },
+      {'vaccine': 'Chicken Pox', 'date': getVaccinationDateMonths(12),
+        'status': 'Not Received'},
+      {'vaccine': 'Vitamin A', 'date': getVaccinationDateMonths(12),
+        'status': 'Not Received'},
+      {
+        'vaccine': 'Menigococcal Conjugate',
+        'date': getVaccinationDateMonths(12),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Measles Mumps and Rubella (MMR)',
+        'date': getVaccinationDateMonths(13),
+        'status': 'Not Received'
+      },
+      {'vaccine': 'Chicken Pox', 'date': getVaccinationDateMonths(13),
+        'status': 'Not Received'},
+      {'vaccine': 'Hepatitis A', 'date': getVaccinationDateMonths(18),
+        'status': 'Not Received'},
+      {'vaccine': 'Hepatitis B', 'date': getVaccinationDateMonths(18),
+        'status': 'Not Received'},
+      {'vaccine': 'Vitamin A', 'date': getVaccinationDateMonths(18),
+        'status': 'Not Received'},
+      {'vaccine': 'Hepatitis A', 'date': getVaccinationDateMonths(19),
+        'status': 'Not Received'},
+      {'vaccine': 'Hepatitis B', 'date': getVaccinationDateMonths(19),
+        'status': 'Not Received'},
+      {'vaccine': 'Typhoid', 'date': getVaccinationDateMonths(24),
+        'status': 'Not Received'},
+      {'vaccine': 'Hepatitis A', 'date': getVaccinationDateMonths(24),
+        'status': 'Not Received'},
+      {'vaccine': 'Hepatitis B', 'date': getVaccinationDateMonths(24),
+        'status': 'Not Received'},
     ];
     return Scaffold(
       body: Padding(
@@ -107,18 +219,18 @@ class _VaccineDetailsState extends ConsumerState<VaccineDetails>
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(widget.image),
+                        backgroundImage: NetworkImage(image),
                         radius: 30,
                       ),
                       Text(
-                        widget.name,
+                        name,
                         style: Theme.of(context)
                             .textTheme
                             .displaySmall!
                             .copyWith(color: Colors.black, fontSize: 18.sp),
                       ),
                       Text(
-                        widget.age,
+                        age,
                         style: Theme.of(context)
                             .textTheme
                             .displaySmall!
@@ -145,8 +257,9 @@ class _VaccineDetailsState extends ConsumerState<VaccineDetails>
               SizedBox(
                 height: 10.h,
               ),
-              _buildTabBar(context),
-              _buildTabBarContent(vaccineList, vaccineStatusList),
+              _buildTabBar(context, tabController),
+              _buildTabBarContent(
+                  vaccineList, vaccineStatusList, tabController),
             ],
           ),
         ),
@@ -154,10 +267,11 @@ class _VaccineDetailsState extends ConsumerState<VaccineDetails>
     );
   }
 
-  Widget _buildTabBarContent(List vaccineList,List vaccineStatusList) {
+  Widget _buildTabBarContent(
+      List vaccineList, List vaccineStatusList, TabController controller) {
     return Expanded(
       child: TabBarView(
-        controller: _tabController,
+        controller: controller,
         children: [
           ListView.builder(
             itemCount: vaccineList.length,
@@ -290,7 +404,7 @@ class _VaccineDetailsState extends ConsumerState<VaccineDetails>
     );
   }
 
-  Widget _buildTabBar(BuildContext context) {
+  Widget _buildTabBar(BuildContext context, TabController controller) {
     return Container(
       height: 50.h,
       decoration: const BoxDecoration(
@@ -302,7 +416,7 @@ class _VaccineDetailsState extends ConsumerState<VaccineDetails>
                   color: primaryAppColor, width: 1, style: BorderStyle.solid))),
       child: TabBar(
         overlayColor: MaterialStateProperty.all(Colors.transparent),
-        controller: _tabController,
+        controller: controller,
         padding: EdgeInsets.zero,
         indicator: const BoxDecoration(color: Colors.transparent),
         labelStyle:
