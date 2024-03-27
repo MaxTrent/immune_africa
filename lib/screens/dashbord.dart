@@ -251,28 +251,26 @@ class Dashboard extends StatelessWidget {
                                               duration = '$totalWeeks weeks';
                                             }
                                           }
-                                          return Padding(
-                                            padding: EdgeInsets.all(10.0.h),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            VaccineDetails(
-                                                              name: fullName,
-                                                              age:
-                                                                  '$duration old',
-                                                              image: imageUrl,
-                                                              dateOfBirth: dob,
-                                                            )));
-                                              },
-                                              child: _buildRecord(context,
-                                                  index, fullName, duration),
-                                            ),
+                                          return GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          VaccineDetails(
+                                                            name: fullName,
+                                                            age:
+                                                                '$duration old',
+                                                            image: imageUrl,
+                                                            dateOfBirth: dob,
+                                                          )));
+                                            },
+                                            child: _buildRecord(context,
+                                                index, fullName, duration),
                                           );
                                         },
                                       ),
                                     ),
+
                                   ],
                                 ),
                               );
@@ -291,92 +289,99 @@ class Dashboard extends StatelessWidget {
 
   Widget _buildRecord(
       BuildContext context, int index, String fullName, String duration) {
-    return Container(
-      width: 337.w,
-      height: 171.h,
-      decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xffE09FFF), primaryAppColor],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
-          borderRadius: BorderRadius.circular(20.r)),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.0.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Padding(
+      padding:  EdgeInsets.only(bottom: 18.h),
+      child: Container(
+        width: 337.w,
+        // height: 171.h,
+        decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xffE09FFF), primaryAppColor],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+            borderRadius: BorderRadius.circular(20.r)),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.0.w, vertical: 20.h),
+          child: Center(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(context
-                          .watch<DashBoardProvider>()
-                          .retrievedRecordsList![index]
-                          .imgUrl),
-                      radius: 40.r,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          fullName,
-                          style: Theme.of(context).textTheme.displaySmall,
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(context
+                              .watch<DashBoardProvider>()
+                              .retrievedRecordsList![index]
+                              .imgUrl),
+                          radius: 40.r,
                         ),
-                        Text(
-                          '$duration old',
-                          style: Theme.of(context).textTheme.displaySmall,
+                        SizedBox(width: 15.w),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              fullName,
+                              style: Theme.of(context).textTheme.displaySmall,
+                            ),
+                            Text(
+                              '$duration old',
+                              style: Theme.of(context).textTheme.displaySmall,
+                            ),
+                          ],
                         ),
                       ],
                     ),
+                    SvgPicture.asset('assets/calendar.svg'),
                   ],
                 ),
-                SvgPicture.asset('assets/calendar.svg'),
+                // SizedBox(
+                //   height: 10.h,
+                // ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 20.0.w),
+                //   child: Row(
+                //     children: [
+                //       SvgPicture.asset('assets/checkmark.svg'),
+                //       SizedBox(
+                //         width: 10.w,
+                //       ),
+                //       Text(
+                //         'Hepatitis B',
+                //         style: Theme.of(context).textTheme.displaySmall,
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 10.h,
+                // ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 20.0.w),
+                //   child: Row(
+                //     children: [
+                //       SvgPicture.asset('assets/checkmark.svg'),
+                //       SizedBox(
+                //         width: 10.w,
+                //       ),
+                //       Text(
+                //         'Oral polio vaccine',
+                //         style: Theme.of(context).textTheme.displaySmall,
+                //       ),
+                //     ],
+                //   ),
+                // )
               ],
             ),
-            SizedBox(
-              height: 10.r,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-              child: Row(
-                children: [
-                  SvgPicture.asset('assets/checkmark.svg'),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  Text(
-                    'Hepatitis B',
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-              child: Row(
-                children: [
-                  SvgPicture.asset('assets/checkmark.svg'),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  Text(
-                    'Oral polio vaccine',
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                ],
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );

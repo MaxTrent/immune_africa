@@ -102,19 +102,7 @@ class NotificationSettings extends ConsumerWidget {
                   .displaySmall!
                   .copyWith(color: Colors.black.withOpacity(0.8)),
             ),
-            SizedBox(
-              height: 50.h,
-            ),
-            Center(
-              child: SizedBox(
-                  height: 52.h,
-                  width: 317.w,
-                  child: AppButton(
-                      onPressed: () {},
-                      btnText: 'Delete Account',
-                      btnBackgroundColor: const Color(0xffF90733),
-                      btnTextColor: Colors.white)),
-            )
+
           ],
         ),
       ),

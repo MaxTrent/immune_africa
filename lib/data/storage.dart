@@ -8,6 +8,17 @@ class SharedPreferencesHelper{
   static const String onboardingKey = 'onboarding';
   static const String loggedInKey = 'loggedIn';
 
+
+  static Future<void> setReceived(String key) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(key, true);
+  }
+
+  static Future<void> setNotReceived(String key) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(key, false);
+  }
+
   // Set onboarding as completed
   static Future<void> setOnboardingCompleted() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

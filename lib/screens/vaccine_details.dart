@@ -3,8 +3,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:immune_africa/data/notifcation_service.dart';
+import 'package:immune_africa/data/storage.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 import 'package:intl/intl.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final vaccineStatusProvider =
+    StateProvider.family<String, int>((ref, id) => 'Not Received');
 
 class VaccineDetails extends HookConsumerWidget {
   VaccineDetails(
@@ -23,6 +30,8 @@ class VaccineDetails extends HookConsumerWidget {
   // @override
   @override
   Widget build(BuildContext context, ref) {
+    final dateOfBirthProvider = StateProvider((ref) => dateOfBirth);
+
     final tabController = useTabController(initialLength: 2);
     DateFormat outputFormat = DateFormat("d MMMM yyyy", "en_US");
     DateFormat inputFormat = DateFormat("dd/MM/yyyy");
@@ -48,6 +57,7 @@ class VaccineDetails extends HookConsumerWidget {
       String vaccinationDate = outputFormat.format(newDate);
       DateTime currentDate = DateTime.now();
       int totalDays = currentDate.difference(date).inDays;
+      // ref.watch(localNotificationServiceProvider).showScheduleNotification(title: vaccineList, body: body, payload: payload, vaccineName: vaccineName, date: date)
       return vaccinationDate;
     }
 
@@ -108,6 +118,8 @@ class VaccineDetails extends HookConsumerWidget {
       {'vaccine': 'Hepatitis B', 'date': getVaccinationDateMonths(24)},
     ];
 
+
+
     final List<Map<String, String>> vaccineStatusList = [
       {'vaccine': 'Hepatitis B', 'date': dob, 'status': 'Not Received'},
       {'vaccine': 'Oral Polio Vaccine', 'date': dob, 'status': 'Not Received'},
@@ -127,17 +139,26 @@ class VaccineDetails extends HookConsumerWidget {
         'date': getVaccinationDateWeeks(6),
         'status': 'Not Received'
       },
-      {'vaccine': 'Pentavalent Vaccine', 'date': getVaccinationDateWeeks(10),
-      'status': 'Not Received'},
+      {
+        'vaccine': 'Pentavalent Vaccine',
+        'date': getVaccinationDateWeeks(10),
+        'status': 'Not Received'
+      },
       {
         'vaccine': 'OPV Pnuemococcal Conjugate (PCV)',
         'date': getVaccinationDateWeeks(10),
-      'status': 'Not Received'
+        'status': 'Not Received'
       },
-      {'vaccine': 'Rotavirus', 'date': getVaccinationDateWeeks(10),
-        'status': 'Not Received'},
-      {'vaccine': 'Pentavalent Vaccine', 'date': getVaccinationDateWeeks(14),
-        'status': 'Not Received'},
+      {
+        'vaccine': 'Rotavirus',
+        'date': getVaccinationDateWeeks(10),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Pentavalent Vaccine',
+        'date': getVaccinationDateWeeks(14),
+        'status': 'Not Received'
+      },
       {
         'vaccine': 'OPV Pnuemococcal Conjugate (PCV)',
         'date': getVaccinationDateWeeks(14),
@@ -153,21 +174,36 @@ class VaccineDetails extends HookConsumerWidget {
         'date': getVaccinationDateWeeks(18),
         'status': 'Not Received'
       },
-      {'vaccine': 'Vitamin A', 'date': getVaccinationDateMonths(6),
-        'status': 'Not Received'},
-      {'vaccine': 'Measles', 'date': getVaccinationDateMonths(9),
-        'status': 'Not Received'},
-      {'vaccine': 'Yellow Fever', 'date': getVaccinationDateMonths(9),
-        'status': 'Not Received'},
+      {
+        'vaccine': 'Vitamin A',
+        'date': getVaccinationDateMonths(6),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Measles',
+        'date': getVaccinationDateMonths(9),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Yellow Fever',
+        'date': getVaccinationDateMonths(9),
+        'status': 'Not Received'
+      },
       {
         'vaccine': 'Measles Mumps and Rubella (MMR)',
         'date': getVaccinationDateMonths(12),
         'status': 'Not Received'
       },
-      {'vaccine': 'Chicken Pox', 'date': getVaccinationDateMonths(12),
-        'status': 'Not Received'},
-      {'vaccine': 'Vitamin A', 'date': getVaccinationDateMonths(12),
-        'status': 'Not Received'},
+      {
+        'vaccine': 'Chicken Pox',
+        'date': getVaccinationDateMonths(12),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Vitamin A',
+        'date': getVaccinationDateMonths(12),
+        'status': 'Not Received'
+      },
       {
         'vaccine': 'Menigococcal Conjugate',
         'date': getVaccinationDateMonths(12),
@@ -178,24 +214,51 @@ class VaccineDetails extends HookConsumerWidget {
         'date': getVaccinationDateMonths(13),
         'status': 'Not Received'
       },
-      {'vaccine': 'Chicken Pox', 'date': getVaccinationDateMonths(13),
-        'status': 'Not Received'},
-      {'vaccine': 'Hepatitis A', 'date': getVaccinationDateMonths(18),
-        'status': 'Not Received'},
-      {'vaccine': 'Hepatitis B', 'date': getVaccinationDateMonths(18),
-        'status': 'Not Received'},
-      {'vaccine': 'Vitamin A', 'date': getVaccinationDateMonths(18),
-        'status': 'Not Received'},
-      {'vaccine': 'Hepatitis A', 'date': getVaccinationDateMonths(19),
-        'status': 'Not Received'},
-      {'vaccine': 'Hepatitis B', 'date': getVaccinationDateMonths(19),
-        'status': 'Not Received'},
-      {'vaccine': 'Typhoid', 'date': getVaccinationDateMonths(24),
-        'status': 'Not Received'},
-      {'vaccine': 'Hepatitis A', 'date': getVaccinationDateMonths(24),
-        'status': 'Not Received'},
-      {'vaccine': 'Hepatitis B', 'date': getVaccinationDateMonths(24),
-        'status': 'Not Received'},
+      {
+        'vaccine': 'Chicken Pox',
+        'date': getVaccinationDateMonths(13),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Hepatitis A',
+        'date': getVaccinationDateMonths(18),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Hepatitis B',
+        'date': getVaccinationDateMonths(18),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Vitamin A',
+        'date': getVaccinationDateMonths(18),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Hepatitis A',
+        'date': getVaccinationDateMonths(19),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Hepatitis B',
+        'date': getVaccinationDateMonths(19),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Typhoid',
+        'date': getVaccinationDateMonths(24),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Hepatitis A',
+        'date': getVaccinationDateMonths(24),
+        'status': 'Not Received'
+      },
+      {
+        'vaccine': 'Hepatitis B',
+        'date': getVaccinationDateMonths(24),
+        'status': 'Not Received'
+      },
     ];
     return Scaffold(
       body: Padding(
@@ -205,42 +268,7 @@ class VaccineDetails extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(image),
-                        radius: 30,
-                      ),
-                      Text(
-                        name,
-                        style: Theme.of(context)
-                            .textTheme
-                            .displaySmall!
-                            .copyWith(color: Colors.black, fontSize: 18.sp),
-                      ),
-                      Text(
-                        age,
-                        style: Theme.of(context)
-                            .textTheme
-                            .displaySmall!
-                            .copyWith(color: Colors.black, fontSize: 16.sp),
-                      ),
-                    ],
-                  ),
-                  SvgPicture.asset('assets/profile2.svg'),
-                ],
-              ),
+              _buildAppBar(context),
               SizedBox(
                 height: 10.h,
               ),
@@ -259,7 +287,7 @@ class VaccineDetails extends HookConsumerWidget {
               ),
               _buildTabBar(context, tabController),
               _buildTabBarContent(
-                  vaccineList, vaccineStatusList, tabController),
+                  vaccineList, vaccineStatusList, tabController, ref),
             ],
           ),
         ),
@@ -267,8 +295,50 @@ class VaccineDetails extends HookConsumerWidget {
     );
   }
 
-  Widget _buildTabBarContent(
-      List vaccineList, List vaccineStatusList, TabController controller) {
+  Padding _buildAppBar(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                backgroundImage: NetworkImage(image),
+                radius: 30,
+              ),
+              Text(
+                name,
+                style: Theme.of(context)
+                    .textTheme
+                    .displaySmall!
+                    .copyWith(color: Colors.black, fontSize: 18.sp),
+              ),
+              Text(
+                age,
+                style: Theme.of(context)
+                    .textTheme
+                    .displaySmall!
+                    .copyWith(color: Colors.black, fontSize: 16.sp),
+              ),
+            ],
+          ),
+          SvgPicture.asset('assets/profile2.svg'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTabBarContent(List vaccineList, List vaccineStatusList,
+      TabController controller, WidgetRef ref) {
     return Expanded(
       child: TabBarView(
         controller: controller,
@@ -296,6 +366,7 @@ class VaccineDetails extends HookConsumerWidget {
                         ],
                       ),
                       child: ListTile(
+                        onTap: () {},
                         leading: SvgPicture.asset(
                           'assets/syringe_purple.svg',
                           height: 18.h,
@@ -348,6 +419,22 @@ class VaccineDetails extends HookConsumerWidget {
                         ],
                       ),
                       child: ListTile(
+                        onTap: () {
+                          final vaccineStatus =
+                              ref.read(vaccineStatusProvider(index).notifier);
+                          // vaccineStatus.state =
+                              // vaccineStatus.state == 'Not Received'
+                              //     ? 'Received'
+                              //     : 'Not Received';
+                          String key = index.toString();
+                          if (vaccineStatus.state == 'Received') {
+                            vaccineStatus.state = 'Not Received';
+                            SharedPreferencesHelper.setNotReceived(key);
+                          }else{
+                            vaccineStatus.state = 'Received';
+                            SharedPreferencesHelper.setReceived(key);
+                          }
+                        },
                         leading: SvgPicture.asset(
                           'assets/syringe_purple.svg',
                           height: 18.h,
@@ -371,7 +458,7 @@ class VaccineDetails extends HookConsumerWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             AppStatusIndicator(
-                              color: vaccineStatusList[index]['status'] ==
+                              color: ref.watch(vaccineStatusProvider(index)) ==
                                       'Received'
                                   ? appGreen
                                   : appYellow,
@@ -380,7 +467,8 @@ class VaccineDetails extends HookConsumerWidget {
                               width: 10.w,
                             ),
                             Text(
-                              vaccineStatusList[index]['status'] ?? '',
+                              ref.watch(vaccineStatusProvider(index)),
+                              // vaccineStatusList[index]['status'] ?? '',
                               style: Theme.of(context)
                                   .textTheme
                                   .displaySmall!

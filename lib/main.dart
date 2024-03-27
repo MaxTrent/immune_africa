@@ -3,25 +3,34 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:immune_africa/providers/dashboard_provider.dart';
 import 'package:immune_africa/themes/app_themes.dart';
-import 'package:provider/provider.dart';
-import 'data/notifcations.dart';
+import 'data/notifcation_service.dart';
 import 'screens/screens.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+final navigatorKeyProvider = Provider<GlobalKey<NavigatorState>>((ref) {
+  return GlobalKey<NavigatorState>();
+});
 
-void main() async{
+final getNotificationProvider = Provider((ref){
+  LocalNotificationService.showSimpleNotification(
+      title: 'Simple Notification',
+      body: 'This is a simple notification',
+      payload: 'This is sample date');
+});
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseAppCheck.instance.activate(
-    // webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
-    // androidProvider: AndroidProvider.debug,
-  );
+      // webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
+      // androidProvider: AndroidProvider.debug,
+      );
+  await LocalNotificationService.init();
   runApp(ProviderScope(
     child: MyApp(
       appTheme: AppTheme(),
@@ -29,49 +38,23 @@ void main() async{
   ));
 }
 
-
 Future backgroundHandler(RemoteMessage msg) async {}
 
-class MyApp extends StatefulWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key, required this.appTheme});
 
   final AppTheme appTheme;
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
+  Widget build(BuildContext context, ref) {
+    ref.watch(getNotificationProvider);
 
-class _MyAppState extends State<MyApp> {
-
-
-  @override
-  void initState() {
-    super.initState();
-    LocalNotificationService.initialize();
-    FirebaseMessaging.instance.getInitialMessage().then((message) {
-
-    });
-
-    // To initialise when app is not terminated
-    FirebaseMessaging.onMessage.listen((message) {
-      if (message.notification != null) {
-        LocalNotificationService.display(message);
-      }
-    });
-
-    // To handle when app is open in
-    // user divide and heshe is using it
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print("on message opened app");
-    });
-  }
-  @override
-  Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(393, 852),
-      builder:(context, child)=> MaterialApp(
+      builder: (context, child) => MaterialApp(
+        navigatorKey: ref.read(navigatorKeyProvider),
         debugShowCheckedModeBanner: false,
-        theme: widget.appTheme.light,
+        theme: appTheme.light,
         themeMode: ThemeMode.system,
         initialRoute: '/splashscreen',
         routes: {

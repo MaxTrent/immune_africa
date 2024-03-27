@@ -11,8 +11,8 @@ import '../themes/themes.dart';
 class SignIn extends StatelessWidget {
   SignIn({super.key});
 
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  static final _emailController = TextEditingController();
+  static final _passwordController = TextEditingController();
   static final _formKey = GlobalKey<FormState>();
 
   @override
