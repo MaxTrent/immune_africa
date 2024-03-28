@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
   const accentColor = Color(0xffFFC9FF);
   const appGreen = Color(0xff62BC37);
   const appYellow = Color(0xffFBFF49);
+  const appRed = Color(0xffd50101);
   // static const appAccentColor = Color(value)
 
 

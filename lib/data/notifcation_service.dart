@@ -1,6 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -42,7 +40,8 @@ class LocalNotificationService {
   static Future showSimpleNotification(
       {required String title,
       required String body,
-      required String payload}) async {
+      required String payload,
+      }) async {
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails('your channel id', 'your channel name',
             channelDescription: 'your channel description',
@@ -73,17 +72,18 @@ class LocalNotificationService {
   }
 
    Future showScheduleNotification(
-      {required String title,
+      {
+        required int id,
+        required String title,
       required String body,
       required String payload,
-      required String vaccineName,
       required String date}) async {
     DateTime notificationDate = DateFormat("d MMMM yyyy", "en_US").parse(date);
 
     tz.initializeTimeZones();
     print(notificationDate);
     await _flutterLocalNotificationsPlugin.zonedSchedule(
-        2,
+        id,
         title,
         body,
         tz.TZDateTime.from(notificationDate, tz.local),
