@@ -52,21 +52,26 @@ class DatabaseService{
     // return snapshot.docs.map((docSnapshot) => Records.fromDocumentSnapshot(docSnapshot)).toList();
   }
 
-  Future<void> deleteAccount(BuildContext context) async {
+  Future<void> deleteAccount(BuildContext context, String password) async {
     try {
       SharedPreferencesHelper.setLoggedOut();
       if (kDebugMode) {
         print('Innnnn');
       }
       await _auth.currentUser!.delete();
-      User? user = _auth.currentUser;
+      await FirebaseFirestore.instance.collection("children").doc("childinfo").collection(user!.email.toString()).doc().delete().then(
+            (doc) => print("Document deleted"),
+        onError: (e) => print("Error updating document $e"),
+      );
+
       var id = user!.uid;
       if (kDebugMode) {
+
         print('User with $id no longer exists');
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == "requires-recent-login") {
-        // await _reauthenticateAndDelete(context, password);
+        await _reauthenticateAndDelete(context, password);
         } else {
         error(context, e.message);
         if (kDebugMode) {

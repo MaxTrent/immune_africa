@@ -4,51 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:immune_africa/Widgets/app_button.dart';
 import 'package:immune_africa/data/services.dart';
+import 'package:immune_africa/screens/delete_account.dart';
 import 'package:immune_africa/screens/register_login.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 
 import '../data/storage.dart';
 import '../main.dart';
-
-
-
-class DeleteAccountState {
-  final bool isLoading;
-  final String? error;
-
- DeleteAccountState({required this.isLoading, this.error});
-}
-
-class DeleteAccountNotifier extends StateNotifier<DeleteAccountState> {
-  final DatabaseService databaseService;
-  final VoidCallback onSuccess;
-
-  DeleteAccountNotifier(this.databaseService, this.onSuccess)
-      : super(DeleteAccountState(isLoading: false));
-
-  Future<void> deleteAccount(BuildContext context) async {
-    try {
-      state = DeleteAccountState(isLoading: true);
-      await databaseService.deleteAccount(context);
-      state = DeleteAccountState(isLoading: false);
-      onSuccess();
-    } catch (error) {
-      state = DeleteAccountState(isLoading: false, error: error.toString());
-    }
-  }
-}
-
-final deleteAccountNotifierProvider =
-StateNotifierProvider<DeleteAccountNotifier, DeleteAccountState>((ref) {
-  final databaseService = ref.read(databaseServiceProvider);
-  final navigatorKey = ref.read(navigatorKeyProvider);
-  return DeleteAccountNotifier(databaseService, () async {
-    navigatorKey.currentState
-        ?.push(MaterialPageRoute(builder: (context) => const RegisterLogin()));
-    await SharedPreferencesHelper.setLoggedOut();
-  });
-});
-
 
 
 class AccountSettings extends ConsumerWidget {
@@ -59,7 +20,7 @@ class AccountSettings extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final deleteAccountState = ref.watch(deleteAccountNotifierProvider);
+    // final deleteAccountState = ref.watch(deleteAccountNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -143,16 +104,17 @@ class AccountSettings extends ConsumerWidget {
               height: 50.h,
             ),
             Center(
-              child: deleteAccountState.isLoading ? const CircularProgressIndicator(color: primaryAppColor,) : SizedBox(
-                  height: 52.h,
-                  width: 317.w,
-                  child: AppButton(
-                      onPressed: () async{
-                        ref.read(deleteAccountNotifierProvider.notifier).deleteAccount(context);
-                      },
-                      btnText: 'Delete Account',
-                      btnBackgroundColor: const Color(0xffF90733),
-                      btnTextColor: Colors.white)),
+              child: SizedBox(
+                      height: 52.h,
+                      width: 317.w,
+                      child: AppButton(
+                          onPressed: () async {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> DeleteAccount()));
+                            // ref.read(deleteAccountNotifierProvider.notifier).deleteAccount(context, password);
+                          },
+                          btnText: 'Delete Account',
+                          btnBackgroundColor: const Color(0xffF90733),
+                          btnTextColor: Colors.white)),
             ),
           ],
         ),

@@ -47,7 +47,6 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    ref.watch(getNotificationProvider);
 
     return ScreenUtilInit(
       designSize: const Size(393, 852),

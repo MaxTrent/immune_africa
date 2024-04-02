@@ -8,25 +8,21 @@ import 'package:immune_africa/data/storage.dart';
 import 'package:immune_africa/themes/app_themes.dart';
 import 'package:intl/intl.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// final vaccineStatusProvider =
-//     StateProvider.family<String, int>((ref, id) => 'Not Received');
+final vaccineStatusProvider =
+    StateProvider.family<String, int>((ref, id) => 'Not Received');
 
+class VaccineStatusNotifier extends StateNotifier<String> {
+  VaccineStatusNotifier() : super('Not Received');
 
-final vaccineStatusProvider = StateProvider.family<String, _StatusProviderData>((ref, data) {
-  String vaccineDate = data.vaccineDate;
-
-  DateFormat outputFormat = DateFormat("d MMMM yyyy", "en_US");
-  DateTime formatDate = outputFormat.parse(vaccineDate);
-
-  // Check if the current date is after formatDate
-  if (DateTime.now().isAfter(formatDate)) {
-    return 'Due';
-  } else {
-    return 'Not Received';
+  void updateStatus(bool isPastDate) {
+    state = isPastDate ? 'Due' : 'Not Received';
   }
-});
+}
+
+// final vaccineStatusProvider = StateNotifierProvider.family<VaccineStatusNotifier , int>((ref, id) {
+//   return VaccineStatusNotifier();
+// });
 
 class _StatusProviderData {
   final int id;
@@ -49,7 +45,12 @@ class VaccineDetails extends HookConsumerWidget {
   String dateOfBirth;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  // @override
+
+  // static final vaccineStatusProvider = StateProvider.family<String, int>(
+  //       (ref, id) =>
+  //   // DateTime.now().isAfter(formatDate) ? 'Due' :
+  //   'Not Received',
+  // );
   @override
   Widget build(BuildContext context, ref) {
     final dateOfBirthProvider = StateProvider((ref) => dateOfBirth);
@@ -80,7 +81,7 @@ class VaccineDetails extends HookConsumerWidget {
       String vaccinationDate = outputFormat.format(newDate);
       DateTime currentDate = DateTime.now();
       int totalDays = currentDate.difference(date).inDays;
-       return vaccinationDate;
+      return vaccinationDate;
     }
 
     final List<Map<String, String>> vaccineList = [
@@ -139,8 +140,6 @@ class VaccineDetails extends HookConsumerWidget {
       {'vaccine': 'Hepatitis A', 'date': getVaccinationDateMonths(24)},
       {'vaccine': 'Hepatitis B', 'date': getVaccinationDateMonths(24)},
     ];
-
-
 
     final List<Map<String, String>> vaccineStatusList = [
       {'vaccine': 'Hepatitis B', 'date': dob, 'status': 'Not Received'},
@@ -361,8 +360,6 @@ class VaccineDetails extends HookConsumerWidget {
 
   Widget _buildTabBarContent(List vaccineList, List vaccineStatusList,
       TabController controller, WidgetRef ref) {
-
-
     return Expanded(
       child: TabBarView(
         controller: controller,
@@ -370,7 +367,6 @@ class VaccineDetails extends HookConsumerWidget {
           ListView.builder(
             itemCount: vaccineList.length,
             itemBuilder: (BuildContext context, int index) {
-
               return Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.0.h),
                 child: Column(
@@ -423,8 +419,19 @@ class VaccineDetails extends HookConsumerWidget {
           ListView.builder(
             itemCount: vaccineStatusList.length,
             itemBuilder: (BuildContext context, int index) {
+              final vaccineStatus = ref.watch(vaccineStatusProvider(index));
+              final vaccineStatusNotifier = ref.read(vaccineStatusProvider(index).notifier);
+              DateFormat outputFormat = DateFormat("d MMMM yyyy", "en_US");
+              DateTime formatDate =
+                  outputFormat.parse(vaccineStatusList[index]['date']);
+              final data =
+                  _StatusProviderData(index, vaccineStatusList[index]['date']);
 
-              final data = _StatusProviderData(index, vaccineStatusList[index]['date']);
+              // if (DateTime.now().isAfter(formatDate)) {
+              //   vaccineStatusNotifier.state = 'Due';
+              // } else {
+              //   vaccineStatusNotifier.state = 'Not Received';
+              // }
 
 
               return Padding(
@@ -448,10 +455,14 @@ class VaccineDetails extends HookConsumerWidget {
                       ),
                       child: ListTile(
                         onTap: () {
-                          final vaccineStatus = ref.watch(vaccineStatusProvider(data));
-                          final vaccineStatusNotifier = ref.read(vaccineStatusProvider(data).notifier);
-                          DateFormat outputFormat = DateFormat("d MMMM yyyy", "en_US");
-                          DateTime formatDate = outputFormat.parse(vaccineStatusList[index]['date']);
+                          final vaccineStatus =
+                              ref.watch(vaccineStatusProvider(index));
+                          final vaccineStatusNotifier =
+                              ref.read(vaccineStatusProvider(index).notifier);
+                          DateFormat outputFormat =
+                              DateFormat("d MMMM yyyy", "en_US");
+                          DateTime formatDate = outputFormat
+                              .parse(vaccineStatusList[index]['date']);
                           String key = index.toString();
 
                           if (vaccineStatus == 'Received') {
@@ -465,11 +476,18 @@ class VaccineDetails extends HookConsumerWidget {
                             print('After: $vaccineStatus');
                             LocalNotificationService.cancel(index);
                             SharedPreferencesHelper.setNotReceived(key);
-                          }else{
+                          } else {
                             print('Before: $vaccineStatus');
                             vaccineStatusNotifier.state = 'Received';
                             print('After: $vaccineStatus');
-                            ref.watch(localNotificationServiceProvider).showScheduleNotification(id: index, title: 'Vaccination Reminder', body: vaccineStatusList[index]['vaccine'], payload: '', date: vaccineStatusList[index]['date']);
+                            ref
+                                .watch(localNotificationServiceProvider)
+                                .showScheduleNotification(
+                                    id: index,
+                                    title: 'Vaccination Reminder',
+                                    body: vaccineStatusList[index]['vaccine'],
+                                    payload: '',
+                                    date: vaccineStatusList[index]['date']);
                             SharedPreferencesHelper.setReceived(key);
                           }
                         },
@@ -496,16 +514,19 @@ class VaccineDetails extends HookConsumerWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             AppStatusIndicator(
-                              color: ref.watch(vaccineStatusProvider(data)) ==
+                              color: ref.watch(vaccineStatusProvider(index)) ==
                                       'Received'
-                                  ? appGreen :ref.watch(vaccineStatusProvider(data)) ==
-                                  'Due' ? appRed : appYellow,
+                                  ? appGreen
+                                  : ref.watch(vaccineStatusProvider(index)) ==
+                                          'Due'
+                                      ? appRed
+                                      : appYellow,
                             ),
                             SizedBox(
                               width: 10.w,
                             ),
                             Text(
-                              ref.watch(vaccineStatusProvider(data)),
+                              ref.watch(vaccineStatusProvider(index).notifier).state,
                               // vaccineStatusList[index]['status'] ?? '',
                               style: Theme.of(context)
                                   .textTheme
