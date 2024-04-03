@@ -72,6 +72,10 @@ class DatabaseService{
     } on FirebaseAuthException catch (e) {
       if (e.code == "requires-recent-login") {
         await _reauthenticateAndDelete(context, password);
+        await FirebaseFirestore.instance.collection("children").doc("childinfo").collection(user!.email.toString()).doc().delete().then(
+              (doc) => print("Document deleted"),
+          onError: (e) => print("Error updating document $e"),
+        );
         } else {
         error(context, e.message);
         if (kDebugMode) {
@@ -83,6 +87,7 @@ class DatabaseService{
       if (kDebugMode) {
         print(e);
       }
+      throw Exception(e);
     }
   }
 

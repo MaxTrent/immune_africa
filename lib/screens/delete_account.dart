@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,10 +49,11 @@ final deleteAccountNotifierProvider =
 class DeleteAccount extends ConsumerWidget {
   DeleteAccount({super.key});
 
-  static final _formKey = GlobalKey<FormState>();
+
+  // static final _formKey = GlobalKey<FormState>();
   final _obscureTextProvider = StateProvider((ref) => true);
-  static final _passwordControllerProvider =
-      StateProvider((ref) => TextEditingController());
+  final _passwordController = TextEditingController();
+  static final _passwordKey = GlobalKey<FormFieldState>();
 
   @override
   Widget build(BuildContext context, ref) {
@@ -80,44 +80,42 @@ class DeleteAccount extends ConsumerWidget {
             SizedBox(
               height: 40.h,
             ),
-            Form(
-              key: _formKey,
-              child: TextFormField(
-                enableInteractiveSelection: false,
-                showCursor: true,
-                cursorColor: primaryAppColor,
-                validator: (value) {
-                  if (value!.isEmpty || value.length < 6) {
-                    return 'Password must be at least 6  character';
-                  }
-                },
-                keyboardType: TextInputType.name,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                controller: ref.watch(_passwordControllerProvider),
-                obscureText: ref.watch(_obscureTextProvider),
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        ref.read(_obscureTextProvider.notifier).state = !ref.read(_obscureTextProvider.notifier).state;
-                      },
-                      icon: ref.watch(_obscureTextProvider)
-                          ? const Icon(
-                              Icons.visibility,
-                              color: Colors.black,
-                            )
-                          : const Icon(
-                              Icons.visibility_off,
-                              color: accentColor,
-                            )),
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: primaryAppColor,
-                    ),
+            TextFormField(
+              key: _passwordKey,
+              enableInteractiveSelection: false,
+              showCursor: true,
+              cursorColor: primaryAppColor,
+              validator: (value) {
+                if (value!.isEmpty || value.length < 6) {
+                  return 'Password must be at least 6  character';
+                }
+              },
+              keyboardType: TextInputType.name,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: _passwordController,
+              obscureText: ref.watch(_obscureTextProvider),
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      ref.read(_obscureTextProvider.notifier).state = !ref.read(_obscureTextProvider.notifier).state;
+                    },
+                    icon: ref.watch(_obscureTextProvider)
+                        ? const Icon(
+                            Icons.visibility,
+                            color: Colors.black,
+                          )
+                        : const Icon(
+                            Icons.visibility_off,
+                            color: accentColor,
+                          )),
+                focusedBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: primaryAppColor,
                   ),
-                  enabledBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: accentColor,
-                    ),
+                ),
+                enabledBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: accentColor,
                   ),
                 ),
               ),
@@ -135,11 +133,11 @@ class DeleteAccount extends ConsumerWidget {
                   width: 317.w,
                   child: AppButton(
                       onPressed: () async {
-                        if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+                        if (_passwordKey.currentState != null && _passwordKey.currentState!.validate()) {
                           ref
                               .read(deleteAccountNotifierProvider.notifier)
                               .deleteAccount(context,
-                                  ref.watch(_passwordControllerProvider).text);
+                              _passwordController.text);
                         }
                       },
                       btnText: 'Delete Account',
